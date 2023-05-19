@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'routes/pages.dart';
+import 'utils/app_helper.dart';
+import 'utils/local.dart';
+import 'utils/preferences_manager.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initServices();
+  await AppHelper.getDeviceNameFromSystem();
+  runApp(const MyApp());
+}
+
+Future initServices() async {
+  await Get.putAsync(() => PreferencesManager().initial());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // SettingsController languageController = Get.put(SettingsController());
+
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, widget) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        // locale: languageController.getAppLocale(),
+        translations: MyTranslations(),
+        // initialBinding: AppBindings(),
+
+        initialRoute: AppPages.splash,
+        getPages: AppPages.routes,
+      ),
+    );
+  }
+}
