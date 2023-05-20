@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:lets_graduation/utils/app_color.dart';
-import 'package:lets_graduation/utils/app_text.dart';
-import 'package:lets_graduation/utils/components.dart';
-import 'package:lets_graduation/utils/constants.dart';
+import '../../utils/app_color.dart';
+import '../../utils/app_text.dart';
+import '../../utils/components.dart';
+import '../../utils/constants.dart';
 import 'preferences_manager.dart';
 
 class AppHelper {

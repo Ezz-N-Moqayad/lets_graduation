@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lets_graduation/utils/app_color.dart';
-import 'package:lets_graduation/utils/constants.dart';
+import '../../utils/app_color.dart';
+import '../../utils/constants.dart';
 
 class AppText {
   static Widget larg(

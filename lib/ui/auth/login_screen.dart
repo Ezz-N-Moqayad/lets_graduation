@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
-import 'package:lets_graduation/controller/login_controller.dart';
-import 'package:lets_graduation/utils/app_color.dart';
-import 'package:lets_graduation/utils/app_helper.dart';
 
+import '../../controller/login_controller.dart';
+import '../../utils/app_color.dart';
+import '../../utils/app_helper.dart';
 import '../../common/routes/routes.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginController controller = Get.put(LoginController());
+
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

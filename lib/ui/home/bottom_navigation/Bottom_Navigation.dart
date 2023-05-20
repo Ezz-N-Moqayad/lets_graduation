@@ -1,9 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:lets_graduation/ui/activities/disability_screen.dart';
-import 'package:lets_graduation/ui/group/groups_screen.dart';
-import 'package:lets_graduation/ui/settings/settings_screen.dart';
 
+import '../../../ui/group/groups_screen.dart';
+import '../../../ui/settings/settings_screen.dart';
 import 'Heart_Beat.dart';
 import 'home_screen.dart';
 import 'profile.dart';

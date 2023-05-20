@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lets_graduation/controller/register_controller.dart';
+import '../../controller/register_controller.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   RegisterController controller = Get.put(RegisterController());

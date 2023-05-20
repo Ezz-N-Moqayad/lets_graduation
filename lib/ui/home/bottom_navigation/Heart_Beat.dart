@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lets_graduation/utils/constants.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class HeartBeat extends StatefulWidget {

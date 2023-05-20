@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lets_graduation/controller/register_controller.dart';
-import 'package:lets_graduation/utils/app_helper.dart';
 
+import '../../controller/register_controller.dart';
+import '../../utils/app_helper.dart';
 import '../../common/routes/routes.dart';
 
 class RegisterScreen extends StatelessWidget {
