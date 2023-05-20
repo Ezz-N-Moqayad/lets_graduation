@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../routes/routes.dart';
+import '../../common/routes/routes.dart';
 import '../store/store.dart';
 
 /// 第一次欢迎页面

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lets_graduation/controller/register_controller.dart';
 import 'package:lets_graduation/utils/app_helper.dart';
 
-import '../../routes/routes.dart';
+import '../../common/routes/routes.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterController controller = Get.put(RegisterController());

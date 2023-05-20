@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../routes/routes.dart';
+import '../common/routes/routes.dart';
 
 class SplachScreen extends StatefulWidget {
   const SplachScreen({Key? key}) : super(key: key);

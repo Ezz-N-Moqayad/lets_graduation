@@ -5,7 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../routes/routes.dart';
+import '../../../common/routes/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

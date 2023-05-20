@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../routes/routes.dart';
+import '../../common/routes/routes.dart';
 import '../store/store.dart';
 import 'package:get/get.dart';
 

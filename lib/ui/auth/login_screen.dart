@@ -6,7 +6,7 @@ import 'package:lets_graduation/controller/login_controller.dart';
 import 'package:lets_graduation/utils/app_color.dart';
 import 'package:lets_graduation/utils/app_helper.dart';
 
-import '../../routes/routes.dart';
+import '../../common/routes/routes.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginController controller = Get.put(LoginController());

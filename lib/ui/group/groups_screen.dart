@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../routes/routes.dart';
+import '../../common/routes/routes.dart';
 
 class GroupScreen extends StatelessWidget {
   const GroupScreen({Key? key}) : super(key: key);
@@ -76,7 +76,8 @@ class GroupScreen extends StatelessWidget {
                             },
                             child: CircleAvatar(
                               backgroundColor: Color(0xffF5F5FA),
-                              child: Image.asset('assets/images/image_groups.png'),
+                              child:
+                                  Image.asset('assets/images/image_groups.png'),
                             ),
                           ),
                         ),
