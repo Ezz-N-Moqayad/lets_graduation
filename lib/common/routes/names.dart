@@ -1,5 +1,5 @@
 class AppRoutes {
-  static const splash = '/SplashScreen';
+  static const Splash = '/SplashScreen';
 
   static const boarding = '/BoardingScreen';
 
@@ -34,8 +34,6 @@ class AppRoutes {
   static const FollowersRemove = '/FollowersRemoveScreen';
 
   static const FollowesCheck = '/FollowesCheckScreen';
-
-  static const Splach = '/SplachScreen';
 
   static const ScreenPageView = '/ScreenPageView';
 

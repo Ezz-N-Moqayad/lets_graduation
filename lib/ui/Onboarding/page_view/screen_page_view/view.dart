@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/routes/routes.dart';
-import '../../widget/widget_container_page_view.dart';
-import '../../widget/widget_pageView.dart';
+import '../../../../common/routes/routes.dart';
+import '../../../widget/widget_container_page_view.dart';
+import '../../../widget/widget_pageView.dart';
 
 class ScreenPageView extends StatefulWidget {
   const ScreenPageView({Key? key}) : super(key: key);
@@ -138,9 +138,7 @@ class _ScreenPageViewState extends State<ScreenPageView> {
                           color: Color(0xffF7F7F8),
                         )),
                   ),
-                  SizedBox(
-                    width: 5
-                  ),
+                  SizedBox(width: 5),
                   widget_container_page_view(
                     title: '3',
                     selected: _currentPage == 2,

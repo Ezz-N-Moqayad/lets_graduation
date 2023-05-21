@@ -1,9 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-import '../../../ui/group/groups_screen.dart';
-import '../../../ui/settings/settings_screen.dart';
 import '../../group/contact/index.dart';
+import '../../settings/settings_screen/index.dart';
 import 'Heart_Beat.dart';
 import 'home_screen.dart';
 import 'profile.dart';
