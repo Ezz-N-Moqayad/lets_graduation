@@ -6,9 +6,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'common/routes/routes.dart';
 import 'common/services/services.dart';
 import 'common/store/store.dart';
-import 'utils/app_helper.dart';
-import 'utils/local.dart';
-import 'utils/preferences_manager.dart';
+import 'common/utils/app_helper.dart';
+import 'common/utils/local.dart';
+import 'common/utils/preferences_manager.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {

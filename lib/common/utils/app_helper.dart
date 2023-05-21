@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-import '../../utils/app_color.dart';
-import '../../utils/app_text.dart';
-import '../../utils/components.dart';
-import '../../utils/constants.dart';
+import 'app_color.dart';
+import 'app_text.dart';
+import 'components.dart';
+import 'constants.dart';
 import 'preferences_manager.dart';
 
 class AppHelper {

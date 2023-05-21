@@ -213,21 +213,46 @@ class NewGroupScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(bottom: 240),
                   child: ListView.separated(
-                      padding: EdgeInsetsDirectional.only(start: 16, end: 16),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 20,
-                      separatorBuilder: (context, index) {
-                        return SizedBox(width: 8);
-                      },
-                      itemBuilder: (context, index) {
-                        return Stack(
-                          alignment: AlignmentDirectional.center,
-                          children: [
-                            Container(
-                              width: 65,
-                              height: 65,
+                    padding: EdgeInsetsDirectional.only(start: 16, end: 16),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 20,
+                    separatorBuilder: (context, index) {
+                      return SizedBox(width: 8);
+                    },
+                    itemBuilder: (context, index) {
+                      return Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 65,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(80),
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                print('gg');
+                              },
+                              child: CircleAvatar(
+                                backgroundColor: Color(0xffF5F5FA),
+                                child: Image.asset(
+                                  'assets/images/personal_frindes.png',
+                                  fit: BoxFit.contain,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.only(
+                                bottom: 40, start: 48),
+                            child: Container(
+                              width: 25,
+                              height: 25,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(80),
+                                color: Color(0xffF5F5FA),
+                                borderRadius: BorderRadius.circular(50),
                               ),
                               child: InkWell(
                                 onTap: () {
@@ -235,55 +260,30 @@ class NewGroupScreen extends StatelessWidget {
                                 },
                                 child: CircleAvatar(
                                   backgroundColor: Color(0xffF5F5FA),
-                                  child: Image.asset(
-                                    'assets/images/personal_frindes.png',
-                                    fit: BoxFit.contain,
-                                    width: double.infinity,
-                                    height: double.infinity,
+                                  child: Icon(
+                                    Icons.dangerous_outlined,
+                                    color: Color(0xff57CA85),
+                                    size: 20,
                                   ),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.only(
-                                  bottom: 40, start: 48),
-                              child: Container(
-                                width: 25,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  color: Color(0xffF5F5FA),
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    print('gg');
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor: Color(0xffF5F5FA),
-                                    child: Icon(
-                                      Icons.dangerous_outlined,
-                                      color: Color(0xff57CA85),
-                                      size: 20,
-                                    ),
-                                  ),
-                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.only(top: 130),
+                            child: Text(
+                              'Aseel',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.only(top: 130),
-                              child: Text(
-                                'Aseel',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      }),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
             ],

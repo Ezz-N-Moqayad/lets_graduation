@@ -1,13 +1,11 @@
 import 'dart:core';
-import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../utils/app_color.dart';
-import '../../utils/constants.dart';
+import 'app_color.dart';
+import 'constants.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class AppWidgets {
