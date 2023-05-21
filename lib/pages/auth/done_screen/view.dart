@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/utils/app_helper.dart';
-import '../../../controller/register_controller.dart';
 import '../../../common/routes/routes.dart';
+import 'index.dart';
 
 class DoneScreen extends StatelessWidget {
-  RegisterController controller = Get.put(RegisterController());
+  DoneController controller = Get.put(DoneController());
 
   @override
   Widget build(BuildContext context) {

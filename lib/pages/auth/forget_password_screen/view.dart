@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../common/routes/routes.dart';
-import '../../../controller/register_controller.dart';
+import 'index.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
-  RegisterController controller = Get.put(RegisterController());
+  ForgetPasswordController controller = Get.put(ForgetPasswordController());
 
   AppBar _buildAppBar() {
     return AppBar(
@@ -124,7 +124,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 obscureText: true,
                 obscuringCharacter: '*',
-                onTap: () => controller.ForgetPasswordController,
+                onTap: () => controller.ForgetPassController,
                 onChanged: (String value) {},
                 cursorColor: Colors.white,
                 cursorRadius: const Radius.circular(10),

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'index.dart';
+
 class LoginController extends GetxController {
+  final state = LoginState();
+
+  LoginController();
+
   RxBool isLoading = false.obs;
   bool isVisiblePass = true;
   bool isVisiblePassCon = true;
@@ -15,22 +21,24 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
+
     formKey = GlobalKey<FormState>();
     formKeyPassword = GlobalKey<FormState>();
     nameController = TextEditingController();
     passwordController = TextEditingController();
 
-    super.onInit();
     nameController.text = '';
     passwordController.text = '';
   }
 
   @override
   void dispose() {
+    super.dispose();
+
     formKey.currentState!.dispose();
     nameController.dispose();
     passwordController.dispose();
-    super.dispose();
   }
 
   void visiblePassword() {

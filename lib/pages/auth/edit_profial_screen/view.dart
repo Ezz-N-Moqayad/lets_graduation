@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../controller/register_controller.dart';
+import 'index.dart';
 
 class EditProfialScreen extends StatelessWidget {
-  RegisterController controller = Get.put(RegisterController());
+  EditProfialController controller = Get.put(EditProfialController());
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +124,7 @@ class EditProfialScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 16),
               child: TextFormField(
-                // controller: controller.EmailController,
+                controller: controller.EmailController,
                 keyboardType: TextInputType.name,
                 onChanged: (String value) {},
                 cursorColor: Colors.white,
