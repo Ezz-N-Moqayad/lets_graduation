@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../controller/login_controller.dart';
-import '../../utils/app_color.dart';
-import '../../utils/app_helper.dart';
-import '../../common/routes/routes.dart';
+import '../../../controller/login_controller.dart';
+import '../../../utils/app_color.dart';
+import '../../../utils/app_helper.dart';
+import '../../../common/routes/routes.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginController controller = Get.put(LoginController());

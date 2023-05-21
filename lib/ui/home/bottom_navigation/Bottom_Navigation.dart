@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../ui/group/groups_screen.dart';
 import '../../../ui/settings/settings_screen.dart';
+import '../../group/contact/index.dart';
 import 'Heart_Beat.dart';
 import 'home_screen.dart';
 import 'profile.dart';
@@ -18,7 +19,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   final _screen = [
     const HomeScreen(),
     const Profile(),
-    const GroupScreen(),
+    const ContactPage(),
     const HeartBeat(),
     const SettingsScreen(),
   ];

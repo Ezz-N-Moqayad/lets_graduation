@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../controller/register_controller.dart';
+import '../../../controller/register_controller.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
 
   RegisterController controller = Get.put(RegisterController());
-
 
   @override
   Widget build(BuildContext context) {

@@ -44,7 +44,7 @@ class _ScreenPageViewState extends State<ScreenPageView> {
                   _currentPage = page;
                 });
               },
-              children: [
+              children: const [
                 widget_pageView(
                   title:
                       'Want a walking group? Walk friends! It is a  \n community of thousands of members that \n connects girls to create walking groups',
@@ -139,7 +139,7 @@ class _ScreenPageViewState extends State<ScreenPageView> {
                         )),
                   ),
                   SizedBox(
-                    width: 5,
+                    width: 5
                   ),
                   widget_container_page_view(
                     title: '3',

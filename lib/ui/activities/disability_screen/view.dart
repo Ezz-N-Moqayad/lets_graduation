@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../common/routes/routes.dart';
+import '../../../common/routes/routes.dart';
 
 class DisabilityScreen extends StatelessWidget {
   const DisabilityScreen({Key? key}) : super(key: key);

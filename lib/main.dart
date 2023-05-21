@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'common/routes/routes.dart';
+import 'common/services/services.dart';
+import 'common/store/store.dart';
 import 'utils/app_helper.dart';
 import 'utils/local.dart';
 import 'utils/preferences_manager.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Get.putAsync<StorageService>(() => StorageService().init());
+  Get.put<ConfigStore>(ConfigStore());
+  Get.put<UserStore>(UserStore());
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await initServices();
   await AppHelper.getDeviceNameFromSystem();
   runApp(const MyApp());

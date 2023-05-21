@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/register_controller.dart';
-import '../../utils/app_helper.dart';
-import '../../common/routes/routes.dart';
+import '../../../controller/register_controller.dart';
+import '../../../utils/app_helper.dart';
+import '../../../common/routes/routes.dart';
 
 class DoneScreen extends StatelessWidget {
   RegisterController controller = Get.put(RegisterController());

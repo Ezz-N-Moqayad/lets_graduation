@@ -15,6 +15,8 @@ class AppRoutes {
 
   static const disability = '/DisabilityScreen';
 
+  static const ContactPage = '/ContactPage';
+
   static const BottomNavigationScreen = '/BottomNavigationScreen';
 
   static const ForgetPassword = '/ForgetPasswordScreen';
