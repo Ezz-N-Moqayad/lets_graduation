@@ -1,4 +1,4 @@
-library followes_check;
+library new_group;
 
 export './bindings.dart';
 export './controller.dart';

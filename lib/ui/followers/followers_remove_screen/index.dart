@@ -1,4 +1,4 @@
-library club;
+library followers_remove;
 
 export './bindings.dart';
 export './controller.dart';

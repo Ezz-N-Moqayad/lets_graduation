@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'index.dart';
 
-class RegisterBinding implements Bindings {
+class GroupBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<RegisterController>(() => RegisterController());
+    Get.lazyPut<GroupController>(() => GroupController());
   }
 }

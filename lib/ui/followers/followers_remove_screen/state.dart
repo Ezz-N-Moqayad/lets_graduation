@@ -1,1 +1,1 @@
-class ClubState {}
+class FollowersRemoveState {}

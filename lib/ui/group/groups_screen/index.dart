@@ -1,4 +1,4 @@
-library register;
+library group;
 
 export './bindings.dart';
 export './controller.dart';

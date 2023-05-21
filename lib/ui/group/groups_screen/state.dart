@@ -1,1 +1,1 @@
-class RegisterState {}
+class GroupState {}

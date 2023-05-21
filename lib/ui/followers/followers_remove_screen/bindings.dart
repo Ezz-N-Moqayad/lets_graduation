@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'index.dart';
 
-class ClubBinding implements Bindings {
+class FollowersRemoveBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ClubController>(() => ClubController());
+    Get.lazyPut<FollowersRemoveController>(() => FollowersRemoveController());
   }
 }
