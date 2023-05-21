@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import '../../controller/register_controller.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
+  ChangePasswordScreen({super.key});
+
   RegisterController controller = Get.put(RegisterController());
+
 
   @override
   Widget build(BuildContext context) {

@@ -15,13 +15,12 @@ class BottomNavigationScreen extends StatefulWidget {
 }
 
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
-  late TabController _tabController;
   final _screen = [
-    HomeScreen(),
-    Profile(),
-    GroupScreen(),
-    HeartBeat(),
-    SettingsScreen(),
+    const HomeScreen(),
+    const Profile(),
+    const GroupScreen(),
+    const HeartBeat(),
+    const SettingsScreen(),
   ];
   int _currentIndex = 0;
 
@@ -29,10 +28,10 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // extendBody: true,
-      backgroundColor: Color(0xFFF0F3F8),
+      backgroundColor: const Color(0xFFF0F3F8),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
         child: CurvedNavigationBar(
           index: 0,
@@ -41,10 +40,10 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
           color: Colors.white,
 
           animationCurve: Curves.easeInBack,
-          animationDuration: Duration(milliseconds: 600),
+          animationDuration: const Duration(milliseconds: 600),
           buttonBackgroundColor: Colors.white,
           backgroundColor: Colors.transparent,
-          items: <Widget>[
+          items: const <Widget>[
             Icon(Icons.home, size: 26, color: Color(0xff57CA85)),
             Icon(Icons.person, size: 26, color: Color(0xff57CA85)),
             Icon(Icons.groups, size: 26, color: Color(0xff57CA85)),

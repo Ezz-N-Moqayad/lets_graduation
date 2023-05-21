@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import 'common/routes/routes.dart';
 import 'utils/app_helper.dart';
 import 'utils/local.dart';
@@ -22,18 +23,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // SettingsController languageController = Get.put(SettingsController());
-
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, widget) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        // locale: languageController.getAppLocale(),
         translations: MyTranslations(),
-        // initialBinding: AppBindings(),
-
         initialRoute: AppPages.splash,
         getPages: AppPages.routes,
       ),

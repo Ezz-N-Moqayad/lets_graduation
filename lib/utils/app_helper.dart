@@ -2,10 +2,10 @@ import 'dart:io';
 import 'dart:math';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+
 import '../../utils/app_color.dart';
 import '../../utils/app_text.dart';
 import '../../utils/components.dart';

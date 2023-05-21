@@ -1,8 +1,3 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
 // class ApiRequestes {
 //   static final _client = http.Client();
 //
@@ -112,7 +107,6 @@ import 'package:http/http.dart' as http;
 //     }
 //   }
 //
-//   //TODO LOGOUT
 //   static Future<Logout?> logout({required String token}) async {
 //     http.Response response = await _client.post(Uri.parse(ApiHelper.Logout),
 //         headers: {
@@ -130,7 +124,6 @@ import 'package:http/http.dart' as http;
 //     }
 //   }
 //
-// //TODO app_settings
 //   static Future<AppSettings?> getSettings({required String appLanguage}) async {
 //     print("getSettings: $appLanguage");
 //     http.Response response = await _client.get(Uri.parse(ApiHelper.Setting),
@@ -147,7 +140,6 @@ import 'package:http/http.dart' as http;
 //     }
 //   }
 //
-//   //TODO Slider
 //   static Future<Sliders?> slider({required String appLanguage}) async {
 //     http.Response response = await _client.get(Uri.parse(ApiHelper.Sliders),
 //         headers: ApiHelper.langHeader(language: appLanguage));
@@ -180,7 +172,6 @@ import 'package:http/http.dart' as http;
 //   //   }
 //   // }
 //
-// //TODO Categories
 //
 //   static Future<Category_m?> Categories({required String appLanguage}) async {
 //     http.Response response = await _client.get(
@@ -213,7 +204,6 @@ import 'package:http/http.dart' as http;
 //     }
 //   }
 //
-//   //TODO Brand_Categories
 //   static Future<CategoryByBrand?> getCategoriesbyBrand(
 //       {required String language, required int brandId}) async {
 //     http.Response response = await _client.get(
@@ -391,7 +381,6 @@ import 'package:http/http.dart' as http;
 //     }
 //   }
 //
-// //TODO Contact_US
 //   static Future<ContactUs?> contactUs({
 //     required String subject,
 //     required String message,
@@ -445,7 +434,6 @@ import 'package:http/http.dart' as http;
 //     }
 //   }
 //
-//   //TODO ForgetPass
 //   static Future<ForgetModel?> forgetPassword(
 //       {required String language, required String email}) async {
 //

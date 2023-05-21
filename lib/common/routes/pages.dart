@@ -25,7 +25,6 @@ import '../../ui/home/bottom_navigation/Bottom_Navigation.dart';
 import '../../ui/settings/about_screen.dart';
 import '../../ui/settings/help_screen.dart';
 import '../../ui/settings/settings_screen.dart';
-import '../../ui/splach_screen.dart';
 import 'routes.dart';
 
 class AppPages {
