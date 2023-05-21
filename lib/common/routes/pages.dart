@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../ui/home/bottom_navigation/Bottom_Navigation/index.dart';
 import '../../ui/Onboarding/page_view/screen_page_view/index.dart';
 import '../../ui/activities/sport_activities_screen/index.dart';
 import '../../ui/followers/followers_remove_screen/index.dart';
@@ -46,7 +47,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => LoginScreen(),
-      binding: Binding(),
+      binding: LoginBinding(),
     ),
     GetPage(
       name: AppRoutes.register,
@@ -76,7 +77,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.BottomNavigationScreen,
       page: () => const BottomNavigationScreen(),
-      binding: Binding(),
+      binding: BottomNavigationBinding(),
     ),
     GetPage(
       name: AppRoutes.ForgetPassword,

@@ -15,7 +15,7 @@ class RouteAuthMiddleware extends GetMiddleware {
   RouteSettings? redirect(String? route) {
     if (UserStore.to.isLogin ||
         route == AppRoutes.login ||
-        route == AppRoutes.splash) {
+        route == AppRoutes.Splash) {
       return null;
     } else {
       Future.delayed(
