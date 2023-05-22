@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class AppRoutes {
   static const Splash = '/SplashScreen';
 
@@ -38,6 +40,10 @@ class AppRoutes {
   static const ScreenPageView = '/ScreenPageView';
 
   static const GroupScreen = '/GroupScreen';
+
+  static const Chat = '/chat';
+
+  static const Photoimgview = '/photoimgview';
 
   static const NewGroup = '/NewGroupScreen';
 

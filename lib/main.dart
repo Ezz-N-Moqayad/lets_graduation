@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
 
-import 'common/routes/routes.dart';
-import 'common/services/services.dart';
-import 'common/store/store.dart';
-import 'common/utils/app_helper.dart';
-import 'common/utils/local.dart';
 import 'common/utils/preferences_manager.dart';
+import 'common/services/services.dart';
+import 'common/utils/app_helper.dart';
+import 'common/routes/routes.dart';
+import 'common/store/store.dart';
+import 'common/utils/local.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {

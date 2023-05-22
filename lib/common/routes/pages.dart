@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../pages/group/message/chat/index.dart';
+import '../../pages/group/message/photoview/index.dart';
 import '../../pages/home/bottom_navigation/Bottom_Navigation/index.dart';
 import '../../pages/Onboarding/page_view/screen_page_view/index.dart';
 import '../../pages/activities/sport_activities_screen/index.dart';
@@ -130,9 +132,14 @@ class AppPages {
       binding: GroupBinding(),
     ),
     GetPage(
-      name: AppRoutes.ContactPage,
-      page: () => const ContactPage(),
-      binding: ContactBinding(),
+      name: AppRoutes.Chat,
+      page: () => const ChatPage(),
+      binding: ChatBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.Photoimgview,
+      page: () => const PhotoImgViewPage(),
+      binding: PhotoImgViewBinding(),
     ),
     GetPage(
       name: AppRoutes.NewGroup,
