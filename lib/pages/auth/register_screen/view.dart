@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/routes/routes.dart';
-import '../../../common/utils/app_helper.dart';
 import 'index.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -97,7 +96,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () => controller.NameController,
-                      validator: (name) => AppHelper.validateName(name: name!),
+                      // validator: (name) => AppHelper.validateName(name: name!),
                     ),
                   ),
                   const Padding(
@@ -141,8 +140,8 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () => controller.EmailController,
-                      validator: (email) =>
-                          AppHelper.validateEmail(email: email!),
+                      // validator: (email) =>
+                      //     AppHelper.validateEmail(email: email!),
                     ),
                   ),
                   const Padding(

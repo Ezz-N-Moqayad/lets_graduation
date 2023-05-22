@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
-import 'common/utils/preferences_manager.dart';
 import 'common/services/services.dart';
-import 'common/utils/app_helper.dart';
 import 'common/routes/routes.dart';
 import 'common/store/store.dart';
 import 'common/utils/local.dart';
@@ -22,14 +20,10 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await initServices();
-  await AppHelper.getDeviceNameFromSystem();
   runApp(const MyApp());
 }
 
-Future initServices() async {
-  await Get.putAsync(() => PreferencesManager().initial());
-}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

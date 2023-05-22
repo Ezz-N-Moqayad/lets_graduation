@@ -1,17 +1,16 @@
 name: lets_graduation
 description: A new Flutter project.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: ">=2.19.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
 
   http: ^0.13.6
 
@@ -119,7 +118,6 @@ dependencies:
 
   google_maps_flutter: ^2.2.6
 
-
 flutter_icons:
   android: "launcher_icon"
   ios: true
@@ -129,7 +127,6 @@ flutter_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 flutter:
   uses-material-design: true

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/app_helper.dart';
 import '../../../common/routes/routes.dart';
 import 'index.dart';
 
@@ -131,7 +130,7 @@ class DoneScreen extends StatelessWidget {
                       ),
                     ),
                     onTap: () => controller.StepsController,
-                    validator: (name) => AppHelper.validateName(name: name),
+                    // validator: (name) => AppHelper.validateName(name: name),
                   ),
                 ),
                 SizedBox(
@@ -181,7 +180,7 @@ class DoneScreen extends StatelessWidget {
                       ),
                     ),
                     onTap: () => controller.StepsController,
-                    validator: (name) => AppHelper.validateName(name: name),
+                    // validator: (name) => AppHelper.validateName(name: name),
                   ),
                 ),
                 SizedBox(
@@ -231,7 +230,7 @@ class DoneScreen extends StatelessWidget {
                       ),
                     ),
                     onTap: () => controller.StepsController,
-                    validator: (name) => AppHelper.validateName(name: name),
+                    // validator: (name) => AppHelper.validateName(name: name),
                   ),
                 ),
                 SizedBox(
@@ -298,7 +297,7 @@ class DoneScreen extends StatelessWidget {
                       ),
                     ),
                     onTap: () => controller.StepsController,
-                    validator: (name) => AppHelper.validateName(name: name),
+                    // validator: (name) => AppHelper.validateName(name: name),
                   ),
                 ),
                 SizedBox(

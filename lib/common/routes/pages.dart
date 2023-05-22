@@ -26,7 +26,6 @@ import '../../pages/group/groups_screen/index.dart';
 import '../../pages/fitness/club_screen/index.dart';
 import '../../pages/auth/login_screen/index.dart';
 import '../../pages/auth/done_screen/index.dart';
-import '../../pages/group/contact/index.dart';
 import '../../pages/splash_screen/index.dart';
 import '../middlewares/middlewares.dart';
 import 'routes.dart';
@@ -45,6 +44,11 @@ class AppPages {
       middlewares: [
         RouteWelcomeMiddleware(priority: 1),
       ],
+    ),
+    GetPage(
+      name: AppRoutes.ScreenPageView,
+      page: () => const ScreenPageView(),
+      binding: ScreenPageBinding(),
     ),
     GetPage(
       name: AppRoutes.login,
@@ -120,11 +124,6 @@ class AppPages {
       name: AppRoutes.FollowesCheck,
       page: () => const FollowesCheckScreen(),
       binding: FollowesCheckBinding(),
-    ),
-    GetPage(
-      name: AppRoutes.ScreenPageView,
-      page: () => const ScreenPageView(),
-      binding: ScreenPageBinding(),
     ),
     GetPage(
       name: AppRoutes.GroupScreen,

@@ -1,25 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../common/routes/routes.dart';
+import 'index.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends GetView<SplashController> {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  void initState() {
-    Future.delayed(Duration(seconds: 3), () {
-      Get.offAndToNamed(AppRoutes.ScreenPageView);
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    controller.handleSingIn();
+
     return Scaffold(
       body: Container(
         alignment: AlignmentDirectional.topStart,

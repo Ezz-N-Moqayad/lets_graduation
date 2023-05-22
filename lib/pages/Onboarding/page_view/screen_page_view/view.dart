@@ -4,31 +4,10 @@ import 'package:get/get.dart';
 import '../../../../common/routes/routes.dart';
 import '../../../widget/widget_container_page_view.dart';
 import '../../../widget/widget_pageView.dart';
+import 'index.dart';
 
-class ScreenPageView extends StatefulWidget {
+class ScreenPageView extends GetView<ScreenPageController> {
   const ScreenPageView({Key? key}) : super(key: key);
-
-  @override
-  State<ScreenPageView> createState() => _ScreenPageViewState();
-}
-
-class _ScreenPageViewState extends State<ScreenPageView> {
-  late PageController _pageController;
-  int _currentPage = 0;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _pageController = PageController();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _pageController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +16,26 @@ class _ScreenPageViewState extends State<ScreenPageView> {
         children: [
           Expanded(
             child: PageView(
-              controller: _pageController,
+              controller: PageController(
+                initialPage: 0,
+                keepPage: false,
+                viewportFraction: 1,
+              ),
               scrollDirection: Axis.horizontal,
-              onPageChanged: (int page) {
-                setState(() {
-                  _currentPage = page;
-                });
+              onPageChanged: (index) {
+                controller.changePage(index);
               },
-              children: const [
+              children: [
                 widget_pageView(
-                  title:
-                      'Want a walking group? Walk friends! It is a  \n community of thousands of members that \n connects girls to create walking groups',
+                  title: controller.state.title,
                   Imagee: 'assets/images/page_view.png',
                 ),
                 widget_pageView(
-                  title:
-                      'Want a walking group? Walk friends! It is a  \n community of thousands of members that \n connects girls to create walking groups',
+                  title: controller.state.title,
                   Imagee: 'assets/images/page_view.png',
                 ),
                 widget_pageView(
-                  title:
-                      'Want a walking group? Walk friends! It is a  \n community of thousands of members that \n connects girls to create walking groups',
+                  title: controller.state.title,
                   Imagee: 'assets/images/page_view.png',
                 ),
               ],
@@ -74,7 +52,14 @@ class _ScreenPageViewState extends State<ScreenPageView> {
                 onPressed: () {
                   Get.offAndToNamed(AppRoutes.login);
                 },
-                child: Text(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  backgroundColor: const Color(0xff388D77),
+                  minimumSize: const Size(289, 48),
+                ),
+                child: const Text(
                   'Join our community',
                   style: TextStyle(
                     color: Color(0xffFCFCFC),
@@ -83,67 +68,66 @@ class _ScreenPageViewState extends State<ScreenPageView> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  minimumSize: Size(289, 48),
-                  primary: Color(0xff388D77),
-                ),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.only(top: 300, start: 117),
-            child: Align(
-              alignment: AlignmentDirectional.center,
-              child: Row(
-                children: [
-                  widget_container_page_view(
-                    title: '1',
-                    selected: _currentPage == 0,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Container(
-                    width: 20,
-                    height: 2,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(2),
-                        border: Border.all(
-                          width: 1.5,
-                          color: Color(0xffF7F7F8),
-                        )),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  widget_container_page_view(
-                    title: '2',
-                    selected: _currentPage == 1,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Container(
-                    width: 20,
-                    height: 2,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(2),
-                        border: Border.all(
-                          width: 1.5,
-                          color: Color(0xffF7F7F8),
-                        )),
-                  ),
-                  SizedBox(width: 5),
-                  widget_container_page_view(
-                    title: '3',
-                    selected: _currentPage == 2,
-                  ),
-                ],
+          Obx(
+            () => Padding(
+              padding: const EdgeInsetsDirectional.only(top: 300, start: 117),
+              child: Align(
+                alignment: AlignmentDirectional.center,
+                child: Row(
+                  children: [
+                    widget_container_page_view(
+                      title: '1',
+                      selected: controller.state.index.value == 0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 5.0),
+                      child: Container(
+                        width: 20,
+                        height: 2,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(2),
+                          border: Border.all(
+                            width: 1.5,
+                            color: const Color(0xffF7F7F8),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 5.0),
+                      child: widget_container_page_view(
+                        title: '2',
+                        selected: controller.state.index.value == 1,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 5.0),
+                      child: Container(
+                        width: 20,
+                        height: 2,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(2),
+                          border: Border.all(
+                            width: 1.5,
+                            color: const Color(0xffF7F7F8),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 5.0),
+                      child: widget_container_page_view(
+                        title: '3',
+                        selected: controller.state.index.value == 2,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
