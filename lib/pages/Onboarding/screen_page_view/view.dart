@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../common/routes/routes.dart';
-import '../../../widget/widget_container_page_view.dart';
-import '../../../widget/widget_pageView.dart';
+import '../../../common/routes/routes.dart';
+import 'widgets/widget_container_page_view.dart';
+import 'widgets/widget_pageView.dart';
 import 'index.dart';
 
 class ScreenPageView extends GetView<ScreenPageController> {

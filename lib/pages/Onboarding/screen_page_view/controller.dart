@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../common/routes/routes.dart';
-import '../../../../common/store/store.dart';
+import '../../../common/routes/routes.dart';
+import '../../../common/store/store.dart';
 import 'index.dart';
 
 class ScreenPageController extends GetxController {

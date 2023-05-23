@@ -5,7 +5,7 @@ import '../../pages/group/contact/index.dart';
 import '../../pages/group/message/chat/index.dart';
 import '../../pages/group/message/photoview/index.dart';
 import '../../pages/home/bottom_navigation/Bottom_Navigation/index.dart';
-import '../../pages/Onboarding/page_view/screen_page_view/index.dart';
+import '../../pages/Onboarding/screen_page_view/index.dart';
 import '../../pages/activities/sport_activities_screen/index.dart';
 import '../../pages/followers/followers_remove_screen/index.dart';
 import '../../pages/followers/followers_check_screen/index.dart';
