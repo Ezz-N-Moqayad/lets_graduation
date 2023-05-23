@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../pages/group/contact/index.dart';
 import '../../pages/group/message/chat/index.dart';
 import '../../pages/group/message/photoview/index.dart';
 import '../../pages/home/bottom_navigation/Bottom_Navigation/index.dart';
@@ -129,6 +130,11 @@ class AppPages {
       name: AppRoutes.GroupScreen,
       page: () => const GroupScreen(),
       binding: GroupBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.ContactPage,
+      page: () => const ContactPage(),
+      binding: ContactBinding(),
     ),
     GetPage(
       name: AppRoutes.Chat,

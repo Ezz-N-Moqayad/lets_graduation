@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../common/values/colors.dart';
-import '../../../common/widgets/app.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
+import '../../../common/routes/routes.dart';
 import 'chat/widgets/message_list.dart';
 import 'index.dart';
 
@@ -10,15 +10,24 @@ class MessagePage extends GetView<MessageController> {
   const MessagePage({Key? key}) : super(key: key);
 
   AppBar _buildAppBar() {
-    return transparentAppBar(
-      title: Text(
-        "Message",
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      toolbarHeight: 75,
+      title: GradientText(
+        'Chats',
         style: TextStyle(
-          color: AppColors.primaryBackground,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w400,
+          fontSize: 20.sp,
         ),
+        gradientType: GradientType.linear,
+        gradientDirection: GradientDirection.ttb,
+        colors: const [
+          Color(0xff184E68),
+          Color(0xff57CA85),
+        ],
       ),
+      centerTitle: true,
     );
   }
 
@@ -26,7 +35,12 @@ class MessagePage extends GetView<MessageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: MessageList(),
+      body: const MessageList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.toNamed("/ContactPage"),
+        backgroundColor: const Color(0xff57CA85),
+        child: const Icon(Icons.chat),
+      ),
     );
   }
 }

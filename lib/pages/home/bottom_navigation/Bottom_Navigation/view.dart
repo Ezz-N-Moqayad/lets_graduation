@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-import '../../../group/contact/index.dart';
+import '../../../group/message/index.dart';
 import '../../../settings/settings_screen/index.dart';
 import '../Heart_Beat/index.dart';
 import '../home_screen/index.dart';
@@ -18,7 +18,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   final _screen = [
     const HomeScreen(),
     const Profile(),
-    const ContactPage(),
+    const MessagePage(),
     const HeartBeat(),
     const SettingsScreen(),
   ];

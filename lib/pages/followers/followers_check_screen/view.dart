@@ -23,13 +23,14 @@ class FollowesCheckScreen extends StatelessWidget {
         ),
         centerTitle: true,
         leading: InkWell(
-            onTap: () {
-              print('ff');
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Color(0xff184E68),
-            )),
+          onTap: () {
+            print('ff');
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Color(0xff184E68),
+          ),
+        ),
       ),
       body: SafeArea(
         child: Column(
