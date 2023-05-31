@@ -12,17 +12,22 @@ AppBar transparentAppBar({
     backgroundColor: Colors.transparent,
     elevation: 0,
     flexibleSpace: Container(
-      decoration: BoxDecoration(
-        // ignore: prefer_const_literals_to_create_immutables
-        gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 176, 106, 231),
-          Color.fromARGB(255, 166, 112, 232),
-          Color.fromARGB(255, 131, 123, 232),
-          Color.fromARGB(255, 104, 132, 231),
-        ], transform: GradientRotation(90)),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color(0xff184E68),
+            Color(0xff57CA85),
+          ],
+          transform: GradientRotation(45),
+        ),
       ),
     ),
-    title: title != null ? Center(child: title) : null,
+    title: title != null
+        ? Padding(
+            padding: EdgeInsetsDirectional.only(end: 60.w),
+            child: Center(child: title),
+          )
+        : null,
     leading: leading,
     actions: actions,
   );
@@ -31,7 +36,7 @@ AppBar transparentAppBar({
 /// 10像素 Divider
 Widget divider10Px({Color bgColor = AppColors.secondaryElement}) {
   return Container(
-    height: 10.w,
+    height: 100.w,
     decoration: BoxDecoration(
       color: bgColor,
     ),

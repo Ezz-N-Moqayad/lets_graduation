@@ -21,11 +21,10 @@ Widget ChatLeftItem(Msgcontent item) {
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 19, 65, 40),
-                  Color.fromARGB(255, 39, 61, 48),
-                  Color.fromARGB(255, 110, 75, 89),
-                  Color.fromARGB(255, 42, 12, 26),
+                  Color.fromARGB(255, 200, 200, 200),
+                  Color.fromARGB(255, 200, 200, 200),
                 ],
+                transform: GradientRotation(135),
               ),
               borderRadius: BorderRadius.all(Radius.circular(10.w)),
             ),
@@ -33,19 +32,24 @@ Widget ChatLeftItem(Msgcontent item) {
                 ? Text(
                     "${item.content}",
                     style: TextStyle(
-                      color: AppColors.primaryBackground,
+                      color: AppColors.primaryText,
                       fontSize: 12.sp,
                     ),
                   )
-                : ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 90.w),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.Photoimgview,
-                            parameters: {"url": item.content ?? ""});
-                      },
-                      child: CachedNetworkImage(
-                        imageUrl: "${item.content}",
+                : Padding(
+                    padding: EdgeInsetsDirectional.only(bottom: 10.h),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: 360.h),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(
+                            AppRoutes.Photoimgview,
+                            parameters: {"url": item.content ?? ""},
+                          );
+                        },
+                        child: CachedNetworkImage(
+                          imageUrl: "${item.content}",
+                        ),
                       ),
                     ),
                   ),

@@ -18,11 +18,10 @@ class ChatPage extends GetView<ChatController> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 104, 132, 231),
-              Color.fromARGB(255, 131, 123, 231),
-              Color.fromARGB(255, 166, 112, 231),
-              Color.fromARGB(255, 176, 106, 231),
+              Color(0xff184E68),
+              Color(0xff57CA85),
             ],
+            transform: GradientRotation(45),
           ),
         ),
       ),

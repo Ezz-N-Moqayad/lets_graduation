@@ -21,11 +21,10 @@ Widget ChatRightItem(Msgcontent item) {
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 104, 132, 231),
-                  Color.fromARGB(255, 131, 123, 231),
-                  Color.fromARGB(255, 166, 112, 231),
-                  Color.fromARGB(255, 176, 106, 231),
+                  Color(0xff184E68),
+                  Color(0xff57CA85),
                 ],
+                transform: GradientRotation(135),
               ),
               borderRadius: BorderRadius.all(Radius.circular(10.w)),
             ),
@@ -37,17 +36,20 @@ Widget ChatRightItem(Msgcontent item) {
                       fontSize: 12.sp,
                     ),
                   )
-                : ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 90.w),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.toNamed(
-                          AppRoutes.Photoimgview,
-                          parameters: {"url": item.content ?? ""},
-                        );
-                      },
-                      child: CachedNetworkImage(
-                        imageUrl: "${item.content}",
+                : Padding(
+                    padding: EdgeInsetsDirectional.only(bottom: 10.h),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: 360.h),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(
+                            AppRoutes.Photoimgview,
+                            parameters: {"url": item.content ?? ""},
+                          );
+                        },
+                        child: CachedNetworkImage(
+                          imageUrl: "${item.content}",
+                        ),
                       ),
                     ),
                   ),

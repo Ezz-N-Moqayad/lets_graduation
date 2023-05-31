@@ -14,13 +14,9 @@ class widget_pageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 360.w,
-      height: 780.h,
       child: Stack(
         children: [
           Container(
-            width: double.infinity,
-            height: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
