@@ -69,7 +69,7 @@ class RegisterScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsetsDirectional.only(top: 12),
                     child: TextFormField(
-                      controller: controller.NameController,
+                      controller: controller.state.NameController,
                       keyboardType: TextInputType.name,
                       onChanged: (String value) {},
                       cursorColor: Colors.white,
@@ -95,7 +95,7 @@ class RegisterScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(14),
                         ),
                       ),
-                      onTap: () => controller.NameController,
+                      onTap: () => controller.state.NameController,
                       // validator: (name) => AppHelper.validateName(name: name!),
                     ),
                   ),
@@ -113,7 +113,7 @@ class RegisterScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsetsDirectional.only(top: 12),
                     child: TextFormField(
-                      controller: controller.EmailController,
+                      controller: controller.state.EmailController,
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (String value) {},
                       cursorColor: Colors.white,
@@ -139,7 +139,7 @@ class RegisterScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(14),
                         ),
                       ),
-                      onTap: () => controller.EmailController,
+                      onTap: () => controller.state.EmailController,
                       // validator: (email) =>
                       //     AppHelper.validateEmail(email: email!),
                     ),
@@ -159,9 +159,9 @@ class RegisterScreen extends StatelessWidget {
                     padding: const EdgeInsetsDirectional.only(top: 12),
                     child: Obx(
                       () => TextField(
-                        controller: controller.PasswordController,
+                        controller: controller.state.PasswordController,
                         keyboardType: TextInputType.text,
-                        obscureText: controller.isPasswordHidden.value,
+                        obscureText: controller.state.isPasswordHidden.value,
                         obscuringCharacter: '*',
                         onTap: () {},
                         onChanged: (String value) {},
@@ -189,14 +189,14 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           suffix: InkWell(
                             child: Icon(
-                              controller.isPasswordHidden.value
+                              controller.state.isPasswordHidden.value
                                   ? Icons.visibility_off_outlined
                                   : Icons.visibility,
                               color: Colors.white,
                             ),
                             onTap: () {
-                              controller.isPasswordHidden.value =
-                                  !controller.isPasswordHidden.value;
+                              controller.state.isPasswordHidden.value =
+                                  !controller.state.isPasswordHidden.value;
                             },
                           ),
                         ),
@@ -218,9 +218,10 @@ class RegisterScreen extends StatelessWidget {
                     padding: const EdgeInsetsDirectional.only(top: 12),
                     child: Obx(
                       () => TextField(
-                        controller: controller.ConfirmPasswordController,
+                        controller: controller.state.ConfirmPasswordController,
                         keyboardType: TextInputType.text,
-                        obscureText: controller.isConfirmPasswordHidden.value,
+                        obscureText:
+                            controller.state.isConfirmPasswordHidden.value,
                         obscuringCharacter: '*',
                         onTap: () {},
                         onChanged: (String value) {},
@@ -248,14 +249,15 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           suffix: InkWell(
                             child: Icon(
-                              controller.isConfirmPasswordHidden.value
+                              controller.state.isConfirmPasswordHidden.value
                                   ? Icons.visibility_off_outlined
                                   : Icons.visibility,
                               color: Colors.white,
                             ),
                             onTap: () {
-                              controller.isConfirmPasswordHidden.value =
-                                  !controller.isConfirmPasswordHidden.value;
+                              controller.state.isConfirmPasswordHidden.value =
+                                  !controller
+                                      .state.isConfirmPasswordHidden.value;
                             },
                           ),
                         ),
@@ -266,15 +268,13 @@ class RegisterScreen extends StatelessWidget {
                     padding:
                         const EdgeInsetsDirectional.only(top: 20, start: 12),
                     child: ElevatedButton(
-                      onPressed: () async {
-                        Get.offAndToNamed(AppRoutes.done);
-                      },
+                      onPressed: () async => await controller.performRegister(),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14),
                         ),
+                        backgroundColor: Colors.white,
                         minimumSize: const Size(343, 48),
-                        primary: Colors.white,
                       ),
                       child: const Text(
                         'Sigin',

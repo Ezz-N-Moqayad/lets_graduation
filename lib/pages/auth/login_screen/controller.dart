@@ -4,43 +4,35 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../../common/entities/entities.dart';
+import '../../../common/entities/fb_response.dart';
 import '../../../common/routes/routes.dart';
 import '../../../common/store/store.dart';
+import '../../../common/utils/helpers.dart';
 import '../../../common/widgets/widgets.dart';
+import '../register_screen/index.dart';
 import 'index.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>['openid']);
 
-class LoginController extends GetxController {
+class LoginController extends GetxController with Helpers {
   final state = LoginState();
 
   LoginController();
 
-  RxBool isPasswordHidden = true.obs;
-  RxBool isLoading = false.obs;
-  bool isVisiblePass = true;
-  bool isVisiblePassCon = true;
-  IconData visiblePassIcon = Icons.visibility;
-  IconData visiblePassCon = Icons.visibility;
-
   final db = FirebaseFirestore.instance;
-
-  late GlobalKey<FormState> formKey;
-  late GlobalKey<FormState> formKeyPassword;
-  late TextEditingController nameController;
-  late TextEditingController passwordController;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   @override
   void onInit() {
     super.onInit();
 
-    formKey = GlobalKey<FormState>();
-    formKeyPassword = GlobalKey<FormState>();
-    nameController = TextEditingController();
-    passwordController = TextEditingController();
+    state.formKey = GlobalKey<FormState>();
+    state.formKeyPassword = GlobalKey<FormState>();
+    state.emailController = TextEditingController();
+    state.passwordController = TextEditingController();
 
-    nameController.text = '';
-    passwordController.text = '';
+    state.emailController.text = '';
+    state.passwordController.text = '';
   }
 
   Future<void> handleSignIn() async {
@@ -101,6 +93,62 @@ class LoginController extends GetxController {
     }
   }
 
+  Future<FbResponse> SignIn(
+      {required String email, required String password}) async {
+    try {
+      UserCredential userCredential = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+      if (userCredential.user != null) {
+        String message = userCredential.user!.emailVerified
+            ? 'logged In Successfully'
+            : 'your must verify your email';
+        return FbResponse(
+            message: message, states: userCredential.user!.emailVerified);
+      }
+    } on FirebaseAuthException catch (e) {
+      return _ControlFirebaseException(e);
+    }
+    return FbResponse(message: 'somthing went worng', states: false);
+  }
+
+  FbResponse _ControlFirebaseException(FirebaseException exception) {
+    print('Message:${exception.message}');
+    if (exception.code == 'email-already-in-use') {
+    } else if (exception.code == 'invalid-email') {
+    } else if (exception.code == 'operation-not-allowed') {
+    } else if (exception.code == 'weak-password') {
+    } else if (exception.code == 'user-disabled') {
+    } else if (exception.code == 'user-not-found') {
+    } else if (exception.code == 'wrong-password') {
+    } else if (exception.code == 'auth/invalid-email') {
+    } else if (exception.code == 'auth/user-not-email') {}
+    return FbResponse(
+        message: exception.message ?? 'Error occurred!', states: false);
+  }
+
+  Future<void> performLogin() async {
+    if (checkData()) {
+      await _login();
+    }
+  }
+
+  bool checkData() {
+    if (state.emailController.text.isNotEmpty &&
+        state.passwordController.text.isNotEmpty) {
+      return true;
+    }
+    showSnackBar(message: 'Enter required data!', error: true);
+    return false;
+  }
+
+  Future<void> _login() async {
+    FbResponse fbResponse = await SignIn(
+        email: state.emailController.text,
+        password: state.passwordController.text);
+    showSnackBar(message: fbResponse.message, error: !fbResponse.states);
+    if (fbResponse.states) Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
+  }
+
   @override
   void onReady() {
     super.onReady();
@@ -119,20 +167,8 @@ class LoginController extends GetxController {
   void dispose() {
     super.dispose();
 
-    formKey.currentState!.dispose();
-    nameController.dispose();
-    passwordController.dispose();
-  }
-
-  void visiblePassword() {
-    isVisiblePass = !isVisiblePass;
-    visiblePassIcon = isVisiblePass ? Icons.visibility : Icons.visibility_off;
-    update();
-  }
-
-  void visiblePasswordCon() {
-    isVisiblePassCon = !isVisiblePassCon;
-    visiblePassCon = isVisiblePassCon ? Icons.visibility : Icons.visibility_off;
-    update();
+    state.formKey.currentState!.dispose();
+    state.emailController.dispose();
+    state.passwordController.dispose();
   }
 }
