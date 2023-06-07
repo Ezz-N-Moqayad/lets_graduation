@@ -110,15 +110,19 @@ class MyTranslations implements Translations {
           'select_size': 'أختر الحجم',
           'select_color': 'إختر اللون',
           'select_stone_color': 'حدد لون الحجر',
+          // ignore: equal_keys_in_map
           'quantity': 'الكمية',
           'total_price': 'السعر الكلي',
           'please_enter_promo_code ': 'الرجاء إدخال الرمز الترويجي',
+          // ignore: equal_keys_in_map
           'enter_delivery_address': 'أدخل عنوان التسليم:',
+          // ignore: equal_keys_in_map
           'add_payment_method': 'إضافة طريقة دفع :',
           'search': 'بحث',
           'order_successfully_placed': 'تم تقديم الطلب\n بنجاح .',
           'order_successfully_test':
               'تم الدفع بنجاح! \n فقط انتظر Plantfresher \n حتى تصل إلى المنزل في أسرع وقت ممكن.',
+          // ignore: equal_keys_in_map
           'done': 'تم',
           'continue': 'إستمر في التسوق',
           'cart_empty': 'عربة التسوق فارغة',
@@ -133,6 +137,7 @@ class MyTranslations implements Translations {
           'enter_confirm_password': 'أدخل تأكيد كلمة المرور',
           'Password_characters': 'يجب أن تكون كلمة المرور أكثر من 6 أحرف',
           'passwords_do_not_match': 'كلمة المرور غير مطابقة',
+          // ignore: equal_keys_in_map
           'enter_email': 'أدخل البريد الإلكتروني',
           'enter__valid_email': 'أدخل بريد إلكتروني متاح',
           'verify': 'تأكيد',
@@ -247,14 +252,18 @@ class MyTranslations implements Translations {
           'select_size': 'Select size',
           'select_color': 'Select color',
           'select_stone_color ': 'Select the stone color',
+          // ignore: equal_keys_in_map
           'quantity': 'Quantity',
           'total_price': 'Total price',
+          // ignore: equal_keys_in_map
           'enter_delivery_address': 'Enter Delivery Address :',
+          // ignore: equal_keys_in_map
           'add_payment_method': 'Add Payment Method :',
           'search': 'Search',
           'order_successfully_placed': 'Order Successfully \n Placed. ',
           'order_successfully_test':
               'Your payment was successfully!\n Just wait Plantfresher \n arrive at home asap.',
+          // ignore: equal_keys_in_map
           'done': 'Done',
           'continue': 'Continue shopping',
           'cart_empty': 'Your Cart is empty',
@@ -269,6 +278,7 @@ class MyTranslations implements Translations {
           'enter_confirm_password': 'Enter Confirm Password',
           'Password_characters': 'Password must be more than 6 characters',
           'passwords_do_not_match': 'Passwords do not match',
+          // ignore: equal_keys_in_map
           'enter_email': 'Enter email',
           'enter__valid_email': 'Enter a valid email',
           'verify': 'Verify',
