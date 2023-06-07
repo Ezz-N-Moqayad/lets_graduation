@@ -255,6 +255,7 @@ class AppWidgets {
 //   );
 // }
 
+// ignore: must_be_immutable
 class MainToolBar extends StatelessWidget {
   String? title;
   String? route = '';
