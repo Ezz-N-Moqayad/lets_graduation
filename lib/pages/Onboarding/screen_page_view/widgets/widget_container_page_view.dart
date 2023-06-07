@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+// ignore: camel_case_types
 class widget_container_page_view extends StatelessWidget {
   const widget_container_page_view({
     Key? key,
