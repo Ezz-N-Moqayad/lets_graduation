@@ -3,8 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'index.dart';
 
+// ignore: must_be_immutable
 class EditProfialScreen extends StatelessWidget {
   EditProfialController controller = Get.put(EditProfialController());
+
+  EditProfialScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

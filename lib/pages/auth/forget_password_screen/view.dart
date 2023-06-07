@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 import '../../../common/routes/routes.dart';
 import 'index.dart';
 
+// ignore: must_be_immutable
 class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordController controller = Get.put(ForgetPasswordController());
+
+  ForgetPasswordScreen({super.key});
 
   AppBar _buildAppBar() {
     return AppBar(

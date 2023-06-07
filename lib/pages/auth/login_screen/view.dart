@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../common/routes/routes.dart';
 import 'index.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginController controller = Get.put(LoginController());
 

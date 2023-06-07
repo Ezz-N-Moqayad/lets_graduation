@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 import '../../../common/routes/routes.dart';
 import 'index.dart';
 
+// ignore: must_be_immutable
 class DoneScreen extends StatelessWidget {
   DoneController controller = Get.put(DoneController());
+
+  DoneScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

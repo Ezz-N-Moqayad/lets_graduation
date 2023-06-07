@@ -9,7 +9,6 @@ import '../../../common/routes/routes.dart';
 import '../../../common/store/store.dart';
 import '../../../common/utils/helpers.dart';
 import '../../../common/widgets/widgets.dart';
-import '../register_screen/index.dart';
 import 'index.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>['openid']);
@@ -167,6 +166,7 @@ class LoginController extends GetxController with Helpers {
   void dispose() {
     super.dispose();
 
+    // ignore: invalid_use_of_protected_member
     state.formKey.currentState!.dispose();
     state.emailController.dispose();
     state.passwordController.dispose();

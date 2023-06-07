@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
-import '../../../common/routes/routes.dart';
 import 'chat/widgets/message_list.dart';
 import 'index.dart';
 
