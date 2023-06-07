@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../common/routes/routes.dart';
 import 'widgets/widget_container_page_view.dart';
 import 'widgets/widget_pageView.dart';
