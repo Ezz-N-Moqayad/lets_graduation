@@ -59,9 +59,7 @@ class NewGroupScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 70,
-              ),
+              const SizedBox(height: 70),
               Stack(
                 alignment: AlignmentDirectional.center,
                 children: [
