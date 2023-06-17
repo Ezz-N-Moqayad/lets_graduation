@@ -20,9 +20,7 @@ class NewGroupScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 25,
-              ),
+              const SizedBox(height: 25),
               Padding(
                 padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
                 child: Row(
