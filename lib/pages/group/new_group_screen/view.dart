@@ -38,7 +38,7 @@ class NewGroupScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {},
-                      child: Text(
+                      child: const Text(
                         'New Group',
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
