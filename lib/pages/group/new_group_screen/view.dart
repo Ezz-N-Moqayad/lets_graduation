@@ -8,7 +8,7 @@ class NewGroupScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         alignment: AlignmentDirectional.topStart,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: AlignmentDirectional.topStart,
                 end: AlignmentDirectional.centerEnd,
