@@ -69,7 +69,7 @@ class NewGroupScreen extends StatelessWidget {
                     width: 103,
                     height: 102,
                     decoration: BoxDecoration(
-                      color: Color(0xffF5F5FA),
+                      color: const Color(0xffF5F5FA),
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: InkWell(
