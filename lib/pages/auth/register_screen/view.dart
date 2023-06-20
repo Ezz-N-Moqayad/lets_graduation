@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../common/routes/routes.dart';
 import 'index.dart';
 
 // ignore: must_be_immutable
@@ -266,7 +268,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.only(top: 20, start: 12),
+                        const EdgeInsetsDirectional.only(top: 30, start: 12),
                     child: ElevatedButton(
                       onPressed: () async => await controller.performRegister(),
                       style: ElevatedButton.styleFrom(
@@ -287,80 +289,116 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        height: 1,
-                        width: 160,
-                        alignment: AlignmentDirectional.topStart,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 22),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 1,
+                          width: 160,
+                          alignment: AlignmentDirectional.topStart,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      const Text(
-                        'OR',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 18,
-                            color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
-                      Container(
-                        height: 1,
-                        width: 160,
-                        alignment: AlignmentDirectional.topStart,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
+                        const Text(
+                          'OR',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 18,
+                              color: Colors.white),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
-                    ],
+                        Container(
+                          height: 1,
+                          width: 160,
+                          alignment: AlignmentDirectional.topStart,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 10),
-                  Align(
-                    alignment: AlignmentDirectional.center,
-                    child: InkWell(
-                      onTap: () {},
-                      child: const Text(
-                        'SignUp with social account',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: Color(0xff184E68),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 16),
+                    child: Align(
+                      alignment: AlignmentDirectional.center,
+                      child: InkWell(
+                        onTap: () {},
+                        child: const Text(
+                          'SignUp with social account',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            color: Color(0xff184E68),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () => controller.handleSignIn(),
-                        child: Container(
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () => controller.handleSignIn(),
+                          child: Container(
+                            height: 64,
+                            width: 92,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Image.asset('assets/images/gmail.png'),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Container(
                           height: 64,
                           width: 92,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(24),
                           ),
-                          child: Image.asset('assets/images/gmail.png'),
+                          child: Image.asset('assets/images/facebook.png'),
                         ),
-                      ),
-                      const SizedBox(width: 20),
-                      Container(
-                        height: 64,
-                        width: 92,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(24),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        top: 25.0, bottom: 26.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Do have an account?',
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15.sp,
+                              color: Colors.white),
+                          textAlign: TextAlign.center,
                         ),
-                        child: Image.asset(
-                          'assets/images/facebook.png',
+                        InkWell(
+                          onTap: () {
+                            Get.offAndToNamed(AppRoutes.login);
+                          },
+                          child: Text(
+                            ' Click here',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15.sp,
+                              color: const Color(0xff184E68),
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

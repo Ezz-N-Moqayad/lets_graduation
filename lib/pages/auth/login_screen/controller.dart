@@ -107,6 +107,7 @@ class LoginController extends GetxController with Helpers {
     } on FirebaseAuthException catch (e) {
       return _ControlFirebaseException(e);
     }
+
     return FbResponse(message: 'somthing went worng', states: false);
   }
 
@@ -144,7 +145,9 @@ class LoginController extends GetxController with Helpers {
     FbResponse fbResponse = await SignIn(
         email: state.emailController.text,
         password: state.passwordController.text);
+
     showSnackBar(message: fbResponse.message, error: !fbResponse.states);
+
     if (fbResponse.states) Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
   }
 

@@ -110,7 +110,9 @@ class RegisterController extends GetxController with Helpers {
 
   // ignore: non_constant_identifier_names
   Future<FbResponse> CreateAccount(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String name}) async {
     try {
       UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -163,7 +165,8 @@ class RegisterController extends GetxController with Helpers {
   Future<void> _register() async {
     FbResponse fbResponse = await CreateAccount(
         email: state.EmailController.text,
-        password: state.PasswordController.text);
+        password: state.PasswordController.text,
+        name: state.NameController.text);
     showSnackBar(message: fbResponse.message, error: !fbResponse.states);
     if (fbResponse.states) Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
   }

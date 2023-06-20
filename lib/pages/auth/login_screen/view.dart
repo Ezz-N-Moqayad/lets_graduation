@@ -256,21 +256,16 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.only(top: 16),
+                    padding: const EdgeInsetsDirectional.only(top: 13),
                     child: Align(
                       alignment: AlignmentDirectional.center,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushReplacementNamed(context, '/Singin');
-                        },
-                        child: Text(
-                          'SignUp with social account',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp,
-                            color: const Color(0xff184E68),
-                          ),
+                      child: Text(
+                        'SignUp with social account',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: const Color(0xff184E68),
                         ),
                       ),
                     ),
@@ -313,7 +308,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsetsDirectional.only(
-                        top: 25.0, bottom: 26.0),
+                        top: 35.0, bottom: 15.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
