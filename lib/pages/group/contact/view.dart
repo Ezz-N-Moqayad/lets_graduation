@@ -12,6 +12,7 @@ class ContactPage extends GetView<ContactController> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     AppBar _buildAppBar() {
       return transparentAppBar(
         title: Text(

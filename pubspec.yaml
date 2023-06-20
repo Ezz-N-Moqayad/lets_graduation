@@ -1,6 +1,6 @@
 name: lets_graduation
 description: A new Flutter project.
-
+#ios: 6.21.1
 publish_to: "none"
 
 version: 1.0.0+1
