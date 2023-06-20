@@ -1,3 +1,8 @@
+import 'dart:js_interop';
+import 'dart:math';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -58,34 +63,8 @@ class RegisterController extends GetxController with Helpers {
         userProfile.displayName = displayName;
         userProfile.photoUrl = photoUrl;
 
-        UserStore.to.saveProfile(userProfile);
-        var userbase = await db
-            .collection("users")
-            .withConverter(
-                fromFirestore: UserData.fromFirestore,
-                toFirestore: (UserData userdata, options) =>
-                    userdata.toFirestore())
-            .where("id", isEqualTo: id)
-            .get();
+        AddUser(userProfile);
 
-        if (userbase.docs.isEmpty) {
-          final data = UserData(
-              id: id,
-              name: displayName,
-              email: email,
-              photourl: photoUrl,
-              location: "",
-              fcmtoken: "",
-              addtime: Timestamp.now());
-
-          await db
-              .collection("users")
-              .withConverter(
-                  fromFirestore: UserData.fromFirestore,
-                  toFirestore: (UserData userdata, options) =>
-                      userdata.toFirestore())
-              .add(data);
-        }
         toastInfo(msg: "Login Success");
         Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
       }
@@ -108,6 +87,38 @@ class RegisterController extends GetxController with Helpers {
     );
   }
 
+  void AddUser(UserLoginResponseEntity userProfile) async {
+    UserStore.to.saveProfile(userProfile);
+    var userbase = await db
+        .collection("users")
+        .withConverter(
+            fromFirestore: UserData.fromFirestore,
+            toFirestore: (UserData userdata, options) => userdata.toFirestore())
+        .where("id", isEqualTo: userProfile.accessToken)
+        .get();
+
+    if (userbase.docs.isEmpty) {
+      final data = UserData(
+          id: userProfile.accessToken,
+          name: userProfile.displayName,
+          email: userProfile.email,
+          photourl: userProfile.photoUrl,
+          location: "",
+          fcmtoken: "",
+          addtime: Timestamp.now());
+
+      await db
+          .collection("users")
+          .withConverter(
+              fromFirestore: UserData.fromFirestore,
+              toFirestore: (UserData userdata, options) =>
+                  userdata.toFirestore())
+          .add(data);
+    }
+
+    toastInfo(msg: "Added successfully");
+  }
+
   // ignore: non_constant_identifier_names
   Future<FbResponse> CreateAccount(
       {required String email,
@@ -118,31 +129,35 @@ class RegisterController extends GetxController with Helpers {
           .createUserWithEmailAndPassword(email: email, password: password);
       if (userCredential.user != null) {
         await userCredential.user!.sendEmailVerification();
+
+        print("11111111111111111");
+        print(userCredential.user);
+        print("11111111111111111");
+
+
+        final random = Random.secure();
+        final bytes = List<int>.generate(16, (index) => random.nextInt(256));
+        final accessToken =  base64Url.encode(bytes );
+
+        print("11111111111111111");
+        print(accessToken);
+        print("11111111111111111");
         return FbResponse(
             message: 'Account Created Successfully', states: true);
       }
-    } on FirebaseAuthException catch (e) {
-      return _ControlFirebaseException(e);
-      //هان تخصييص نوع الاكسبشن
+
+
+      // UserLoginResponseEntity userProfile = UserLoginResponseEntity();
+      // userProfile.email = email;
+      //
+      // userProfile.displayName = name;
+      // userProfile.photoUrl = "";
+      //
+      // AddUser(userProfile);
     } catch (e) {
-      //هان الاشي الي مش متوقعه
+      toastInfo(msg: "Login Error");
     }
     return FbResponse(message: 'something went wrong', states: false);
-  }
-
-  FbResponse _ControlFirebaseException(FirebaseException exception) {
-    print('Message:${exception.message}');
-    if (exception.code == 'email-already-in-use') {
-    } else if (exception.code == 'invalid-email') {
-    } else if (exception.code == 'operation-not-allowed') {
-    } else if (exception.code == 'weak-password') {
-    } else if (exception.code == 'user-disabled') {
-    } else if (exception.code == 'user-not-found') {
-    } else if (exception.code == 'wrong-password') {
-    } else if (exception.code == 'auth/invalid-email') {
-    } else if (exception.code == 'auth/user-not-email') {}
-    return FbResponse(
-        message: exception.message ?? 'Error occurred!', states: false);
   }
 
   Future<void> performRegister() async {
@@ -156,8 +171,14 @@ class RegisterController extends GetxController with Helpers {
         state.EmailController.text.isNotEmpty &&
         state.PasswordController.text.isNotEmpty &&
         state.ConfirmPasswordController.text.isNotEmpty) {
+      if (state.PasswordController.text !=
+          state.ConfirmPasswordController.text) {
+        showSnackBar(message: 'Passwords do not match!', error: true);
+        return false;
+      }
       return true;
     }
+
     showSnackBar(message: 'Enter required data!', error: true);
     return false;
   }

@@ -13,31 +13,44 @@ class ScreenPageView extends GetView<ScreenPageController> {
     return Scaffold(
       body: Stack(
         children: [
-          Expanded(
-            child: PageView(
-              controller: PageController(
-                initialPage: 0,
-                keepPage: false,
-                viewportFraction: 1,
+          Container(
+            alignment: AlignmentDirectional.topStart,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: AlignmentDirectional.topStart,
+                end: AlignmentDirectional.centerEnd,
+                colors: [
+                  Color(0xffe7f2ea),
+                  Color(0xff79654e),
+                ],
               ),
-              scrollDirection: Axis.horizontal,
-              onPageChanged: (index) {
-                controller.changePage(index);
-              },
-              children: [
-                widget_pageView(
-                  title: controller.state.title,
-                  Imagee: 'assets/images/page_view.png',
+            ),
+            child: Expanded(
+              child: PageView(
+                controller: PageController(
+                  initialPage: 0,
+                  keepPage: false,
+                  viewportFraction: 1,
                 ),
-                widget_pageView(
-                  title: controller.state.title,
-                  Imagee: 'assets/images/page_view.png',
-                ),
-                widget_pageView(
-                  title: controller.state.title,
-                  Imagee: 'assets/images/page_view.png',
-                ),
-              ],
+                scrollDirection: Axis.horizontal,
+                onPageChanged: (index) {
+                  controller.changePage(index);
+                },
+                children: [
+                  widget_pageView(
+                    title: controller.state.title,
+                    Imagee: 'assets/images/page_view.png',
+                  ),
+                  widget_pageView(
+                    title: controller.state.title,
+                    Imagee: 'assets/images/page_view.png',
+                  ),
+                  widget_pageView(
+                    title: controller.state.title,
+                    Imagee: 'assets/images/page_view.png',
+                  ),
+                ],
+              ),
             ),
           ),
           Visibility(

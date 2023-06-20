@@ -56,40 +56,47 @@ class LoginController extends GetxController with Helpers {
         userProfile.displayName = displayName;
         userProfile.photoUrl = photoUrl;
 
-        UserStore.to.saveProfile(userProfile);
-        var userbase = await db
-            .collection("users")
-            .withConverter(
-                fromFirestore: UserData.fromFirestore,
-                toFirestore: (UserData userdata, options) =>
-                    userdata.toFirestore())
-            .where("id", isEqualTo: id)
-            .get();
+        AddUser(userProfile);
 
-        if (userbase.docs.isEmpty) {
-          final data = UserData(
-              id: id,
-              name: displayName,
-              email: email,
-              photourl: photoUrl,
-              location: "",
-              fcmtoken: "",
-              addtime: Timestamp.now());
-
-          await db
-              .collection("users")
-              .withConverter(
-                  fromFirestore: UserData.fromFirestore,
-                  toFirestore: (UserData userdata, options) =>
-                      userdata.toFirestore())
-              .add(data);
-        }
         toastInfo(msg: "Login Success");
         Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
       }
     } catch (e) {
       toastInfo(msg: "Login Error");
     }
+  }
+
+
+  void AddUser(UserLoginResponseEntity userProfile) async {
+    UserStore.to.saveProfile(userProfile);
+    var userbase = await db
+        .collection("users")
+        .withConverter(
+        fromFirestore: UserData.fromFirestore,
+        toFirestore: (UserData userdata, options) => userdata.toFirestore())
+        .where("id", isEqualTo: userProfile.accessToken)
+        .get();
+
+    if (userbase.docs.isEmpty) {
+      final data = UserData(
+          id: userProfile.accessToken,
+          name: userProfile.displayName,
+          email: userProfile.email,
+          photourl: userProfile.photoUrl,
+          location: "",
+          fcmtoken: "",
+          addtime: Timestamp.now());
+
+      await db
+          .collection("users")
+          .withConverter(
+          fromFirestore: UserData.fromFirestore,
+          toFirestore: (UserData userdata, options) =>
+              userdata.toFirestore())
+          .add(data);
+    }
+
+    toastInfo(msg: "Added successfully");
   }
 
   Future<FbResponse> SignIn(
@@ -104,26 +111,11 @@ class LoginController extends GetxController with Helpers {
         return FbResponse(
             message: message, states: userCredential.user!.emailVerified);
       }
-    } on FirebaseAuthException catch (e) {
-      return _ControlFirebaseException(e);
+    } catch (e) {
+      toastInfo(msg: "Login Error");
     }
 
     return FbResponse(message: 'somthing went worng', states: false);
-  }
-
-  FbResponse _ControlFirebaseException(FirebaseException exception) {
-    print('Message:${exception.message}');
-    if (exception.code == 'email-already-in-use') {
-    } else if (exception.code == 'invalid-email') {
-    } else if (exception.code == 'operation-not-allowed') {
-    } else if (exception.code == 'weak-password') {
-    } else if (exception.code == 'user-disabled') {
-    } else if (exception.code == 'user-not-found') {
-    } else if (exception.code == 'wrong-password') {
-    } else if (exception.code == 'auth/invalid-email') {
-    } else if (exception.code == 'auth/user-not-email') {}
-    return FbResponse(
-        message: exception.message ?? 'Error occurred!', states: false);
   }
 
   Future<void> performLogin() async {
@@ -131,6 +123,7 @@ class LoginController extends GetxController with Helpers {
       await _login();
     }
   }
+
 
   bool checkData() {
     if (state.emailController.text.isNotEmpty &&

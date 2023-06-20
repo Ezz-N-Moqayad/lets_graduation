@@ -4,6 +4,7 @@ class UserData {
   final String? id;
   final String? name;
   final String? email;
+  final String? password;
   final String? photourl;
   final String? location;
   final String? fcmtoken;
@@ -13,6 +14,7 @@ class UserData {
     this.id,
     this.name,
     this.email,
+    this.password,
     this.photourl,
     this.location,
     this.fcmtoken,
@@ -28,6 +30,7 @@ class UserData {
       id: data?['id'],
       name: data?['name'],
       email: data?['email'],
+      password: data?['password'],
       photourl: data?['photourl'],
       location: data?['location'],
       fcmtoken: data?['fcmtoken'],
@@ -40,6 +43,7 @@ class UserData {
       if (id != null) "id": id,
       if (name != null) "name": name,
       if (email != null) "email": email,
+      if (password != null) "password": password,
       if (photourl != null) "photourl": photourl,
       if (location != null) "location": location,
       if (fcmtoken != null) "fcmtoken": fcmtoken,
@@ -53,12 +57,14 @@ class UserLoginResponseEntity {
   String? accessToken;
   String? displayName;
   String? email;
+  String? password;
   String? photoUrl;
 
   UserLoginResponseEntity({
     this.accessToken,
     this.displayName,
     this.email,
+    this.password,
     this.photoUrl,
   });
 
@@ -67,6 +73,7 @@ class UserLoginResponseEntity {
         accessToken: json["access_token"],
         displayName: json["display_name"],
         email: json["email"],
+        password: json["password"],
         photoUrl: json["photoUrl"],
       );
 
@@ -74,6 +81,7 @@ class UserLoginResponseEntity {
         "access_token": accessToken,
         "display_name": displayName,
         "email": email,
+        "password": password,
         "photoUrl": photoUrl,
       };
 }
