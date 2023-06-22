@@ -76,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsetsDirectional.only(top: 12, end: 16),
                     child: TextFormField(
-                      textInputAction: TextInputAction.go,
+                      textInputAction: TextInputAction.next,
                       controller: controller.state.emailController,
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (String value) {},

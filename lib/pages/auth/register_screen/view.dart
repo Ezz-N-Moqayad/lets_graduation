@@ -6,9 +6,10 @@ import '../../../common/routes/routes.dart';
 import 'index.dart';
 
 // ignore: must_be_immutable
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends GetView<RegisterController> {
   RegisterScreen({Key? key}) : super(key: key);
 
+  @override
   RegisterController controller = Get.put(RegisterController());
 
   @override
@@ -19,12 +20,13 @@ class RegisterScreen extends StatelessWidget {
           alignment: AlignmentDirectional.topStart,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-                begin: AlignmentDirectional.topStart,
-                end: AlignmentDirectional.centerEnd,
-                colors: [
-                  Color(0xff184E68),
-                  Color(0xff57CA85),
-                ]),
+              begin: AlignmentDirectional.topStart,
+              end: AlignmentDirectional.centerEnd,
+              colors: [
+                Color(0xff184E68),
+                Color(0xff57CA85),
+              ],
+            ),
           ),
           child: Padding(
             padding:
@@ -73,6 +75,7 @@ class RegisterScreen extends StatelessWidget {
                     child: TextFormField(
                       controller: controller.state.NameController,
                       keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
                       onChanged: (String value) {},
                       cursorColor: Colors.white,
                       cursorRadius: const Radius.circular(10),
@@ -98,7 +101,6 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () => controller.state.NameController,
-                      // validator: (name) => AppHelper.validateName(name: name!),
                     ),
                   ),
                   const Padding(
@@ -117,6 +119,7 @@ class RegisterScreen extends StatelessWidget {
                     child: TextFormField(
                       controller: controller.state.EmailController,
                       keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
                       onChanged: (String value) {},
                       cursorColor: Colors.white,
                       cursorRadius: const Radius.circular(10),
@@ -142,8 +145,6 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () => controller.state.EmailController,
-                      // validator: (email) =>
-                      //     AppHelper.validateEmail(email: email!),
                     ),
                   ),
                   const Padding(
@@ -163,6 +164,7 @@ class RegisterScreen extends StatelessWidget {
                       () => TextField(
                         controller: controller.state.PasswordController,
                         keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
                         obscureText: controller.state.isPasswordHidden.value,
                         obscuringCharacter: '*',
                         onTap: () {},

@@ -18,9 +18,6 @@ class LoginController extends GetxController with Helpers {
 
   LoginController();
 
-  final db = FirebaseFirestore.instance;
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   @override
   void onInit() {
     super.onInit();
@@ -29,7 +26,6 @@ class LoginController extends GetxController with Helpers {
     state.formKeyPassword = GlobalKey<FormState>();
     state.emailController = TextEditingController();
     state.passwordController = TextEditingController();
-
     state.emailController.text = '';
     state.passwordController.text = '';
   }
@@ -55,25 +51,32 @@ class LoginController extends GetxController with Helpers {
         userProfile.accessToken = id;
         userProfile.displayName = displayName;
         userProfile.photoUrl = photoUrl;
+        userProfile.password = "";
 
-        AddUser(userProfile);
+        var fUser =
+            await state.db.collection("users").where("id", isEqualTo: id).get();
 
-        toastInfo(msg: "Login Success");
-        Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
+        if (fUser.docs.isEmpty) {
+          AddUser(userProfile);
+          toastInfo(msg: "Account Added successfully");
+          Get.offAndToNamed(AppRoutes.done);
+        } else {
+          toastInfo(msg: "Login successfully");
+          Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
+        }
       }
     } catch (e) {
       toastInfo(msg: "Login Error");
     }
   }
 
-
   void AddUser(UserLoginResponseEntity userProfile) async {
     UserStore.to.saveProfile(userProfile);
-    var userbase = await db
+    var userbase = await state.db
         .collection("users")
         .withConverter(
-        fromFirestore: UserData.fromFirestore,
-        toFirestore: (UserData userdata, options) => userdata.toFirestore())
+            fromFirestore: UserData.fromFirestore,
+            toFirestore: (UserData userdata, options) => userdata.toFirestore())
         .where("id", isEqualTo: userProfile.accessToken)
         .get();
 
@@ -83,16 +86,20 @@ class LoginController extends GetxController with Helpers {
           name: userProfile.displayName,
           email: userProfile.email,
           photourl: userProfile.photoUrl,
+          password: userProfile.password,
+          gender: Gender.non,
           location: "",
+          heightKg: "",
+          heightCm: "",
           fcmtoken: "",
           addtime: Timestamp.now());
 
-      await db
+      await state.db
           .collection("users")
           .withConverter(
-          fromFirestore: UserData.fromFirestore,
-          toFirestore: (UserData userdata, options) =>
-              userdata.toFirestore())
+              fromFirestore: UserData.fromFirestore,
+              toFirestore: (UserData userdata, options) =>
+                  userdata.toFirestore())
           .add(data);
     }
 
@@ -102,14 +109,16 @@ class LoginController extends GetxController with Helpers {
   Future<FbResponse> SignIn(
       {required String email, required String password}) async {
     try {
-      UserCredential userCredential = await _firebaseAuth
+      UserCredential userCredential = await state.firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       if (userCredential.user != null) {
         String message = userCredential.user!.emailVerified
             ? 'logged In Successfully'
             : 'your must verify your email';
-        return FbResponse(
-            message: message, states: userCredential.user!.emailVerified);
+
+        bool states = userCredential.user!.emailVerified;
+
+        return FbResponse(message: message, states: !states);
       }
     } catch (e) {
       toastInfo(msg: "Login Error");
@@ -123,7 +132,6 @@ class LoginController extends GetxController with Helpers {
       await _login();
     }
   }
-
 
   bool checkData() {
     if (state.emailController.text.isNotEmpty &&

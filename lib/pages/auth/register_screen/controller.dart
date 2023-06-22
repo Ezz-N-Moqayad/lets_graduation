@@ -1,8 +1,4 @@
-import 'dart:js_interop';
 import 'dart:math';
-import 'package:crypto/crypto.dart';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,9 +18,6 @@ class RegisterController extends GetxController with Helpers {
   final state = RegisterState();
 
   RegisterController();
-
-  final db = FirebaseFirestore.instance;
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   @override
   void onInit() {
@@ -62,11 +55,19 @@ class RegisterController extends GetxController with Helpers {
         userProfile.accessToken = id;
         userProfile.displayName = displayName;
         userProfile.photoUrl = photoUrl;
+        userProfile.password = "";
 
-        AddUser(userProfile);
+        var fUser =
+            await state.db.collection("users").where("id", isEqualTo: id).get();
 
-        toastInfo(msg: "Login Success");
-        Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
+        if (fUser.docs.isEmpty) {
+          AddUser(userProfile);
+          toastInfo(msg: "Account Added successfully");
+          Get.offAndToNamed(AppRoutes.done);
+        } else {
+          toastInfo(msg: "Login successfully");
+          Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
+        }
       }
     } catch (e) {
       toastInfo(msg: "Login Error");
@@ -87,9 +88,10 @@ class RegisterController extends GetxController with Helpers {
     );
   }
 
+  // ignore: non_constant_identifier_names
   void AddUser(UserLoginResponseEntity userProfile) async {
     UserStore.to.saveProfile(userProfile);
-    var userbase = await db
+    var userbase = await state.db
         .collection("users")
         .withConverter(
             fromFirestore: UserData.fromFirestore,
@@ -103,11 +105,15 @@ class RegisterController extends GetxController with Helpers {
           name: userProfile.displayName,
           email: userProfile.email,
           photourl: userProfile.photoUrl,
+          password: userProfile.password,
+          gender: Gender.non,
           location: "",
+          heightKg: "",
+          heightCm: "",
           fcmtoken: "",
           addtime: Timestamp.now());
 
-      await db
+      await state.db
           .collection("users")
           .withConverter(
               fromFirestore: UserData.fromFirestore,
@@ -125,35 +131,28 @@ class RegisterController extends GetxController with Helpers {
       required String password,
       required String name}) async {
     try {
-      UserCredential userCredential = await _firebaseAuth
+      UserCredential userCredential = await state.firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       if (userCredential.user != null) {
         await userCredential.user!.sendEmailVerification();
 
-        print("11111111111111111");
-        print(userCredential.user);
-        print("11111111111111111");
+        String accessToken = '';
+        for (int i = 0; i < 21; i++) {
+          accessToken += Random().nextInt(10).toString();
+        }
 
+        UserLoginResponseEntity userProfile = UserLoginResponseEntity();
+        userProfile.email = email;
+        userProfile.accessToken = accessToken;
+        userProfile.displayName = name;
+        userProfile.photoUrl = "";
+        userProfile.password = password;
 
-        final random = Random.secure();
-        final bytes = List<int>.generate(16, (index) => random.nextInt(256));
-        final accessToken =  base64Url.encode(bytes );
+        AddUser(userProfile);
 
-        print("11111111111111111");
-        print(accessToken);
-        print("11111111111111111");
         return FbResponse(
             message: 'Account Created Successfully', states: true);
       }
-
-
-      // UserLoginResponseEntity userProfile = UserLoginResponseEntity();
-      // userProfile.email = email;
-      //
-      // userProfile.displayName = name;
-      // userProfile.photoUrl = "";
-      //
-      // AddUser(userProfile);
     } catch (e) {
       toastInfo(msg: "Login Error");
     }
@@ -189,7 +188,7 @@ class RegisterController extends GetxController with Helpers {
         password: state.PasswordController.text,
         name: state.NameController.text);
     showSnackBar(message: fbResponse.message, error: !fbResponse.states);
-    if (fbResponse.states) Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
+    if (fbResponse.states) Get.offAndToNamed(AppRoutes.done);
   }
 
   @override

@@ -6,7 +6,10 @@ class UserData {
   final String? email;
   final String? password;
   final String? photourl;
+  final String? heightKg;
+  final String? heightCm;
   final String? location;
+  final Gender? gender;
   final String? fcmtoken;
   final Timestamp? addtime;
 
@@ -16,7 +19,10 @@ class UserData {
     this.email,
     this.password,
     this.photourl,
+    this.heightKg,
+    this.heightCm,
     this.location,
+    this.gender,
     this.fcmtoken,
     this.addtime,
   });
@@ -32,7 +38,10 @@ class UserData {
       email: data?['email'],
       password: data?['password'],
       photourl: data?['photourl'],
+      heightKg: data?['heightKg'],
+      heightCm: data?['heightCm'],
       location: data?['location'],
+      gender: data?['gender'],
       fcmtoken: data?['fcmtoken'],
       addtime: data?['addtime'],
     );
@@ -45,7 +54,10 @@ class UserData {
       if (email != null) "email": email,
       if (password != null) "password": password,
       if (photourl != null) "photourl": photourl,
+      if (heightKg != null) "heightKg": heightKg,
+      if (heightCm != null) "heightCm": heightCm,
       if (location != null) "location": location,
+      if (gender != null) "gender": gender,
       if (fcmtoken != null) "fcmtoken": fcmtoken,
       if (addtime != null) "addtime": addtime,
     };
@@ -106,3 +118,5 @@ class MeListItem {
         route: json["route"],
       );
 }
+
+enum Gender { male, female, non }

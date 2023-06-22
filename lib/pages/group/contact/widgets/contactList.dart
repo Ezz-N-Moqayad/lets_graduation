@@ -10,6 +10,7 @@ import '../index.dart';
 class ContactList extends GetView<ContactController> {
   const ContactList({super.key});
 
+  // ignore: non_constant_identifier_names
   Widget BuildListItem(UserData item) {
     return Container(
       padding: EdgeInsets.only(top: 15.w, left: 15.w, right: 15.w),
@@ -34,10 +35,7 @@ class ContactList extends GetView<ContactController> {
               padding: EdgeInsets.only(top: 15.w, left: 0.w, right: 0.w),
               decoration: const BoxDecoration(
                 border: Border(
-                  bottom: BorderSide(
-                    width: 1,
-                    color: Color(0xffe5efe5),
-                  ),
+                  bottom: BorderSide(width: 1, color: Color(0xffe5efe5)),
                 ),
               ),
               child: Row(
