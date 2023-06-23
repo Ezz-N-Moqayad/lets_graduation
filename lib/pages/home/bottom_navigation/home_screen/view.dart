@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../common/routes/routes.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -19,14 +17,12 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _tabController.dispose();
     super.dispose();
   }
@@ -34,87 +30,55 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          bottom: TabBar(
-            controller: _tabController,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.black,
-            labelStyle: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
-            ),
-            unselectedLabelStyle: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-            ),
-            indicatorColor: Color(0xff57CA85),
-            indicatorWeight: 3,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorPadding: EdgeInsetsDirectional.only(bottom: 10),
-            onTap: (int index) {
-              setState(() {
-                _tabController.index = index;
-              });
-              print('Selected tab index: $index');
-            },
-            tabs: [
-              Tab(
-                text: 'Day',
-              ),
-              Tab(
-                text: 'Week',
-              ),
-              Tab(
-                text: 'Month',
-              ),
-            ],
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        bottom: TabBar(
+          controller: _tabController,
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.black,
+          labelStyle: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
           ),
+          unselectedLabelStyle: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+          ),
+          indicatorColor: const Color(0xff57CA85),
+          indicatorWeight: 3,
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorPadding: const EdgeInsetsDirectional.only(bottom: 10),
+          onTap: (int index) {
+            setState(() {
+              _tabController.index = index;
+            });
+            // ignore: avoid_print
+            print('Selected tab index: $index');
+          },
+          tabs: const [
+            Tab(text: 'Day'),
+            Tab(text: 'Week'),
+            Tab(text: 'Month'),
+          ],
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: TabBarView(controller: _tabController, children: [
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: const [
                 DayScreen(),
                 WeekScreen(),
                 MonthScreen(),
-                // //Fintes
-                // Container(
-                // child: Column(
-                // children: [
-                // Text('Fitness',style: TextStyle(
-                // color:Color(0xff57CA85),
-                // fontSize: 18.sp,
-                // fontWeight: FontWeight.w500,
-                // ),),
-                // Container(
-                // width: double.infinity,
-                // height: 200.h,
-                // child: Stack(
-                // children: [
-                // Image.asset('assets/images/',fit: BoxFit.cover,
-                // height: double.infinity,
-                // width: double.infinity,),
-                // Align(
-                // alignment: AlignmentDirectional.center,
-                // child: Text('Fitness For Women',style: TextStyle(
-                // color:Colors.white,
-                // fontSize: 18.sp,
-                // fontWeight: FontWeight.bold,
-                // ),),
-                // ),
-                // ],
-                // ),
-                // ),
-                // ],
-                // ),
-                // ),
-              ]),
+              ],
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -139,27 +103,25 @@ class ChartData {
 }
 
 class DayScreen extends StatelessWidget {
+  const DayScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Text("DAY"),
+          const Text("DAY"),
           CircularPercentIndicator(
             radius: 110.0,
             animation: true,
             animationDuration: 1200,
             lineWidth: 18.0,
             percent: 0.3,
-            center: Column(
+            center: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Padding(
-                //   padding:
-                //   const EdgeInsetsDirectional.only(start: 0, bottom: 30),
-                //   child: Image.asset('assets/images/Walking.png'),
-                // ),
+
                 Text(
                   'Total steps \n 5,658',
                   style: TextStyle(
@@ -172,14 +134,13 @@ class DayScreen extends StatelessWidget {
               ],
             ),
             circularStrokeCap: CircularStrokeCap.butt,
-            backgroundColor: Color(0xffCFD8DC),
-            progressColor: Color(0xff57CA85),
+            backgroundColor: const Color(0xffCFD8DC),
+            progressColor: const Color(0xff57CA85),
           ),
-          SizedBox(
-            height: 6,
-          ),
+
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 35, end: 35),
+            padding:
+                const EdgeInsetsDirectional.only(top: 6, start: 35, end: 35),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -189,13 +150,13 @@ class DayScreen extends StatelessWidget {
                       radius: 26.0,
                       lineWidth: 5.0,
                       percent: 0.6,
-                      center: Icon(Icons.arrow_forward),
-                      progressColor: Color(0xff57CA85),
+                      center: const Icon(Icons.arrow_forward),
+                      progressColor: const Color(0xff57CA85),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Text(
+                    const Text(
                       '146 kcal',
                       style: TextStyle(
                         color: Colors.black,
@@ -211,13 +172,13 @@ class DayScreen extends StatelessWidget {
                       radius: 26.0,
                       lineWidth: 5.0,
                       percent: 0.6,
-                      center: Icon(Icons.arrow_forward),
-                      progressColor: Color(0xff57CA85),
+                      center: const Icon(Icons.arrow_forward),
+                      progressColor: const Color(0xff57CA85),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Text(
+                    const Text(
                       '891 m',
                       style: TextStyle(
                         color: Colors.black,
@@ -233,13 +194,13 @@ class DayScreen extends StatelessWidget {
                       radius: 26.0,
                       lineWidth: 5.0,
                       percent: 0.6,
-                      center: Icon(Icons.access_time_outlined),
-                      progressColor: Color(0xff57CA85),
+                      center: const Icon(Icons.access_time_outlined),
+                      progressColor: const Color(0xff57CA85),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Text(
+                    const Text(
                       '1:34h',
                       style: TextStyle(
                         color: Colors.black,
@@ -252,16 +213,21 @@ class DayScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 12,
-          ),
+
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 16),
+            padding: const EdgeInsetsDirectional.only(top: 12, start: 16),
             child: Row(
               children: [
                 ElevatedButton(
                   onPressed: () async {},
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    backgroundColor: const Color(0xff57CA85),
+                    minimumSize: const Size(50, 38),
+                  ),
+                  child: const Text(
                     'Running',
                     style: TextStyle(
                       color: Colors.white,
@@ -270,18 +236,11 @@ class DayScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    minimumSize: Size(50, 38),
-                    primary: Color(0xff57CA85),
-                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 35,
                 ),
-                Text(
+                const Text(
                   'Walking',
                   style: TextStyle(
                     color: Colors.black,
@@ -290,10 +249,10 @@ class DayScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 35,
                 ),
-                Text(
+                const Text(
                   'Relax',
                   style: TextStyle(
                     color: Colors.black,
@@ -305,11 +264,9 @@ class DayScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.only(start: 16),
+
+          const Padding(
+            padding: EdgeInsetsDirectional.only(top: 20, start: 16),
             child: Text(
               'Total distance',
               style: TextStyle(
@@ -324,7 +281,7 @@ class DayScreen extends StatelessWidget {
               child: SfCartesianChart(
                 series: <ChartSeries>[
                   SplineAreaSeries<ChartData, int>(
-                    color: Color(0xff57CA85),
+                    color: const Color(0xff57CA85),
                     xValueMapper: (ChartData cData, _) => cData.x,
                     yValueMapper: (ChartData cData, _) => cData.y,
                     dataSource: chartData,
@@ -333,7 +290,7 @@ class DayScreen extends StatelessWidget {
               )),
           //Fintes
           Container(
-            padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
             alignment: AlignmentDirectional.topStart,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -342,18 +299,16 @@ class DayScreen extends StatelessWidget {
                 Text(
                   'Fitness',
                   style: TextStyle(
-                    color: Color(0xff57CA85),
+                    color: const Color(0xff57CA85),
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.offAndToNamed(AppRoutes.FitnessWomenScreen);
-                  },
+                  onTap: () => Get.toNamed("/FitnessWomenScreen"),
                   child: Container(
-                    padding:
-                        EdgeInsetsDirectional.only(start: 22, end: 22, top: 20),
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 22, end: 22, top: 20),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8)),
@@ -383,12 +338,10 @@ class DayScreen extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.offAndToNamed(AppRoutes.FitnessMenScreen);
-                  },
+                  onTap: () => Get.toNamed("/FitnessMenScreen"),
                   child: Container(
-                    padding:
-                        EdgeInsetsDirectional.only(start: 22, end: 22, top: 40),
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 22, end: 22, top: 40),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8)),
@@ -423,7 +376,7 @@ class DayScreen extends StatelessWidget {
 
           //Health Tips
           Container(
-            padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
             alignment: AlignmentDirectional.topStart,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -432,17 +385,15 @@ class DayScreen extends StatelessWidget {
                 Text(
                   'Health Tips',
                   style: TextStyle(
-                    color: Color(0xff57CA85),
+                    color: const Color(0xff57CA85),
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.offAndToNamed(AppRoutes.HealthTipsScreen);
-                  },
+                  onTap: () => Get.toNamed("/HealthTipsScreen"),
                   child: Container(
-                    padding: EdgeInsetsDirectional.only(
+                    padding: const EdgeInsetsDirectional.only(
                         start: 22, end: 22, top: 20, bottom: 50),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -479,7 +430,7 @@ class DayScreen extends StatelessWidget {
           InkWell(
             onTap: () {},
             child: Container(
-              padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
               alignment: AlignmentDirectional.topStart,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -488,17 +439,15 @@ class DayScreen extends StatelessWidget {
                   Text(
                     'Health Tips',
                     style: TextStyle(
-                      color: Color(0xff57CA85),
+                      color: const Color(0xff57CA85),
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      Get.offAndToNamed(AppRoutes.HealthTipsScreen);
-                    },
+                    onTap: () => Get.toNamed("/HealthTipsScreen"),
                     child: Container(
-                      padding: EdgeInsetsDirectional.only(
+                      padding: const EdgeInsetsDirectional.only(
                           start: 22, end: 22, top: 20, bottom: 50),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -535,11 +484,9 @@ class DayScreen extends StatelessWidget {
 
           //GEMET
           InkWell(
-            onTap: () {
-              Get.offAndToNamed(AppRoutes.ClubScreen);
-            },
+            onTap: () => Get.toNamed("/ClubScreen"),
             child: Container(
-              padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
               alignment: AlignmentDirectional.topStart,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -548,17 +495,15 @@ class DayScreen extends StatelessWidget {
                   Text(
                     'Gemat',
                     style: TextStyle(
-                      color: Color(0xff57CA85),
+                      color: const Color(0xff57CA85),
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      Get.offAndToNamed(AppRoutes.HealthTipsScreen);
-                    },
+                    onTap: () => Get.toNamed("/HealthTipsScreen"),
                     child: Container(
-                      padding: EdgeInsetsDirectional.only(
+                      padding: const EdgeInsetsDirectional.only(
                           start: 22, end: 22, top: 20, bottom: 50),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -599,19 +544,21 @@ class DayScreen extends StatelessWidget {
 }
 
 class WeekScreen extends StatelessWidget {
+  const WeekScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Text("WEEK"),
+          const Text("WEEK"),
           CircularPercentIndicator(
             radius: 110.0,
             animation: true,
             animationDuration: 1200,
             lineWidth: 18.0,
             percent: 0.3,
-            center: Column(
+            center: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -627,14 +574,13 @@ class WeekScreen extends StatelessWidget {
               ],
             ),
             circularStrokeCap: CircularStrokeCap.butt,
-            backgroundColor: Color(0xffCFD8DC),
-            progressColor: Color(0xff57CA85),
+            backgroundColor: const Color(0xffCFD8DC),
+            progressColor: const Color(0xff57CA85),
           ),
-          SizedBox(
-            height: 6,
-          ),
+
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 35, end: 35),
+            padding:
+                const EdgeInsetsDirectional.only(top: 6, start: 35, end: 35),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -644,13 +590,13 @@ class WeekScreen extends StatelessWidget {
                       radius: 26.0,
                       lineWidth: 5.0,
                       percent: 0.6,
-                      center: Icon(Icons.arrow_forward),
-                      progressColor: Color(0xff57CA85),
+                      center: const Icon(Icons.arrow_forward),
+                      progressColor: const Color(0xff57CA85),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Text(
+                    const Text(
                       '146 kcal',
                       style: TextStyle(
                         color: Colors.black,
@@ -666,13 +612,13 @@ class WeekScreen extends StatelessWidget {
                       radius: 26.0,
                       lineWidth: 5.0,
                       percent: 0.6,
-                      center: Icon(Icons.arrow_forward),
-                      progressColor: Color(0xff57CA85),
+                      center: const Icon(Icons.arrow_forward),
+                      progressColor: const Color(0xff57CA85),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Text(
+                    const Text(
                       '891 m',
                       style: TextStyle(
                         color: Colors.black,
@@ -688,13 +634,13 @@ class WeekScreen extends StatelessWidget {
                       radius: 26.0,
                       lineWidth: 5.0,
                       percent: 0.6,
-                      center: Icon(Icons.access_time_outlined),
-                      progressColor: Color(0xff57CA85),
+                      center: const Icon(Icons.access_time_outlined),
+                      progressColor: const Color(0xff57CA85),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Text(
+                    const Text(
                       '1:34h',
                       style: TextStyle(
                         color: Colors.black,
@@ -707,16 +653,21 @@ class WeekScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 12,
-          ),
+
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 16),
+            padding: const EdgeInsetsDirectional.only(top: 12, start: 16),
             child: Row(
               children: [
                 ElevatedButton(
                   onPressed: () async {},
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    backgroundColor: const Color(0xff57CA85),
+                    minimumSize: const Size(50, 38),
+                  ),
+                  child: const Text(
                     'Running',
                     style: TextStyle(
                       color: Colors.white,
@@ -725,18 +676,11 @@ class WeekScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    minimumSize: Size(50, 38),
-                    primary: Color(0xff57CA85),
-                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 35,
                 ),
-                Text(
+                const Text(
                   'Walking',
                   style: TextStyle(
                     color: Colors.black,
@@ -745,10 +689,10 @@ class WeekScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 35,
                 ),
-                Text(
+                const Text(
                   'Relax',
                   style: TextStyle(
                     color: Colors.black,
@@ -760,11 +704,9 @@ class WeekScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.only(start: 16),
+
+          const Padding(
+            padding: EdgeInsetsDirectional.only(top: 20, start: 16),
             child: Text(
               'Total distance',
               style: TextStyle(
@@ -779,7 +721,7 @@ class WeekScreen extends StatelessWidget {
               child: SfCartesianChart(
                 series: <ChartSeries>[
                   SplineAreaSeries<ChartData, int>(
-                    color: Color(0xff57CA85),
+                    color: const Color(0xff57CA85),
                     xValueMapper: (ChartData cData, _) => cData.x,
                     yValueMapper: (ChartData cData, _) => cData.y,
                     dataSource: chartData,
@@ -787,7 +729,7 @@ class WeekScreen extends StatelessWidget {
                 ],
               )),
           Container(
-            padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
             alignment: AlignmentDirectional.topStart,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -796,18 +738,16 @@ class WeekScreen extends StatelessWidget {
                 Text(
                   'Fitness',
                   style: TextStyle(
-                    color: Color(0xff57CA85),
+                    color: const Color(0xff57CA85),
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.offAndToNamed(AppRoutes.FitnessWomenScreen);
-                  },
+                  onTap: () => Get.toNamed("/FitnessWomenScreen"),
                   child: Container(
-                    padding:
-                        EdgeInsetsDirectional.only(start: 22, end: 22, top: 20),
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 22, end: 22, top: 20),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8)),
@@ -837,12 +777,10 @@ class WeekScreen extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.offAndToNamed(AppRoutes.FitnessMenScreen);
-                  },
+                  onTap: () => Get.toNamed("/FitnessMenScreen"),
                   child: Container(
-                    padding:
-                        EdgeInsetsDirectional.only(start: 22, end: 22, top: 40),
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 22, end: 22, top: 40),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8)),
@@ -877,7 +815,7 @@ class WeekScreen extends StatelessWidget {
 
           //Health Tips
           Container(
-            padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
             alignment: AlignmentDirectional.topStart,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -886,17 +824,15 @@ class WeekScreen extends StatelessWidget {
                 Text(
                   'Health Tips',
                   style: TextStyle(
-                    color: Color(0xff57CA85),
+                    color: const Color(0xff57CA85),
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.offAndToNamed(AppRoutes.HealthTipsScreen);
-                  },
+                  onTap: () => Get.toNamed("/HealthTipsScreen"),
                   child: Container(
-                    padding: EdgeInsetsDirectional.only(
+                    padding: const EdgeInsetsDirectional.only(
                         start: 22, end: 22, top: 20, bottom: 50),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -933,7 +869,7 @@ class WeekScreen extends StatelessWidget {
           InkWell(
             onTap: () {},
             child: Container(
-              padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
               alignment: AlignmentDirectional.topStart,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -942,17 +878,15 @@ class WeekScreen extends StatelessWidget {
                   Text(
                     'Health Tips',
                     style: TextStyle(
-                      color: Color(0xff57CA85),
+                      color: const Color(0xff57CA85),
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      Get.offAndToNamed(AppRoutes.HealthTipsScreen);
-                    },
+                    onTap: () => Get.toNamed("/HealthTipsScreen"),
                     child: Container(
-                      padding: EdgeInsetsDirectional.only(
+                      padding: const EdgeInsetsDirectional.only(
                           start: 22, end: 22, top: 20, bottom: 50),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -989,11 +923,9 @@ class WeekScreen extends StatelessWidget {
 
           //GEMET
           InkWell(
-            onTap: () {
-              Get.offAndToNamed(AppRoutes.ClubScreen);
-            },
+            onTap: () => Get.toNamed("/ClubScreen"),
             child: Container(
-              padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
               alignment: AlignmentDirectional.topStart,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -1002,17 +934,15 @@ class WeekScreen extends StatelessWidget {
                   Text(
                     'Gemat',
                     style: TextStyle(
-                      color: Color(0xff57CA85),
+                      color: const Color(0xff57CA85),
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      Get.offAndToNamed(AppRoutes.HealthTipsScreen);
-                    },
+                    onTap: () => Get.toNamed("/HealthTipsScreen"),
                     child: Container(
-                      padding: EdgeInsetsDirectional.only(
+                      padding: const EdgeInsetsDirectional.only(
                           start: 22, end: 22, top: 20, bottom: 50),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -1053,19 +983,21 @@ class WeekScreen extends StatelessWidget {
 }
 
 class MonthScreen extends StatelessWidget {
+  const MonthScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Text("MONTH"),
+          const Text("MONTH"),
           CircularPercentIndicator(
             radius: 110.0,
             animation: true,
             animationDuration: 1200,
             lineWidth: 18.0,
             percent: 0.3,
-            center: Column(
+            center: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -1081,14 +1013,12 @@ class MonthScreen extends StatelessWidget {
               ],
             ),
             circularStrokeCap: CircularStrokeCap.butt,
-            backgroundColor: Color(0xffCFD8DC),
-            progressColor: Color(0xff57CA85),
-          ),
-          SizedBox(
-            height: 6,
+            backgroundColor: const Color(0xffCFD8DC),
+            progressColor: const Color(0xff57CA85),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 35, end: 35),
+            padding:
+                const EdgeInsetsDirectional.only(top: 6, start: 35, end: 35),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -1098,13 +1028,13 @@ class MonthScreen extends StatelessWidget {
                       radius: 26.0,
                       lineWidth: 5.0,
                       percent: 0.6,
-                      center: Icon(Icons.arrow_forward),
-                      progressColor: Color(0xff57CA85),
+                      center: const Icon(Icons.arrow_forward),
+                      progressColor: const Color(0xff57CA85),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Text(
+                    const Text(
                       '146 kcal',
                       style: TextStyle(
                         color: Colors.black,
@@ -1120,13 +1050,13 @@ class MonthScreen extends StatelessWidget {
                       radius: 26.0,
                       lineWidth: 5.0,
                       percent: 0.6,
-                      center: Icon(Icons.arrow_forward),
-                      progressColor: Color(0xff57CA85),
+                      center: const Icon(Icons.arrow_forward),
+                      progressColor: const Color(0xff57CA85),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Text(
+                    const Text(
                       '891 m',
                       style: TextStyle(
                         color: Colors.black,
@@ -1142,13 +1072,13 @@ class MonthScreen extends StatelessWidget {
                       radius: 26.0,
                       lineWidth: 5.0,
                       percent: 0.6,
-                      center: Icon(Icons.access_time_outlined),
-                      progressColor: Color(0xff57CA85),
+                      center: const Icon(Icons.access_time_outlined),
+                      progressColor: const Color(0xff57CA85),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Text(
+                    const Text(
                       '1:34h',
                       style: TextStyle(
                         color: Colors.black,
@@ -1161,16 +1091,20 @@ class MonthScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 12,
-          ),
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 16),
+            padding: const EdgeInsetsDirectional.only(top: 12, start: 16),
             child: Row(
               children: [
                 ElevatedButton(
                   onPressed: () async {},
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    backgroundColor: const Color(0xff57CA85),
+                    minimumSize: const Size(50, 38),
+                  ),
+                  child: const Text(
                     'Running',
                     style: TextStyle(
                       color: Colors.white,
@@ -1179,18 +1113,11 @@ class MonthScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    minimumSize: Size(50, 38),
-                    primary: Color(0xff57CA85),
-                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 35,
                 ),
-                Text(
+                const Text(
                   'Walking',
                   style: TextStyle(
                     color: Colors.black,
@@ -1199,10 +1126,10 @@ class MonthScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 35,
                 ),
-                Text(
+                const Text(
                   'Relax',
                   style: TextStyle(
                     color: Colors.black,
@@ -1214,11 +1141,8 @@ class MonthScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.only(start: 16),
+          const Padding(
+            padding: EdgeInsetsDirectional.only(top: 20, start: 16),
             child: Text(
               'Total distance',
               style: TextStyle(
@@ -1233,7 +1157,7 @@ class MonthScreen extends StatelessWidget {
               child: SfCartesianChart(
                 series: <ChartSeries>[
                   SplineAreaSeries<ChartData, int>(
-                    color: Color(0xff57CA85),
+                    color: const Color(0xff57CA85),
                     xValueMapper: (ChartData cData, _) => cData.x,
                     yValueMapper: (ChartData cData, _) => cData.y,
                     dataSource: chartData,
@@ -1241,7 +1165,7 @@ class MonthScreen extends StatelessWidget {
                 ],
               )),
           Container(
-            padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
             alignment: AlignmentDirectional.topStart,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -1250,18 +1174,16 @@ class MonthScreen extends StatelessWidget {
                 Text(
                   'Fitness',
                   style: TextStyle(
-                    color: Color(0xff57CA85),
+                    color: const Color(0xff57CA85),
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.offAndToNamed(AppRoutes.FitnessWomenScreen);
-                  },
+                  onTap: () => Get.toNamed("/FitnessWomenScreen"),
                   child: Container(
-                    padding:
-                        EdgeInsetsDirectional.only(start: 22, end: 22, top: 20),
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 22, end: 22, top: 20),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8)),
@@ -1291,12 +1213,10 @@ class MonthScreen extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.offAndToNamed(AppRoutes.FitnessMenScreen);
-                  },
+                  onTap: () => Get.toNamed("/FitnessMenScreen"),
                   child: Container(
-                    padding:
-                        EdgeInsetsDirectional.only(start: 22, end: 22, top: 40),
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 22, end: 22, top: 40),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8)),
@@ -1328,12 +1248,10 @@ class MonthScreen extends StatelessWidget {
               ],
             ),
           ),
-
-          //GEMET
           InkWell(
             onTap: () {},
             child: Container(
-              padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
               alignment: AlignmentDirectional.topStart,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -1342,17 +1260,15 @@ class MonthScreen extends StatelessWidget {
                   Text(
                     'Health Tips',
                     style: TextStyle(
-                      color: Color(0xff57CA85),
+                      color: const Color(0xff57CA85),
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      Get.offAndToNamed(AppRoutes.HealthTipsScreen);
-                    },
+                    onTap: () => Get.toNamed("/HealthTipsScreen"),
                     child: Container(
-                      padding: EdgeInsetsDirectional.only(
+                      padding: const EdgeInsetsDirectional.only(
                           start: 22, end: 22, top: 20, bottom: 50),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -1386,14 +1302,10 @@ class MonthScreen extends StatelessWidget {
               ),
             ),
           ),
-
-          //GEMET
           InkWell(
-            onTap: () {
-              Get.offAndToNamed(AppRoutes.ClubScreen);
-            },
+            onTap: () => Get.toNamed("/ClubScreen"),
             child: Container(
-              padding: EdgeInsetsDirectional.only(start: 20, top: 20),
+              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
               alignment: AlignmentDirectional.topStart,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -1402,17 +1314,15 @@ class MonthScreen extends StatelessWidget {
                   Text(
                     'Gemat',
                     style: TextStyle(
-                      color: Color(0xff57CA85),
+                      color: const Color(0xff57CA85),
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      Get.offAndToNamed(AppRoutes.HealthTipsScreen);
-                    },
+                    onTap: () => Get.toNamed("/HealthTipsScreen"),
                     child: Container(
-                      padding: EdgeInsetsDirectional.only(
+                      padding: const EdgeInsetsDirectional.only(
                           start: 22, end: 22, top: 20, bottom: 50),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -1451,34 +1361,3 @@ class MonthScreen extends StatelessWidget {
     );
   }
 }
-// //Fintes
-// Container(
-// child: Column(
-// children: [
-// Text('Fitness',style: TextStyle(
-// color:Color(0xff57CA85),
-// fontSize: 18.sp,
-// fontWeight: FontWeight.w500,
-// ),),
-// Container(
-// width: double.infinity,
-// height: 200.h,
-// child: Stack(
-// children: [
-// Image.asset('assets/images/',fit: BoxFit.cover,
-// height: double.infinity,
-// width: double.infinity,),
-// Align(
-// alignment: AlignmentDirectional.center,
-// child: Text('Fitness For Women',style: TextStyle(
-// color:Colors.white,
-// fontSize: 18.sp,
-// fontWeight: FontWeight.bold,
-// ),),
-// ),
-// ],
-// ),
-// ),
-// ],
-// ),
-// ),

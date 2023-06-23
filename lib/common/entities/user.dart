@@ -9,7 +9,7 @@ class UserData {
   final String? heightKg;
   final String? heightCm;
   final String? location;
-  final Gender? gender;
+  final String? gender;
   final String? fcmtoken;
   final Timestamp? addtime;
 
@@ -64,7 +64,6 @@ class UserData {
   }
 }
 
-// 登录返回
 class UserLoginResponseEntity {
   String? accessToken;
   String? displayName;

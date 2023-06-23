@@ -87,7 +87,7 @@ class LoginController extends GetxController with Helpers {
           email: userProfile.email,
           photourl: userProfile.photoUrl,
           password: userProfile.password,
-          gender: Gender.non,
+          gender: Gender.non.toString(),
           location: "",
           heightKg: "",
           heightCm: "",

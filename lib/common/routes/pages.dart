@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../pages/Onboarding/screen_page_view/index.dart';
+import '../../pages/fitness/videoView/index.dart';
 import '../../pages/group/contact/index.dart';
 import '../../pages/group/message/chat/index.dart';
 import '../../pages/group/message/photoview/index.dart';
@@ -163,18 +164,23 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.FitnessMenScreen,
-      page: () => const FitnessMenScreen(),
+      page: () => FitnessMenScreen(),
       binding: FitnessMenBinding(),
     ),
     GetPage(
       name: AppRoutes.FitnessWomenScreen,
-      page: () => const FitnessWomenScreen(),
+      page: () => FitnessWomenScreen(),
       binding: FitnessWomenBinding(),
     ),
     GetPage(
       name: AppRoutes.ClubScreen,
       page: () => const ClubScreen(),
       binding: ClubBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.VideoViewScreen,
+      page: () => VideoViewScreen(),
+      binding: VideoViewBinding(),
     ),
   ];
 }

@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../common/values/values.dart';
+import '../../../common/widgets/widgets.dart';
+
 class HealthTipsScreen extends StatelessWidget {
   const HealthTipsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+    // ignore: no_leading_underscores_for_local_identifiers
+    AppBar _buildAppBar() {
+      return transparentAppBar(
         title: Text(
-          'Health Tips',
+          "Health Tips",
           style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 20,
-            color: Colors.black,
+            color: AppColors.primaryBackground,
+            fontSize: 18.sp,
+            fontWeight: FontWeight.w600,
           ),
         ),
-        centerTitle: true,
-        leading: InkWell(
-            onTap: () {
-              print('ff');
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Color(0xff184E68),
-            )),
-      ),
+      );
+    }
+
+    return Scaffold(
+      appBar: _buildAppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -36,49 +33,72 @@ class HealthTipsScreen extends StatelessWidget {
             child: ListView.separated(
               itemBuilder: (context, index) {
                 return Container(
-                  padding: EdgeInsetsDirectional.only(
+                  padding: const EdgeInsetsDirectional.only(
                       start: 20, end: 20, top: 20, bottom: 20),
                   width: double.infinity,
                   height: 270.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.r),
                   ),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 150.h,
-                        child: Image.asset(
-                          'assets/images/image_tips.jpeg',
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.r),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black,
+                          blurRadius: 5,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
                           width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Container(
-                        alignment: AlignmentDirectional.center,
-                        padding: EdgeInsetsDirectional.only(top: 11),
-                        child: Text(
-                          'Eat a healthy diet',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black),
-                        ),
-                      ),
-                      Container(
-                        alignment: AlignmentDirectional.center,
-                        padding: EdgeInsetsDirectional.only(top: 11),
-                        child: Text(
-                          '              Lorem ipsum dolor sit amet, consectetur \n              adipiscing elit. Porta enim ultricies sem ',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey,
+                          height: 150.h,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15.0),
+                              topRight: Radius.circular(15.0),
+                            ),
+                            child: Image.asset(
+                              'assets/images/image_tips.jpeg',
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          alignment: AlignmentDirectional.center,
+                          padding: EdgeInsetsDirectional.only(top: 11),
+                          child: Text(
+                            'Eat a healthy diet',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.only(start: 5, end: 5),
+                          child: Container(
+                            alignment: AlignmentDirectional.centerStart,
+                            padding: EdgeInsetsDirectional.only(top: 11),
+                            child: const Text(
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porta enim ultricies sem",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

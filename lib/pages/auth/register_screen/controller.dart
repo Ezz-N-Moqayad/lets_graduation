@@ -38,13 +38,13 @@ class RegisterController extends GetxController with Helpers {
     try {
       var user = await _googleSignIn.signIn();
       if (user != null) {
-        final _gAuthentication = await user.authentication;
-        final _credential = GoogleAuthProvider.credential(
-          idToken: _gAuthentication.idToken,
-          accessToken: _gAuthentication.accessToken,
+        final gAuthentication = await user.authentication;
+        final credential = GoogleAuthProvider.credential(
+          idToken: gAuthentication.idToken,
+          accessToken: gAuthentication.accessToken,
         );
 
-        await FirebaseAuth.instance.signInWithCredential(_credential);
+        await FirebaseAuth.instance.signInWithCredential(credential);
 
         String displayName = user.displayName ?? user.email;
         String email = user.email;
@@ -59,7 +59,6 @@ class RegisterController extends GetxController with Helpers {
 
         var fUser =
             await state.db.collection("users").where("id", isEqualTo: id).get();
-
         if (fUser.docs.isEmpty) {
           AddUser(userProfile);
           toastInfo(msg: "Account Added successfully");
@@ -80,9 +79,9 @@ class RegisterController extends GetxController with Helpers {
     FirebaseAuth.instance.authStateChanges().listen(
       (User? user) {
         if (user == null) {
-          print("User is currently logged out");
+          toastInfo(msg: "User is currently logged out");
         } else {
-          print("User is logged in");
+          toastInfo(msg: "User is logged in");
         }
       },
     );
@@ -98,7 +97,6 @@ class RegisterController extends GetxController with Helpers {
             toFirestore: (UserData userdata, options) => userdata.toFirestore())
         .where("id", isEqualTo: userProfile.accessToken)
         .get();
-
     if (userbase.docs.isEmpty) {
       final data = UserData(
           id: userProfile.accessToken,
@@ -106,13 +104,12 @@ class RegisterController extends GetxController with Helpers {
           email: userProfile.email,
           photourl: userProfile.photoUrl,
           password: userProfile.password,
-          gender: Gender.non,
+          gender: "",
           location: "",
           heightKg: "",
           heightCm: "",
           fcmtoken: "",
           addtime: Timestamp.now());
-
       await state.db
           .collection("users")
           .withConverter(
@@ -121,7 +118,6 @@ class RegisterController extends GetxController with Helpers {
                   userdata.toFirestore())
           .add(data);
     }
-
     toastInfo(msg: "Added successfully");
   }
 

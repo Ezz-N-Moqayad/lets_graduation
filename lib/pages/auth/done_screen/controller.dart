@@ -74,12 +74,21 @@ class DoneController extends GetxController with Helpers {
 
       if (userUpdate.docs.isNotEmpty) {
         var docId = userUpdate.docs.first.id;
-        await state.db.collection("users").doc(docId).update({
-          "heightKg": heightKg,
-          "heightCm": heightCm,
-          "location": location,
-          "gender": state.selectedGender.value,
-        });
+        if (state.selectedGender.value == Gender.male) {
+          await state.db.collection("users").doc(docId).update({
+            "heightKg": heightKg,
+            "heightCm": heightCm,
+            "location": location,
+            "gender": "Male",
+          });
+        } else {
+          await state.db.collection("users").doc(docId).update({
+            "heightKg": heightKg,
+            "heightCm": heightCm,
+            "location": location,
+            "gender": "Female",
+          });
+        }
       }
 
       return FbResponse(message: 'Update Successfully', states: true);
@@ -108,7 +117,7 @@ class DoneController extends GetxController with Helpers {
     if (state.HeightkgController.text.isNotEmpty &&
         state.HeightCmController.text.isNotEmpty &&
         state.LocationController.text.isNotEmpty &&
-        state.selectedGender.value == Gender.non) {
+        state.selectedGender.value != Gender.non) {
       return true;
     }
 
