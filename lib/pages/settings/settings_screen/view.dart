@@ -167,9 +167,7 @@ class SettingsScreen extends GetView<SettingsController> {
                   Padding(
                     padding: EdgeInsetsDirectional.only(top: 36.h),
                     child: InkWell(
-                      onTap: () {
-                        Get.offAndToNamed(AppRoutes.About);
-                      },
+                      onTap: () => Get.toNamed("/AboutScreen"),
                       child: Row(
                         children: [
                           Container(

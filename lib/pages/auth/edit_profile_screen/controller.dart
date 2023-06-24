@@ -17,11 +17,6 @@ class EditProfileController extends GetxController with Helpers {
   @override
   void onInit() {
     super.onInit();
-
-    state.NameController = TextEditingController();
-    state.HeightkgController = TextEditingController();
-    state.HeightCmController = TextEditingController();
-    state.LocationController = TextEditingController();
     showAccountData();
   }
 
@@ -46,11 +41,8 @@ class EditProfileController extends GetxController with Helpers {
         state.HeightCmController.text = heightCm;
         state.LocationController.text = location;
 
-        if (gender == 'Male') {
-          state.selectedGender.value = Gender.male;
-        } else {
-          state.selectedGender.value = Gender.female;
-        }
+        state.selectedGender.value =
+            gender == 'Male' ? Gender.male : Gender.female;
       }
     } catch (e) {
       toastInfo(msg: "Show Error");
@@ -60,9 +52,7 @@ class EditProfileController extends GetxController with Helpers {
   getUserLocation() async {
     try {
       final location = await Location().getLocation();
-
       String address = "${location.latitude} , ${location.longitude}";
-
       state.LocationController.text = address;
     } catch (e) {
       // ignore: avoid_print
@@ -85,27 +75,17 @@ class EditProfileController extends GetxController with Helpers {
 
       if (userUpdate.docs.isNotEmpty) {
         var docId = userUpdate.docs.first.id;
-        if (state.selectedGender.value == Gender.male) {
-          await state.db.collection("users").doc(docId).update(
-            {
-              "name": name,
-              "heightKg": heightKg,
-              "heightCm": heightCm,
-              "location": location,
-              "gender": "Male",
-            },
-          );
-        } else {
-          await state.db.collection("users").doc(docId).update(
-            {
-              "name": name,
-              "heightKg": heightKg,
-              "heightCm": heightCm,
-              "location": location,
-              "gender": "Female",
-            },
-          );
-        }
+
+        Gender gender = state.selectedGender.value;
+        await state.db.collection("users").doc(docId).update(
+          {
+            "name": name,
+            "heightKg": heightKg,
+            "heightCm": heightCm,
+            "location": location,
+            "gender": await gender == Gender.male ? "Male" : "Female",
+          },
+        );
       }
 
       return FbResponse(message: 'Update Successfully', states: true);

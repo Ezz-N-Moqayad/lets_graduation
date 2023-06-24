@@ -58,4 +58,6 @@ class AppRoutes {
   static const ClubScreen = '/ClubScreen';
 
   static const VideoViewScreen = '/VideoViewScreen';
+
+  static const DetailsHealthTip = '/DetailsHealthTip';
 }

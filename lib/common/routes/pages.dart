@@ -7,6 +7,7 @@ import '../../pages/fitness/videoView/index.dart';
 import '../../pages/group/contact/index.dart';
 import '../../pages/group/message/chat/index.dart';
 import '../../pages/group/message/photoview/index.dart';
+import '../../pages/health/detailsHealthTip/index.dart';
 import '../../pages/home/bottom_navigation/Bottom_Navigation/index.dart';
 import '../../pages/activities/sport_activities_screen/index.dart';
 import '../../pages/followers/followers_remove_screen/index.dart';
@@ -159,7 +160,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.HealthTipsScreen,
-      page: () => const HealthTipsScreen(),
+      page: () => HealthTipsScreen(),
       binding: HealthTipsBinding(),
     ),
     GetPage(
@@ -181,6 +182,11 @@ class AppPages {
       name: AppRoutes.VideoViewScreen,
       page: () => VideoViewScreen(),
       binding: VideoViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.DetailsHealthTip,
+      page: () => DetailsHealthTip(),
+      binding: DetailsHealthTipBinding(),
     ),
   ];
 }

@@ -13,8 +13,8 @@ class EditProfileState {
 
   var selectedGender = Gender.non.obs;
 
-  late TextEditingController NameController;
-  late TextEditingController HeightkgController;
-  late TextEditingController HeightCmController;
-  late TextEditingController LocationController;
+  late TextEditingController NameController = TextEditingController();
+  late TextEditingController HeightkgController = TextEditingController();
+  late TextEditingController HeightCmController = TextEditingController();
+  late TextEditingController LocationController = TextEditingController();
 }
