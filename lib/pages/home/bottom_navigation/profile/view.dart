@@ -38,9 +38,7 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                          onPressed: () {
-                            Get.offAndToNamed(AppRoutes.editProfial);
-                          },
+                          onPressed: () => Get.toNamed("/EditProfialScreen"),
                           icon: Icon(
                             Icons.edit_outlined,
                             color: Colors.white,
@@ -54,7 +52,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () => Get.toNamed("/SettingsScreen"),
                         icon: Icon(
                           Icons.settings,
                           color: Colors.white,

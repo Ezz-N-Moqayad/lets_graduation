@@ -1,4 +1,4 @@
-library edit_profial;
+library edit_profile;
 
 export './bindings.dart';
 export './controller.dart';

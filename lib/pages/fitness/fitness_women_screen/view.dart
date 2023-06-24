@@ -28,7 +28,7 @@ class FitnessWomenScreen extends GetView<FitnessWomenController> {
     AppBar _buildAppBar() {
       return transparentAppBar(
         title: Text(
-          "Fitness",
+          "Fitness For Women",
           style: TextStyle(
             color: AppColors.primaryBackground,
             fontSize: 18.sp,

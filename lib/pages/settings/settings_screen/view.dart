@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../common/routes/routes.dart';
+import '../../../common/values/values.dart';
+import '../../../common/widgets/widgets.dart';
 import 'index.dart';
 
 class SettingsScreen extends GetView<SettingsController> {
@@ -10,8 +12,23 @@ class SettingsScreen extends GetView<SettingsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    // ignore: no_leading_underscores_for_local_identifiers
+    AppBar _buildAppBar() {
+      return transparentAppBar(
+        title: Text(
+          "Settings",
+          style: TextStyle(
+            color: AppColors.primaryBackground,
+            fontSize: 18.sp,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      );
+    }
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    Widget _buildBody() {
+      return Container(
         alignment: AlignmentDirectional.topStart,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -27,39 +44,11 @@ class SettingsScreen extends GetView<SettingsController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.only(start: 10.w, top: 45.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.only(start: 95.w),
-                    child: Text(
-                      'Settings',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.only(start: 22.w, top: 54.h),
+              padding: EdgeInsetsDirectional.only(start: 22.w, top: 25.h),
               child: Column(
                 children: [
                   InkWell(
-                    onTap: () {
-                      Get.offAndToNamed(AppRoutes.editProfial);
-                    },
+                    onTap: () => Get.toNamed("/EditProfialScreen"),
                     child: Row(
                       children: [
                         Container(
@@ -72,10 +61,7 @@ class SettingsScreen extends GetView<SettingsController> {
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
                                 blurRadius: 7,
-                                offset: const Offset(
-                                  0,
-                                  3,
-                                ), // changes position of shadow
+                                offset: const Offset(0, 3),
                               ),
                             ],
                             borderRadius: BorderRadius.circular(10.w),
@@ -113,10 +99,7 @@ class SettingsScreen extends GetView<SettingsController> {
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
                                 blurRadius: 7,
-                                offset: const Offset(
-                                  0,
-                                  3,
-                                ), // changes position of shadow
+                                offset: const Offset(0, 3),
                               ),
                             ],
                             borderRadius: BorderRadius.circular(10.w),
@@ -156,8 +139,7 @@ class SettingsScreen extends GetView<SettingsController> {
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
                                   blurRadius: 7,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
+                                  offset: const Offset(0, 3),
                                 ),
                               ],
                               borderRadius: BorderRadius.circular(10.w),
@@ -200,8 +182,7 @@ class SettingsScreen extends GetView<SettingsController> {
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
                                   blurRadius: 7,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
+                                  offset: const Offset(0, 3),
                                 ),
                               ],
                               borderRadius: BorderRadius.circular(10.w),
@@ -229,9 +210,7 @@ class SettingsScreen extends GetView<SettingsController> {
                   Padding(
                     padding: EdgeInsetsDirectional.only(top: 36.h),
                     child: InkWell(
-                      onTap: () {
-                        controller.onLogOut();
-                      },
+                      onTap: () => controller.onLogOut(),
                       child: Row(
                         children: [
                           Container(
@@ -244,8 +223,7 @@ class SettingsScreen extends GetView<SettingsController> {
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
                                   blurRadius: 7,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
+                                  offset: const Offset(0, 3),
                                 ),
                               ],
                               borderRadius: BorderRadius.circular(10.w),
@@ -275,7 +253,12 @@ class SettingsScreen extends GetView<SettingsController> {
             ),
           ],
         ),
-      ),
+      );
+    }
+
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: _buildBody(),
     );
   }
 }

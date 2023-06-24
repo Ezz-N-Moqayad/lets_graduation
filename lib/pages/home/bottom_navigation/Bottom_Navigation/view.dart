@@ -16,7 +16,7 @@ class BottomNavigationScreen extends StatefulWidget {
 
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   final _screen = [
-    const HomeScreen(),
+    HomeScreen(),
     const Profile(),
     const MessagePage(),
     const HeartBeat(),

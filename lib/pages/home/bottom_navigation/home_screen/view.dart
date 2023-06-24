@@ -4,28 +4,16 @@ import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+import '../../../../common/entities/entities.dart';
+import '../../../../common/widgets/widgets.dart';
+import 'index.dart';
+import 'widgets/group_page.dart';
+
+class HomeScreen extends GetView<HomeController> {
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+  HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen>
         backgroundColor: Colors.transparent,
         elevation: 0,
         bottom: TabBar(
-          controller: _tabController,
+          controller: controller.state.tabController,
           labelColor: Colors.black,
           unselectedLabelColor: Colors.black,
           labelStyle: const TextStyle(
@@ -51,9 +39,8 @@ class _HomeScreenState extends State<HomeScreen>
           indicatorSize: TabBarIndicatorSize.label,
           indicatorPadding: const EdgeInsetsDirectional.only(bottom: 10),
           onTap: (int index) {
-            setState(() {
-              _tabController.index = index;
-            });
+            controller.state.tabController.index = index;
+
             // ignore: avoid_print
             print('Selected tab index: $index');
           },
@@ -68,8 +55,8 @@ class _HomeScreenState extends State<HomeScreen>
         children: [
           Expanded(
             child: TabBarView(
-              controller: _tabController,
-              children: const [
+              controller: controller.state.tabController,
+              children: [
                 DayScreen(),
                 WeekScreen(),
                 MonthScreen(),
@@ -102,8 +89,11 @@ class ChartData {
   final double y1;
 }
 
-class DayScreen extends StatelessWidget {
-  const DayScreen({super.key});
+class DayScreen extends GetView<HomeController> {
+  DayScreen({Key? key}) : super(key: key);
+
+  @override
+  HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +111,6 @@ class DayScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 Text(
                   'Total steps \n 5,658',
                   style: TextStyle(
@@ -276,265 +265,48 @@ class DayScreen extends StatelessWidget {
             ),
           ),
           Padding(
-              padding: const EdgeInsets.all(8.0),
-              //Initialize the spark charts widget
-              child: SfCartesianChart(
-                series: <ChartSeries>[
-                  SplineAreaSeries<ChartData, int>(
-                    color: const Color(0xff57CA85),
-                    xValueMapper: (ChartData cData, _) => cData.x,
-                    yValueMapper: (ChartData cData, _) => cData.y,
-                    dataSource: chartData,
-                  ),
-                ],
-              )),
-          //Fintes
-          Container(
-            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-            alignment: AlignmentDirectional.topStart,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Fitness',
-                  style: TextStyle(
-                    color: const Color(0xff57CA85),
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Get.toNamed("/FitnessWomenScreen"),
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 22, end: 22, top: 20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    width: double.infinity,
-                    height: 200.h,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/fintes_women.jpg',
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text(
-                            'Fitness For Women',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Get.toNamed("/FitnessMenScreen"),
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 22, end: 22, top: 40),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    width: double.infinity,
-                    height: 200.h,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/men.jpg',
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text(
-                            'Fitness For Men',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            padding: const EdgeInsets.all(8.0),
+            //Initialize the spark charts widget
+            child: SfCartesianChart(
+              series: <ChartSeries>[
+                SplineAreaSeries<ChartData, int>(
+                  color: const Color(0xff57CA85),
+                  xValueMapper: (ChartData cData, _) => cData.x,
+                  yValueMapper: (ChartData cData, _) => cData.y,
+                  dataSource: chartData,
                 ),
               ],
+            ),
+          ),
+
+          //Fitness
+          InkWell(
+            onTap: () => Get.toNamed(
+              controller.state.checkGender == Gender.female.obs
+                  ? "/FitnessWomenScreen"
+                  : "/FitnessMenScreen",
+            ),
+            child: GroupPage(
+              nameGroup: 'Fitness',
+              imageGroup: "assets/images/men.jpg",
             ),
           ),
 
           //Health Tips
-          Container(
-            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-            alignment: AlignmentDirectional.topStart,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Health Tips',
-                  style: TextStyle(
-                    color: const Color(0xff57CA85),
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Get.toNamed("/HealthTipsScreen"),
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 22, end: 22, top: 20, bottom: 50),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    width: double.infinity,
-                    height: 200.h,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/image_health_tips.jpeg',
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text(
-                            'Health Tips',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
           InkWell(
-            onTap: () {},
-            child: Container(
-              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-              alignment: AlignmentDirectional.topStart,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Health Tips',
-                    style: TextStyle(
-                      color: const Color(0xff57CA85),
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => Get.toNamed("/HealthTipsScreen"),
-                    child: Container(
-                      padding: const EdgeInsetsDirectional.only(
-                          start: 22, end: 22, top: 20, bottom: 50),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8)),
-                      width: double.infinity,
-                      height: 200.h,
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            'assets/images/image_health_tips.jpeg',
-                            fit: BoxFit.fill,
-                            height: double.infinity,
-                            width: double.infinity,
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              'Health Tips',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            onTap: () => Get.toNamed("/HealthTipsScreen"),
+            child: GroupPage(
+              nameGroup: 'Health Tips',
+              imageGroup: 'assets/images/image_health_tips.jpeg',
             ),
           ),
 
           //GEMET
           InkWell(
             onTap: () => Get.toNamed("/ClubScreen"),
-            child: Container(
-              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-              alignment: AlignmentDirectional.topStart,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Gemat',
-                    style: TextStyle(
-                      color: const Color(0xff57CA85),
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => Get.toNamed("/HealthTipsScreen"),
-                    child: Container(
-                      padding: const EdgeInsetsDirectional.only(
-                          start: 22, end: 22, top: 20, bottom: 50),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8)),
-                      width: double.infinity,
-                      height: 200.h,
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            'assets/images/image_gmet.jpeg',
-                            fit: BoxFit.fill,
-                            height: double.infinity,
-                            width: double.infinity,
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              'GMET',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            child: GroupPage(
+              nameGroup: 'Gemat',
+              imageGroup: 'assets/images/image_gmet.jpeg',
             ),
           ),
         ],
@@ -543,8 +315,11 @@ class DayScreen extends StatelessWidget {
   }
 }
 
-class WeekScreen extends StatelessWidget {
-  const WeekScreen({super.key});
+class WeekScreen extends GetView<HomeController> {
+  WeekScreen({Key? key}) : super(key: key);
+
+  @override
+  HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -716,264 +491,47 @@ class WeekScreen extends StatelessWidget {
             ),
           ),
           Padding(
-              padding: const EdgeInsets.all(8.0),
-              //Initialize the spark charts widget
-              child: SfCartesianChart(
-                series: <ChartSeries>[
-                  SplineAreaSeries<ChartData, int>(
-                    color: const Color(0xff57CA85),
-                    xValueMapper: (ChartData cData, _) => cData.x,
-                    yValueMapper: (ChartData cData, _) => cData.y,
-                    dataSource: chartData,
-                  ),
-                ],
-              )),
-          Container(
-            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-            alignment: AlignmentDirectional.topStart,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Fitness',
-                  style: TextStyle(
-                    color: const Color(0xff57CA85),
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Get.toNamed("/FitnessWomenScreen"),
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 22, end: 22, top: 20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    width: double.infinity,
-                    height: 200.h,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/fintes_women.jpg',
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text(
-                            'Fitness For Women',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Get.toNamed("/FitnessMenScreen"),
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 22, end: 22, top: 40),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    width: double.infinity,
-                    height: 200.h,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/men.jpg',
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text(
-                            'Fitness For Men',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            padding: const EdgeInsets.all(8.0),
+            //Initialize the spark charts widget
+            child: SfCartesianChart(
+              series: <ChartSeries>[
+                SplineAreaSeries<ChartData, int>(
+                  color: const Color(0xff57CA85),
+                  xValueMapper: (ChartData cData, _) => cData.x,
+                  yValueMapper: (ChartData cData, _) => cData.y,
+                  dataSource: chartData,
                 ),
               ],
+            ),
+          ),
+          //Fitness
+          InkWell(
+            onTap: () => Get.toNamed(
+              controller.state.checkGender == Gender.female.obs
+                  ? "/FitnessWomenScreen"
+                  : "/FitnessMenScreen",
+            ),
+            child: GroupPage(
+              nameGroup: 'Fitness',
+              imageGroup: "assets/images/men.jpg",
             ),
           ),
 
           //Health Tips
-          Container(
-            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-            alignment: AlignmentDirectional.topStart,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Health Tips',
-                  style: TextStyle(
-                    color: const Color(0xff57CA85),
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Get.toNamed("/HealthTipsScreen"),
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 22, end: 22, top: 20, bottom: 50),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    width: double.infinity,
-                    height: 200.h,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/image_health_tips.jpeg',
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text(
-                            'Health Tips',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
           InkWell(
-            onTap: () {},
-            child: Container(
-              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-              alignment: AlignmentDirectional.topStart,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Health Tips',
-                    style: TextStyle(
-                      color: const Color(0xff57CA85),
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => Get.toNamed("/HealthTipsScreen"),
-                    child: Container(
-                      padding: const EdgeInsetsDirectional.only(
-                          start: 22, end: 22, top: 20, bottom: 50),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8)),
-                      width: double.infinity,
-                      height: 200.h,
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            'assets/images/image_health_tips.jpeg',
-                            fit: BoxFit.fill,
-                            height: double.infinity,
-                            width: double.infinity,
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              'Health Tips',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            onTap: () => Get.toNamed("/HealthTipsScreen"),
+            child: GroupPage(
+              nameGroup: 'Health Tips',
+              imageGroup: 'assets/images/image_health_tips.jpeg',
             ),
           ),
 
           //GEMET
           InkWell(
             onTap: () => Get.toNamed("/ClubScreen"),
-            child: Container(
-              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-              alignment: AlignmentDirectional.topStart,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Gemat',
-                    style: TextStyle(
-                      color: const Color(0xff57CA85),
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => Get.toNamed("/HealthTipsScreen"),
-                    child: Container(
-                      padding: const EdgeInsetsDirectional.only(
-                          start: 22, end: 22, top: 20, bottom: 50),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8)),
-                      width: double.infinity,
-                      height: 200.h,
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            'assets/images/image_gmet.jpeg',
-                            fit: BoxFit.fill,
-                            height: double.infinity,
-                            width: double.infinity,
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              'GMET',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            child: GroupPage(
+              nameGroup: 'Gemat',
+              imageGroup: 'assets/images/image_gmet.jpeg',
             ),
           ),
         ],
@@ -982,8 +540,11 @@ class WeekScreen extends StatelessWidget {
   }
 }
 
-class MonthScreen extends StatelessWidget {
-  const MonthScreen({super.key});
+class MonthScreen extends GetView<HomeController> {
+  MonthScreen({Key? key}) : super(key: key);
+
+  @override
+  HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -1152,208 +713,48 @@ class MonthScreen extends StatelessWidget {
             ),
           ),
           Padding(
-              padding: const EdgeInsets.all(8.0),
-              //Initialize the spark charts widget
-              child: SfCartesianChart(
-                series: <ChartSeries>[
-                  SplineAreaSeries<ChartData, int>(
-                    color: const Color(0xff57CA85),
-                    xValueMapper: (ChartData cData, _) => cData.x,
-                    yValueMapper: (ChartData cData, _) => cData.y,
-                    dataSource: chartData,
-                  ),
-                ],
-              )),
-          Container(
-            padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-            alignment: AlignmentDirectional.topStart,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Fitness',
-                  style: TextStyle(
-                    color: const Color(0xff57CA85),
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Get.toNamed("/FitnessWomenScreen"),
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 22, end: 22, top: 20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    width: double.infinity,
-                    height: 200.h,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/fintes_women.jpg',
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text(
-                            'Fitness For Women',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Get.toNamed("/FitnessMenScreen"),
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 22, end: 22, top: 40),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    width: double.infinity,
-                    height: 200.h,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/men.jpg',
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text(
-                            'Fitness For Men',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            padding: const EdgeInsets.all(8.0),
+            //Initialize the spark charts widget
+            child: SfCartesianChart(
+              series: <ChartSeries>[
+                SplineAreaSeries<ChartData, int>(
+                  color: const Color(0xff57CA85),
+                  xValueMapper: (ChartData cData, _) => cData.x,
+                  yValueMapper: (ChartData cData, _) => cData.y,
+                  dataSource: chartData,
                 ),
               ],
             ),
           ),
+
+          //Fitness
           InkWell(
-            onTap: () {},
-            child: Container(
-              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-              alignment: AlignmentDirectional.topStart,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Health Tips',
-                    style: TextStyle(
-                      color: const Color(0xff57CA85),
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => Get.toNamed("/HealthTipsScreen"),
-                    child: Container(
-                      padding: const EdgeInsetsDirectional.only(
-                          start: 22, end: 22, top: 20, bottom: 50),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8)),
-                      width: double.infinity,
-                      height: 200.h,
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            'assets/images/image_health_tips.jpeg',
-                            fit: BoxFit.fill,
-                            height: double.infinity,
-                            width: double.infinity,
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              'Health Tips',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            onTap: () => Get.toNamed(
+              controller.state.checkGender == Gender.female.obs
+                  ? "/FitnessWomenScreen"
+                  : "/FitnessMenScreen",
+            ),
+            child: GroupPage(
+              nameGroup: 'Fitness',
+              imageGroup: "assets/images/men.jpg",
             ),
           ),
+
+          //Health Tips
+          InkWell(
+            onTap: () => Get.toNamed("/HealthTipsScreen"),
+            child: GroupPage(
+              nameGroup: 'Health Tips',
+              imageGroup: 'assets/images/image_health_tips.jpeg',
+            ),
+          ),
+
+          //GEMET
           InkWell(
             onTap: () => Get.toNamed("/ClubScreen"),
-            child: Container(
-              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-              alignment: AlignmentDirectional.topStart,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Gemat',
-                    style: TextStyle(
-                      color: const Color(0xff57CA85),
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => Get.toNamed("/HealthTipsScreen"),
-                    child: Container(
-                      padding: const EdgeInsetsDirectional.only(
-                          start: 22, end: 22, top: 20, bottom: 50),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8)),
-                      width: double.infinity,
-                      height: 200.h,
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            'assets/images/image_gmet.jpeg',
-                            fit: BoxFit.fill,
-                            height: double.infinity,
-                            width: double.infinity,
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              'GMET',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            child: GroupPage(
+              nameGroup: 'Gemat',
+              imageGroup: 'assets/images/image_gmet.jpeg',
             ),
           ),
         ],

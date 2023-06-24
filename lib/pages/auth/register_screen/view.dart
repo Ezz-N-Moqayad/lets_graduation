@@ -62,7 +62,7 @@ class RegisterScreen extends GetView<RegisterController> {
                   const Padding(
                     padding: EdgeInsetsDirectional.only(top: 40),
                     child: Text(
-                      'User name',
+                      'Name',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,

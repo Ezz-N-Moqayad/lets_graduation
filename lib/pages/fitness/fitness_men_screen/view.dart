@@ -27,7 +27,7 @@ class FitnessMenScreen extends GetView<FitnessMenController> {
     AppBar _buildAppBar() {
       return transparentAppBar(
         title: Text(
-          "Fitness",
+          "Fitness For Men",
           style: TextStyle(
             color: AppColors.primaryBackground,
             fontSize: 18.sp,

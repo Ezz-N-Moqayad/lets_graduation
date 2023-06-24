@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../pages/Onboarding/screen_page_view/index.dart';
+import '../../pages/auth/edit_profile_screen/index.dart';
 import '../../pages/fitness/videoView/index.dart';
 import '../../pages/group/contact/index.dart';
 import '../../pages/group/message/chat/index.dart';
@@ -17,7 +18,6 @@ import '../../pages/auth/change_password_screen/index.dart';
 import '../../pages/auth/forget_password_screen/index.dart';
 import '../../pages/fitness/fitness_men_screen/index.dart';
 import '../../pages/health/health_tips_screen/index.dart';
-import '../../pages/auth/edit_profial_screen/index.dart';
 import '../../pages/settings/settings_screen/index.dart';
 import '../../pages/auth/check_email_screen/index.dart';
 import '../../pages/group/new_group_screen/index.dart';
@@ -99,8 +99,8 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.editProfial,
-      page: () => EditProfialScreen(),
-      binding: EditProfialBinding(),
+      page: () => EditProfileScreen(),
+      binding: EditProfileBinding(),
     ),
     GetPage(
       name: AppRoutes.Setting,
@@ -174,7 +174,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.ClubScreen,
-      page: () => const ClubScreen(),
+      page: () => ClubScreen(),
       binding: ClubBinding(),
     ),
     GetPage(
