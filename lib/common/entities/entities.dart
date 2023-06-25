@@ -1,6 +1,6 @@
 library entities;
 
-export 'user.dart';
+export 'fb_response.dart';
 export 'msg.dart';
 export 'msgcontent.dart';
-export 'mylocation.dart';
+export 'user.dart';

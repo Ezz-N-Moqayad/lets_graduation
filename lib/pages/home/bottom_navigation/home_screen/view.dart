@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../common/entities/entities.dart';
-import '../../../../common/widgets/widgets.dart';
+
 import 'index.dart';
-import 'widgets/group_page.dart';
 import 'widgets/groups_home.dart';
 
 class HomeScreen extends GetView<HomeController> {
