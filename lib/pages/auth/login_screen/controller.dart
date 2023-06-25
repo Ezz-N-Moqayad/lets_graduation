@@ -70,6 +70,7 @@ class LoginController extends GetxController with Helpers {
     }
   }
 
+  // ignore: non_constant_identifier_names
   void AddUser(UserLoginResponseEntity userProfile) async {
     UserStore.to.saveProfile(userProfile);
     var userbase = await state.db
@@ -87,7 +88,7 @@ class LoginController extends GetxController with Helpers {
           email: userProfile.email,
           photourl: userProfile.photoUrl,
           password: userProfile.password,
-          gender: Gender.non.toString(),
+          gender: "",
           location: "",
           heightKg: "",
           heightCm: "",

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../common/entities/entities.dart';
 import '../../../../common/widgets/widgets.dart';
 import 'index.dart';
 import 'widgets/group_page.dart';
+import 'widgets/groups_home.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({Key? key}) : super(key: key);
@@ -51,19 +53,27 @@ class HomeScreen extends GetView<HomeController> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: TabBarView(
-              controller: controller.state.tabController,
-              children: [
-                DayScreen(),
-                WeekScreen(),
-                MonthScreen(),
-              ],
+      body: SmartRefresher(
+        controller: controller.refreshController,
+        enablePullDown: true,
+        enablePullUp: true,
+        onLoading: controller.onLoading,
+        onRefresh: controller.onRefresh,
+        header: const WaterDropHeader(),
+        child: Column(
+          children: [
+            Expanded(
+              child: TabBarView(
+                controller: controller.state.tabController,
+                children: [
+                  DayScreen(),
+                  WeekScreen(),
+                  MonthScreen(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -126,7 +136,6 @@ class DayScreen extends GetView<HomeController> {
             backgroundColor: const Color(0xffCFD8DC),
             progressColor: const Color(0xff57CA85),
           ),
-
           Padding(
             padding:
                 const EdgeInsetsDirectional.only(top: 6, start: 35, end: 35),
@@ -202,7 +211,6 @@ class DayScreen extends GetView<HomeController> {
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsetsDirectional.only(top: 12, start: 16),
             child: Row(
@@ -253,7 +261,6 @@ class DayScreen extends GetView<HomeController> {
               ],
             ),
           ),
-
           const Padding(
             padding: EdgeInsetsDirectional.only(top: 20, start: 16),
             child: Text(
@@ -278,37 +285,7 @@ class DayScreen extends GetView<HomeController> {
               ],
             ),
           ),
-
-          //Fitness
-          InkWell(
-            onTap: () => Get.toNamed(
-              controller.state.checkGender == Gender.female.obs
-                  ? "/FitnessWomenScreen"
-                  : "/FitnessMenScreen",
-            ),
-            child: GroupPage(
-              nameGroup: 'Fitness',
-              imageGroup: "assets/images/men.jpg",
-            ),
-          ),
-
-          //Health Tips
-          InkWell(
-            onTap: () => Get.toNamed("/HealthTipsScreen"),
-            child: GroupPage(
-              nameGroup: 'Health Tips',
-              imageGroup: 'assets/images/image_health_tips.jpeg',
-            ),
-          ),
-
-          //GEMET
-          InkWell(
-            onTap: () => Get.toNamed("/ClubScreen"),
-            child: GroupPage(
-              nameGroup: 'Gemat',
-              imageGroup: 'assets/images/image_gmet.jpeg',
-            ),
-          ),
+          GroupsHome(controller.state.checkGender),
         ],
       ),
     );
@@ -352,7 +329,6 @@ class WeekScreen extends GetView<HomeController> {
             backgroundColor: const Color(0xffCFD8DC),
             progressColor: const Color(0xff57CA85),
           ),
-
           Padding(
             padding:
                 const EdgeInsetsDirectional.only(top: 6, start: 35, end: 35),
@@ -428,7 +404,6 @@ class WeekScreen extends GetView<HomeController> {
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsetsDirectional.only(top: 12, start: 16),
             child: Row(
@@ -479,7 +454,6 @@ class WeekScreen extends GetView<HomeController> {
               ],
             ),
           ),
-
           const Padding(
             padding: EdgeInsetsDirectional.only(top: 20, start: 16),
             child: Text(
@@ -504,36 +478,7 @@ class WeekScreen extends GetView<HomeController> {
               ],
             ),
           ),
-          //Fitness
-          InkWell(
-            onTap: () => Get.toNamed(
-              controller.state.checkGender == Gender.female.obs
-                  ? "/FitnessWomenScreen"
-                  : "/FitnessMenScreen",
-            ),
-            child: GroupPage(
-              nameGroup: 'Fitness',
-              imageGroup: "assets/images/men.jpg",
-            ),
-          ),
-
-          //Health Tips
-          InkWell(
-            onTap: () => Get.toNamed("/HealthTipsScreen"),
-            child: GroupPage(
-              nameGroup: 'Health Tips',
-              imageGroup: 'assets/images/image_health_tips.jpeg',
-            ),
-          ),
-
-          //GEMET
-          InkWell(
-            onTap: () => Get.toNamed("/ClubScreen"),
-            child: GroupPage(
-              nameGroup: 'Gemat',
-              imageGroup: 'assets/images/image_gmet.jpeg',
-            ),
-          ),
+          GroupsHome(controller.state.checkGender),
         ],
       ),
     );
@@ -726,37 +671,7 @@ class MonthScreen extends GetView<HomeController> {
               ],
             ),
           ),
-
-          //Fitness
-          InkWell(
-            onTap: () => Get.toNamed(
-              controller.state.checkGender == Gender.female.obs
-                  ? "/FitnessWomenScreen"
-                  : "/FitnessMenScreen",
-            ),
-            child: GroupPage(
-              nameGroup: 'Fitness',
-              imageGroup: "assets/images/men.jpg",
-            ),
-          ),
-
-          //Health Tips
-          InkWell(
-            onTap: () => Get.toNamed("/HealthTipsScreen"),
-            child: GroupPage(
-              nameGroup: 'Health Tips',
-              imageGroup: 'assets/images/image_health_tips.jpeg',
-            ),
-          ),
-
-          //GEMET
-          InkWell(
-            onTap: () => Get.toNamed("/ClubScreen"),
-            child: GroupPage(
-              nameGroup: 'Gemat',
-              imageGroup: 'assets/images/image_gmet.jpeg',
-            ),
-          ),
+          GroupsHome(controller.state.checkGender),
         ],
       ),
     );

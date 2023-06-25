@@ -38,6 +38,8 @@ class RegisterController extends GetxController with Helpers {
     state.NameController.text = "";
     state.PasswordController.text = '';
     state.ConfirmPasswordController.text = '';
+
+    generateAccessToken();
   }
 
   Future<void> handleSignIn() async {
@@ -95,15 +97,16 @@ class RegisterController extends GetxController with Helpers {
 
   // ignore: non_constant_identifier_names
   void AddUser(UserLoginResponseEntity userProfile) async {
-    UserStore.to.saveProfile(userProfile);
-    var userbase = await state.db
+    await UserStore.to.saveProfile(userProfile);
+
+    var userBase = await state.db
         .collection("users")
         .withConverter(
             fromFirestore: UserData.fromFirestore,
             toFirestore: (UserData userdata, options) => userdata.toFirestore())
         .where("id", isEqualTo: userProfile.accessToken)
         .get();
-    if (userbase.docs.isEmpty) {
+    if (userBase.docs.isEmpty) {
       final data = UserData(
           id: userProfile.accessToken,
           name: userProfile.displayName,
@@ -219,14 +222,9 @@ class RegisterController extends GetxController with Helpers {
           case TaskState.success:
             String imgUrl = await getImgUrl(fileName);
 
-            String accessToken = '';
-            for (int i = 0; i < 21; i++) {
-              accessToken += Random().nextInt(10).toString();
-            }
-
             UserLoginResponseEntity userProfile = UserLoginResponseEntity();
             userProfile.email = email;
-            userProfile.accessToken = accessToken;
+            userProfile.accessToken = generateAccessToken();
             userProfile.displayName = name;
             userProfile.photoUrl = imgUrl;
             userProfile.password = password;
@@ -243,6 +241,11 @@ class RegisterController extends GetxController with Helpers {
     final spaceRef = FirebaseStorage.instance.ref("User Photos").child(name);
     var str = await spaceRef.getDownloadURL();
     return str;
+  }
+
+  String generateAccessToken() {
+    final random = Random.secure();
+    return List.generate(21, (_) => random.nextInt(10).toString()).join();
   }
 
   @override

@@ -147,55 +147,87 @@ class ChatPage extends GetView<ChatController> {
               const ChatList(),
               Positioned(
                 bottom: 0.h,
-                height: 50.h,
-                child: Container(
-                  width: 360.h,
-                  height: 50.h,
-                  color: AppColors.primaryBackground,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 217.w,
-                        height: 50.h,
-                        child: TextField(
-                          keyboardType: TextInputType.multiline,
-                          maxLines: 3,
-                          controller: controller.textController,
-                          autofocus: false,
-                          focusNode: controller.contentNode,
-                          decoration: const InputDecoration(
-                            hintText: "Send messages...",
+                height: 55.h,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.only(
+                      start: 0.w, bottom: 0.h, end: 0.w),
+                  child: Container(
+                    width: double.infinity.w,
+                    height: 55.h,
+                    color: AppColors.primaryBackground,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.only(start: 16.w),
+                          child: SizedBox(
+                            width: 43.w,
+                            height: 43.h,
+                            child: GestureDetector(
+                              child: Icon(
+                                Icons.photo_outlined,
+                                size: 43.w,
+                                color: const Color(0xFF184E68),
+                                // color: const Color(0xFF57CA85),
+                              ),
+                              onTap: () => _showPicker(context),
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: 30.h,
-                        width: 30.w,
-                        margin: EdgeInsets.only(left: 5.w),
-                        child: GestureDetector(
-                          child: Icon(
-                            Icons.photo_outlined,
-                            size: 35.w,
-                            color: Colors.blue,
+                        Padding(
+                          padding: EdgeInsetsDirectional.only(
+                              start: 15.w, bottom: 5.h, top: 5.h, end: 15.w),
+                          child: Container(
+                            width: 280.w,
+                            height: 100.h,
+                            decoration: ShapeDecoration(
+                              color: Color(0xFFF4F400),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.only(start: 16.w),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  SizedBox(
+                                    width: 200.w,
+                                    child: TextField(
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: 3,
+                                      controller: controller.textController,
+                                      autofocus: false,
+                                      focusNode: controller.contentNode,
+                                      decoration: InputDecoration(
+                                        hintText: "Aa...",
+                                        hintStyle: TextStyle(fontSize: 17),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding:
+                                    EdgeInsetsDirectional.only(start: 5.w),
+                                    width: 30.w,
+                                    height: 30.h,
+                                    child: GestureDetector(
+                                      child: Icon(
+                                        Icons.send,
+                                        size: 30.w,
+                                        // color: Color(0xFF184E68),
+                                        color: Color(0xFF57CA85),
+                                      ),
+                                      onTap: () => controller.sendMessage(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          onTap: () {
-                            _showPicker(context);
-                          },
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 10.w, top: 5.h),
-                        width: 65.w,
-                        height: 35.h,
-                        child: ElevatedButton(
-                          child: const Text("Send"),
-                          onPressed: () {
-                            controller.sendMessage();
-                          },
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

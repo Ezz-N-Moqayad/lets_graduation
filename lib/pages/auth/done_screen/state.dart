@@ -7,7 +7,6 @@ import '../../../common/store/store.dart';
 
 class DoneState {
 
-  final token = UserStore.to.token;
   final db = FirebaseFirestore.instance;
 
   var selectedGender = Gender.non.obs;

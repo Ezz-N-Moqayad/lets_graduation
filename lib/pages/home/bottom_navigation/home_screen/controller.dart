@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../common/entities/entities.dart';
 import '../../../../common/widgets/widgets.dart';
@@ -19,6 +20,26 @@ class HomeController extends GetxController
   void onReady() {
     super.onReady();
     CheckGender();
+  }
+
+  final RefreshController refreshController = RefreshController(
+    initialRefresh: true,
+  );
+
+  void onRefresh() {
+    CheckGender().then((_) {
+      refreshController.refreshCompleted(resetFooterState: true);
+    }).catchError((_) {
+      refreshController.refreshFailed();
+    });
+  }
+
+  void onLoading() {
+    CheckGender().then((_) {
+      refreshController.refreshCompleted();
+    }).catchError((_) {
+      refreshController.refreshFailed();
+    });
   }
 
   // ignore: non_constant_identifier_names

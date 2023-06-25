@@ -211,8 +211,6 @@ class MessageList extends GetView<MessageController> {
                       return messageListItem(item);
                     } else {
                       return listItemIsEmpty();
-
-
                     }
                   },
                   childCount: controller.state.msgList.length,

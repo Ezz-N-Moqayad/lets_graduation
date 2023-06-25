@@ -38,6 +38,7 @@ class UserStore extends GetxController {
   // 保存 token
   Future<void> setToken(String value) async {
     await StorageService.to.setString(STORAGE_USER_TOKEN_KEY, value);
+
     token = value;
   }
 
@@ -54,7 +55,8 @@ class UserStore extends GetxController {
   Future<void> saveProfile(UserLoginResponseEntity profile) async {
     _isLogin.value = true;
     StorageService.to.setString(STORAGE_USER_PROFILE_KEY, jsonEncode(profile));
-    setToken(profile.accessToken!);
+
+    await setToken(profile.accessToken!);
   }
 
   // 注销
