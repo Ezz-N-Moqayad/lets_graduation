@@ -59,6 +59,56 @@ class RegisterScreen extends GetView<RegisterController> {
                       ),
                     ),
                   ),
+                  InkWell(
+                    onTap: () => _showPicker(context),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.only(top: 25.h),
+                      child: Align(
+                        alignment: AlignmentDirectional.center,
+                        child: Stack(
+                          alignment: AlignmentDirectional.center,
+                          children: [
+                            Container(
+                              width: 100.w,
+                              height: 100.h,
+                              decoration: BoxDecoration(
+                                color: const Color(0xff2d4d2d),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: CircleAvatar(
+                                child: Image.asset(
+                                  'assets/images/personal_group.png',
+                                  fit: BoxFit.contain,
+                                  width: 100.w,
+                                  height: 100.h,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.only(
+                                  top: 75, start: 70),
+                              child: Container(
+                                width: 35,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffF5F5FA),
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: const CircleAvatar(
+                                  backgroundColor: Color(0xffF5F5FA),
+                                  child: Icon(
+                                    Icons.camera_alt,
+                                    color: Color(0xff57CA85),
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                   const Padding(
                     padding: EdgeInsetsDirectional.only(top: 40),
                     child: Text(
@@ -408,6 +458,32 @@ class RegisterScreen extends GetView<RegisterController> {
           ),
         ),
       ),
+    );
+  }
+  void _showPicker(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Gallery"),
+                onTap: () {
+                  controller.imgFromGallery();
+                  Get.back();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text("Camera"),
+                onTap: () {},
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

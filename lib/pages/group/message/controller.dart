@@ -25,7 +25,6 @@ class MessageController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    getUserLocation();
     getFmcToken();
   }
 
@@ -72,60 +71,82 @@ class MessageController extends GetxController {
     }
   }
 
-  getUserLocation() async {
-    try {
-      final location = await Location().getLocation();
-
-      String address = "${location.latitude} , ${location.longitude}";
-
-      String url =
-          "https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDuxj8dmTs7kueuaMDV-XNosobnVPmuD3I";
-      var response = await HttpUtil().get(url);
-
-      MyLocation location_res = MyLocation.fromJson(response);
-
-      if (location_res.status == "OK") {
-        String? myaddresss = location_res.results?.first.formattedAddress;
-
-        print(myaddresss);
-
-        if (myaddresss != null) {
-          var user_location =
-              await db.collection("users").where("id", isEqualTo: token).get();
-
-          if (user_location.docs.isNotEmpty) {
-            var doc_id = user_location.docs.first.id;
-            await db
-                .collection("users")
-                .doc(doc_id)
-                .update({"location": myaddresss});
-          }
-        }
-      } else {
-        var user_location =
-            await db.collection("users").where("id", isEqualTo: token).get();
-
-        if (user_location.docs.isNotEmpty) {
-          var doc_id = user_location.docs.first.id;
-          await db
-              .collection("users")
-              .doc(doc_id)
-              .update({"location": address});
-        }
-      }
-    } catch (e) {
-      print("Getting error $e");
-    }
-  }
+  // getUserLocation() async {
+  //   try {
+  //     final location = await Location().getLocation();
+  //
+  //     String address = "${location.latitude} , ${location.longitude}";
+  //
+  //     String url =
+  //         "https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDuxj8dmTs7kueuaMDV-XNosobnVPmuD3I";
+  //     var response = await HttpUtil().get(url);
+  //
+  //     MyLocation location_res = MyLocation.fromJson(response);
+  //
+  //     if (location_res.status == "OK") {
+  //       String? myaddresss = location_res.results?.first.formattedAddress;
+  //
+  //       print(myaddresss);
+  //
+  //       if (myaddresss != null) {
+  //         var user_location =
+  //             await db.collection("users").where("id", isEqualTo: token).get();
+  //
+  //         if (user_location.docs.isNotEmpty) {
+  //           var doc_id = user_location.docs.first.id;
+  //           await db
+  //               .collection("users")
+  //               .doc(doc_id)
+  //               .update({"location": myaddresss});
+  //         }
+  //       }
+  //     } else {
+  //       var user_location =
+  //           await db.collection("users").where("id", isEqualTo: token).get();
+  //
+  //       if (user_location.docs.isNotEmpty) {
+  //         var doc_id = user_location.docs.first.id;
+  //         await db
+  //             .collection("users")
+  //             .doc(doc_id)
+  //             .update({"location": address});
+  //       }
+  //     }
+  //   } catch (e) {
+  //     print("Getting error $e");
+  //   }
+  // }
 
   getFmcToken() async {
+    print("11111111111111111111111111");
     final fcmToken = await FirebaseMessaging.instance.getToken();
+    print("2222222222222");
+
+    print(fcmToken);
+    print("2222222222222");
+
     if (fcmToken != null) {
+      print("33333333333333333333");
+
+      print(fcmToken);
+      print("33333333333333333333");
+
       var user =
           await db.collection("users").where("id", isEqualTo: token).get();
+      print("444444444444444444");
+
+      print(user);
+      print("444444444444444444");
+
       if (user.docs.isNotEmpty) {
+        print("555555555555555555555555");
+
         var doc_id = user.docs.first.id;
+        print("66666666666666666666666");
+        print(doc_id);
+        print("66666666666666666666666");
         await db.collection("users").doc(doc_id).update({"fcmtoken": fcmToken});
+        print("77777777777777777777777");
       }
     }
   }

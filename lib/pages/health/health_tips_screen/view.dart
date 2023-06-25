@@ -115,7 +115,7 @@ class HealthTipsScreen extends GetView<HealthTipsController> {
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 10);
               },
-              itemCount: 20,
+              itemCount: 5,
             ),
           ),
         ],

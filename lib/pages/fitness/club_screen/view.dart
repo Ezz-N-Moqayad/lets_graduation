@@ -38,33 +38,65 @@ class ClubScreen extends GetView<ClubController> {
             child: ListView.separated(
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: () => Get.toNamed("/DetailsClub"),
                   child: Container(
-                    padding: const EdgeInsetsDirectional.only(
-                        start: 22, end: 22, top: 40),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    width: double.infinity,
-                    height: 200.h,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/image_gmet.jpeg',
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
+                    padding: EdgeInsetsDirectional.only(
+                        start: 16.w, end: 20.w, top: 20.h, bottom: 20.h),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          width: 1,
+                          color: Color(0xffe5e5e5),
                         ),
-                        Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text(
-                            'Khalil ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 64.w,
+                          height: 64.w,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(40),
+                            child: Image.asset(
+                              'assets/images/image_gmet.jpeg',
+                              fit: BoxFit.fill,
+                              width: 64.w,
+                              height: 64.w,
                             ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.only(start: 20.w),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Name GEM',
+                                overflow: TextOverflow.clip,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontFamily: "Avenir",
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.normal,
+                                  color: AppColors.thirdElement,
+                                  fontSize: 20.sp,
+                                ),
+                              ),
+                              Text(
+                                'Location GEM',
+                                overflow: TextOverflow.clip,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontFamily: "Avenir",
+                                  fontWeight: FontWeight.normal,
+                                  color: AppColors.thirdElement,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -75,7 +107,7 @@ class ClubScreen extends GetView<ClubController> {
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 10);
               },
-              itemCount: 20,
+              itemCount: 10,
             ),
           ),
         ],

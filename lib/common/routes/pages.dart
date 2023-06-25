@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../pages/Onboarding/screen_page_view/index.dart';
 import '../../pages/auth/edit_profile_screen/index.dart';
+import '../../pages/fitness/detailsClub/index.dart';
 import '../../pages/fitness/videoView/index.dart';
 import '../../pages/group/contact/index.dart';
 import '../../pages/group/message/chat/index.dart';
@@ -187,6 +188,11 @@ class AppPages {
       name: AppRoutes.DetailsHealthTip,
       page: () => DetailsHealthTip(),
       binding: DetailsHealthTipBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.DetailsClub,
+      page: () => DetailsClub(),
+      binding: DetailsClubBinding(),
     ),
   ];
 }

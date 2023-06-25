@@ -21,34 +21,36 @@ class MessageList extends GetView<MessageController> {
           padding: EdgeInsetsDirectional.only(start: 20.w, end: 20.w),
           child: InkWell(
             onTap: () {
-              var to_uid = "";
-              var to_name = "";
-              var to_avatar = "";
+              var toUid = "";
+              var toName = "";
+              var toAvatar = "";
               if (item.data().from_uid == controller.token) {
-                to_uid = item.data().to_uid ?? "";
-                to_name = item.data().to_name ?? "";
-                to_avatar = item.data().to_avatar ?? "";
+                toUid = item.data().to_uid ?? "";
+                toName = item.data().to_name ?? "";
+                toAvatar = item.data().to_avatar ?? "";
               } else {
-                to_uid = item.data().from_uid ?? "";
-                to_name = item.data().from_name ?? "";
-                to_avatar = item.data().from_avatar ?? "";
+                toUid = item.data().from_uid ?? "";
+                toName = item.data().from_name ?? "";
+                toAvatar = item.data().from_avatar ?? "";
               }
 
-              Get.toNamed("/chat", parameters: {
-                "doc_id": item.id,
-                "to_uid": to_uid,
-                "to_name": to_name,
-                "to_avatar": to_avatar,
-              });
+              Get.toNamed(
+                "/chat",
+                parameters: {
+                  "doc_id": item.id,
+                  "to_uid": toUid,
+                  "to_name": toName,
+                  "to_avatar": toAvatar,
+                },
+              );
             },
             child: Container(
+              padding: EdgeInsetsDirectional.only(top: 20.h, bottom: 20.h),
               decoration: const BoxDecoration(
                 border: Border(
-                  top: BorderSide(width: 1, color: Color(0xffe5e5e5)),
                   bottom: BorderSide(width: 1, color: Color(0xffe5e5e5)),
                 ),
               ),
-              padding: EdgeInsetsDirectional.only(top: 20.h, bottom: 20.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +77,7 @@ class MessageList extends GetView<MessageController> {
                           ),
                         ),
                         errorWidget: (context, url, error) => const Image(
-                          image: AssetImage('assets/images/feature-1.png'),
+                          image: AssetImage('assets/images/personal_group.png'),
                         ),
                       ),
                     ),
@@ -205,10 +207,13 @@ class MessageList extends GetView<MessageController> {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     var item = controller.state.msgList[index];
-                    if (controller.state.msgList.isEmpty) {
+                    if (controller.state.msgList.isNotEmpty) {
+                      return messageListItem(item);
+                    } else {
                       return listItemIsEmpty();
+
+
                     }
-                    return messageListItem(item);
                   },
                   childCount: controller.state.msgList.length,
                 ),

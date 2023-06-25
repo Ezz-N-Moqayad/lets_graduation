@@ -50,7 +50,7 @@ class ChatPage extends GetView<ChatController> {
                       ),
                     ),
                     errorWidget: (context, url, error) => const Image(
-                      image: AssetImage('assets/images/feature-1.png'),
+                      image: AssetImage('assets/images/personal_group.png'),
                     ),
                   ),
                 ),

@@ -24,11 +24,11 @@ class DoneController extends GetxController with Helpers {
     state.LocationController = TextEditingController();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-    getFmcToken();
-  }
+  // @override
+  // void onReady() {
+  //   super.onReady();
+  //   getFmcToken();
+  // }
 
   getUserLocation() async {
     try {
@@ -44,19 +44,40 @@ class DoneController extends GetxController with Helpers {
   }
 
   getFmcToken() async {
+    print("11111111111111111111111111");
     final fcmToken = await FirebaseMessaging.instance.getToken();
+    print("2222222222222");
+
+    print(fcmToken);
+    print("2222222222222");
+
     if (fcmToken != null) {
+      print("33333333333333333333");
+
+      print(fcmToken);
+      print("33333333333333333333");
+
       var user = await state.db
           .collection("users")
           .where("id", isEqualTo: state.token)
           .get();
+      print("444444444444444444");
+
+      print(user);
+      print("444444444444444444");
 
       if (user.docs.isNotEmpty) {
-        var docId = user.docs.first.id;
+        print("555555555555555555555555");
+
+        var doc_id = user.docs.first.id;
+        print("66666666666666666666666");
+        print(doc_id);
+        print("66666666666666666666666");
         await state.db
             .collection("users")
-            .doc(docId)
+            .doc(doc_id)
             .update({"fcmtoken": fcmToken});
+        print("77777777777777777777777");
       }
     }
   }
@@ -66,29 +87,37 @@ class DoneController extends GetxController with Helpers {
       {required String heightKg,
       required String heightCm,
       required String location}) async {
+    print("rrrrrrrrrrrrrrrrrrrrrrrr");
+
     try {
+      print("tttttttttttttttttttttttttttttt");
+
       var userUpdate = await state.db
           .collection("users")
           .where("id", isEqualTo: state.token)
           .get();
+      print("yyyyyyyyyyyyyyyyyyyyyyyyy");
+      print(userUpdate.docs);
+      print("yyyyyyyyyyyyyyyyyyyyyyyyy");
 
       if (userUpdate.docs.isNotEmpty) {
+        print("uuuuuuuuuuuuuuuuuuuuuuuuuuu");
+
         var docId = userUpdate.docs.first.id;
-        if (state.selectedGender.value == Gender.male) {
-          await state.db.collection("users").doc(docId).update({
-            "heightKg": heightKg,
-            "heightCm": heightCm,
-            "location": location,
-            "gender": "Male",
-          });
-        } else {
-          await state.db.collection("users").doc(docId).update({
-            "heightKg": heightKg,
-            "heightCm": heightCm,
-            "location": location,
-            "gender": "Female",
-          });
-        }
+
+        String gender = await (state.selectedGender.value == Gender.male)
+            ? 'Male'
+            : 'Female';
+        print("iiiiiiiiiiiiiiiiii");
+
+        await state.db.collection("users").doc(docId).update({
+          "heightKg": heightKg,
+          "heightCm": heightCm,
+          "location": location,
+          "gender": gender,
+        });
+        print("oooooooooooooooooooooo");
+        getFmcToken();
       }
 
       return FbResponse(message: 'Update Successfully', states: true);
@@ -99,10 +128,15 @@ class DoneController extends GetxController with Helpers {
   }
 
   Future<void> _updateDown() async {
+    print("wwwwwwwwwwwwwwwwwwwwwwww");
+
     FbResponse fbResponse = await UpdateAccount(
-        heightKg: state.HeightkgController.text,
-        heightCm: state.HeightCmController.text,
-        location: state.LocationController.text);
+      heightKg: state.HeightkgController.text,
+      heightCm: state.HeightCmController.text,
+      location: state.LocationController.text,
+    );
+    print("eeeeeeeeeeeeeeeeeeeeeeeeee");
+
     showSnackBar(message: fbResponse.message, error: !fbResponse.states);
     if (fbResponse.states) Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
   }
@@ -118,6 +152,8 @@ class DoneController extends GetxController with Helpers {
         state.HeightCmController.text.isNotEmpty &&
         state.LocationController.text.isNotEmpty &&
         state.selectedGender.value != Gender.non) {
+      print("qqqqqqqqqqqqqqqqqqq");
+
       return true;
     }
 

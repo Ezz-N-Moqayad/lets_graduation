@@ -1,14 +1,20 @@
+import 'dart:io';
 import 'dart:math';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+
 import '../../../common/entities/entities.dart';
 import '../../../common/entities/fb_response.dart';
 import '../../../common/routes/routes.dart';
 import '../../../common/store/store.dart';
 import '../../../common/utils/helpers.dart';
+import '../../../common/utils/utils.dart';
 import '../../../common/widgets/widgets.dart';
 import 'index.dart';
 
@@ -122,29 +128,18 @@ class RegisterController extends GetxController with Helpers {
   }
 
   // ignore: non_constant_identifier_names
-  Future<FbResponse> CreateAccount(
-      {required String email,
-      required String password,
-      required String name}) async {
+  Future<FbResponse> CreateAccount({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
     try {
       UserCredential userCredential = await state.firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       if (userCredential.user != null) {
         await userCredential.user!.sendEmailVerification();
 
-        String accessToken = '';
-        for (int i = 0; i < 21; i++) {
-          accessToken += Random().nextInt(10).toString();
-        }
-
-        UserLoginResponseEntity userProfile = UserLoginResponseEntity();
-        userProfile.email = email;
-        userProfile.accessToken = accessToken;
-        userProfile.displayName = name;
-        userProfile.photoUrl = "";
-        userProfile.password = password;
-
-        AddUser(userProfile);
+        uploadFile(name: name, email: email, password: password);
 
         return FbResponse(
             message: 'Account Created Successfully', states: true);
@@ -166,6 +161,10 @@ class RegisterController extends GetxController with Helpers {
         state.EmailController.text.isNotEmpty &&
         state.PasswordController.text.isNotEmpty &&
         state.ConfirmPasswordController.text.isNotEmpty) {
+      if (state.photo == null) {
+        showSnackBar(message: 'Please add a photo', error: true);
+        return false;
+      }
       if (state.PasswordController.text !=
           state.ConfirmPasswordController.text) {
         showSnackBar(message: 'Passwords do not match!', error: true);
@@ -185,6 +184,65 @@ class RegisterController extends GetxController with Helpers {
         name: state.NameController.text);
     showSnackBar(message: fbResponse.message, error: !fbResponse.states);
     if (fbResponse.states) Get.offAndToNamed(AppRoutes.done);
+  }
+
+  Future imgFromGallery() async {
+    final pickedFile =
+        await state.picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      state.photo = File(pickedFile.path);
+    } else {
+      // ignore: avoid_print
+      print("No image selected");
+    }
+  }
+
+  Future uploadFile({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    if (state.photo == null) return;
+    final fileName = getRandomString(15) + extension(state.photo!.path);
+    try {
+      final ref = FirebaseStorage.instance.ref("User Photos").child(fileName);
+      await ref.putFile(state.photo!).snapshotEvents.listen((event) async {
+        switch (event.state) {
+          case TaskState.running:
+            break;
+          case TaskState.paused:
+            break;
+          case TaskState.canceled:
+            break;
+          case TaskState.error:
+            break;
+          case TaskState.success:
+            String imgUrl = await getImgUrl(fileName);
+
+            String accessToken = '';
+            for (int i = 0; i < 21; i++) {
+              accessToken += Random().nextInt(10).toString();
+            }
+
+            UserLoginResponseEntity userProfile = UserLoginResponseEntity();
+            userProfile.email = email;
+            userProfile.accessToken = accessToken;
+            userProfile.displayName = name;
+            userProfile.photoUrl = imgUrl;
+            userProfile.password = password;
+
+            AddUser(userProfile);
+        }
+      });
+    } catch (e) {
+      print("There's an error $e");
+    }
+  }
+
+  Future getImgUrl(String name) async {
+    final spaceRef = FirebaseStorage.instance.ref("User Photos").child(name);
+    var str = await spaceRef.getDownloadURL();
+    return str;
   }
 
   @override

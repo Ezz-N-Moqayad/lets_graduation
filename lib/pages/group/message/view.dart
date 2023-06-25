@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'chat/widgets/message_list.dart';
 import 'index.dart';
 
@@ -12,21 +10,20 @@ class MessagePage extends GetView<MessageController> {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      toolbarHeight: 75,
-      title: GradientText(
-        'Chats',
-        style: TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 20.sp,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xff184E68),
+              Color(0xff57CA85),
+            ],
+            transform: GradientRotation(45),
+          ),
         ),
-        gradientType: GradientType.linear,
-        gradientDirection: GradientDirection.ttb,
-        colors: const [
-          Color(0xff184E68),
-          Color(0xff57CA85),
-        ],
       ),
-      centerTitle: true,
+      title: const Center(
+        child: Text("Chats"),
+      ),
     );
   }
 
