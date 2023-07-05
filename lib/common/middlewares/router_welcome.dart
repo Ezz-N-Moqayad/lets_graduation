@@ -5,6 +5,7 @@ import '../../common/routes/routes.dart';
 import '../store/store.dart';
 
 class RouteWelcomeMiddleware extends GetMiddleware {
+
   @override
   int? priority = 0;
 
