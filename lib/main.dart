@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'common/services/services.dart';
 import 'common/routes/routes.dart';
 import 'common/store/store.dart';
-import 'common/utils/local.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -33,7 +32,6 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, widget) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        translations: MyTranslations(),
         initialRoute: AppPages.splash,
         getPages: AppPages.routes,
       ),

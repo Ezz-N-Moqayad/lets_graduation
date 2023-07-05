@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:location/location.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../../../common/models/models.dart';
 import '../../../common/store/store.dart';
-import '../../../common/entities/entities.dart';
-import '../../../common/utils/http.dart';
 import 'index.dart';
 
 class MessageController extends GetxController {
