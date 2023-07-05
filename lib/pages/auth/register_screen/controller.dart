@@ -1,5 +1,7 @@
+
 import 'dart:io';
 import 'dart:math';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,11 +11,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
-import '../../../common/entities/entities.dart';
-import '../../../common/entities/fb_response.dart';
+import '../../../common/models/models.dart';
 import '../../../common/routes/routes.dart';
 import '../../../common/store/store.dart';
-import '../../../common/utils/helpers.dart';
 import '../../../common/utils/utils.dart';
 import '../../../common/widgets/widgets.dart';
 import 'index.dart';
@@ -42,9 +42,115 @@ class RegisterController extends GetxController with Helpers {
     generateAccessToken();
   }
 
+  @override
+  void onReady() {
+    super.onReady();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {});
+  }
+
+  Future<XFile?> imgFromGallery() async {
+    final pickedFile = await state.picker.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      state.photo = File(pickedFile.path);
+      return XFile(pickedFile.path);
+    }
+    return null;
+  }
+
+  String generateAccessToken() {
+    final random = Random.secure();
+    return List.generate(21, (_) => random.nextInt(10).toString()).join();
+  }
+
+  Future getImgUrl(String name) async {
+    final spaceRef = FirebaseStorage.instance.ref("User Photos").child(name);
+    var str = await spaceRef.getDownloadURL();
+    return str;
+  }
+
+  // ignore: non_constant_identifier_names
+  void AddUser(UserLoginResponseEntity userProfile) async {
+    await UserStore.to.saveProfile(userProfile);
+    var userBase = await state.db
+        .collection("users")
+        .withConverter(
+            fromFirestore: UserData.fromFirestore,
+            toFirestore: (UserData userdata, options) => userdata.toFirestore())
+        .where("id", isEqualTo: userProfile.accessToken)
+        .get();
+
+    if (userBase.docs.isEmpty) {
+      final data = UserData(
+          id: userProfile.accessToken,
+          name: userProfile.displayName,
+          email: userProfile.email,
+          photourl: userProfile.photoUrl,
+          password: userProfile.password,
+          gender: "",
+          location: "",
+          widthKg: "",
+          heightCm: "",
+          fcmtoken: "",
+          addtime: Timestamp.now());
+
+      await state.db
+          .collection("users")
+          .withConverter(
+              fromFirestore: UserData.fromFirestore,
+              toFirestore: (UserData userdata, options) =>
+                  userdata.toFirestore())
+          .add(data);
+    }
+    toastInfo(msg: "Added successfully");
+  }
+
+  Future uploadFile({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    if (state.photo == null) return;
+    final fileName = getRandomString(15) + extension(state.photo!.path);
+    try {
+      final ref = FirebaseStorage.instance.ref("User Photos").child(fileName);
+      await ref
+          .putFile(state.photo as File)
+          .snapshotEvents
+          .listen((event) async {
+        switch (event.state) {
+          case TaskState.running:
+            break;
+          case TaskState.paused:
+            break;
+          case TaskState.canceled:
+            break;
+          case TaskState.error:
+            break;
+          case TaskState.success:
+            String imgUrl = await getImgUrl(fileName);
+
+            UserLoginResponseEntity userProfile = UserLoginResponseEntity();
+            userProfile.email = email;
+            userProfile.accessToken = generateAccessToken();
+            userProfile.displayName = name;
+            userProfile.photoUrl = imgUrl;
+            userProfile.password = password;
+
+            AddUser(userProfile);
+        }
+      });
+    } catch (e) {
+      print("There's an error $e");
+    }
+  }
+
   Future<void> handleSignIn() async {
     try {
       var user = await _googleSignIn.signIn();
+
       if (user != null) {
         final gAuthentication = await user.authentication;
         final credential = GoogleAuthProvider.credential(
@@ -59,6 +165,7 @@ class RegisterController extends GetxController with Helpers {
         String id = user.id;
         String photoUrl = user.photoUrl ?? "";
         UserLoginResponseEntity userProfile = UserLoginResponseEntity();
+
         userProfile.email = email;
         userProfile.accessToken = id;
         userProfile.displayName = displayName;
@@ -79,55 +186,6 @@ class RegisterController extends GetxController with Helpers {
     } catch (e) {
       toastInfo(msg: "Login Error");
     }
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-    FirebaseAuth.instance.authStateChanges().listen(
-      (User? user) {
-        if (user == null) {
-          toastInfo(msg: "User is currently logged out");
-        } else {
-          toastInfo(msg: "User is logged in");
-        }
-      },
-    );
-  }
-
-  // ignore: non_constant_identifier_names
-  void AddUser(UserLoginResponseEntity userProfile) async {
-    await UserStore.to.saveProfile(userProfile);
-
-    var userBase = await state.db
-        .collection("users")
-        .withConverter(
-            fromFirestore: UserData.fromFirestore,
-            toFirestore: (UserData userdata, options) => userdata.toFirestore())
-        .where("id", isEqualTo: userProfile.accessToken)
-        .get();
-    if (userBase.docs.isEmpty) {
-      final data = UserData(
-          id: userProfile.accessToken,
-          name: userProfile.displayName,
-          email: userProfile.email,
-          photourl: userProfile.photoUrl,
-          password: userProfile.password,
-          gender: "",
-          location: "",
-          heightKg: "",
-          heightCm: "",
-          fcmtoken: "",
-          addtime: Timestamp.now());
-      await state.db
-          .collection("users")
-          .withConverter(
-              fromFirestore: UserData.fromFirestore,
-              toFirestore: (UserData userdata, options) =>
-                  userdata.toFirestore())
-          .add(data);
-    }
-    toastInfo(msg: "Added successfully");
   }
 
   // ignore: non_constant_identifier_names
@@ -151,12 +209,6 @@ class RegisterController extends GetxController with Helpers {
       toastInfo(msg: "Login Error");
     }
     return FbResponse(message: 'something went wrong', states: false);
-  }
-
-  Future<void> performRegister() async {
-    if (checkData()) {
-      await _register();
-    }
   }
 
   bool checkData() {
@@ -189,63 +241,10 @@ class RegisterController extends GetxController with Helpers {
     if (fbResponse.states) Get.offAndToNamed(AppRoutes.done);
   }
 
-  Future imgFromGallery() async {
-    final pickedFile =
-        await state.picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      state.photo = File(pickedFile.path);
-    } else {
-      // ignore: avoid_print
-      print("No image selected");
+  Future<void> performRegister() async {
+    if (checkData()) {
+      await _register();
     }
-  }
-
-  Future uploadFile({
-    required String name,
-    required String email,
-    required String password,
-  }) async {
-    if (state.photo == null) return;
-    final fileName = getRandomString(15) + extension(state.photo!.path);
-    try {
-      final ref = FirebaseStorage.instance.ref("User Photos").child(fileName);
-      await ref.putFile(state.photo!).snapshotEvents.listen((event) async {
-        switch (event.state) {
-          case TaskState.running:
-            break;
-          case TaskState.paused:
-            break;
-          case TaskState.canceled:
-            break;
-          case TaskState.error:
-            break;
-          case TaskState.success:
-            String imgUrl = await getImgUrl(fileName);
-
-            UserLoginResponseEntity userProfile = UserLoginResponseEntity();
-            userProfile.email = email;
-            userProfile.accessToken = generateAccessToken();
-            userProfile.displayName = name;
-            userProfile.photoUrl = imgUrl;
-            userProfile.password = password;
-
-            AddUser(userProfile);
-        }
-      });
-    } catch (e) {
-      print("There's an error $e");
-    }
-  }
-
-  Future getImgUrl(String name) async {
-    final spaceRef = FirebaseStorage.instance.ref("User Photos").child(name);
-    var str = await spaceRef.getDownloadURL();
-    return str;
-  }
-
-  String generateAccessToken() {
-    final random = Random.secure();
-    return List.generate(21, (_) => random.nextInt(10).toString()).join();
   }
 
   @override

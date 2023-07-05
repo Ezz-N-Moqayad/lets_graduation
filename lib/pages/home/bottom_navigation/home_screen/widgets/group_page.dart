@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 // ignore: non_constant_identifier_names
 Widget GroupPage({required String nameGroup, required String imageGroup}) {

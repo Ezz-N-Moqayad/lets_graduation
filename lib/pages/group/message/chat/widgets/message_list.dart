@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
-import '../../../../../common/utils/date.dart';
-import '../../../../../common/entities/msg.dart';
+import '../../../../../common/utils/utils.dart';
+import '../../../../../common/models/models.dart';
 import '../../../../../common/values/values.dart';
 import '../../index.dart';
 
@@ -89,7 +89,7 @@ class MessageList extends GetView<MessageController> {
                       children: [
                         SizedBox(
                           width: 180.w,
-                          height: 48.w,
+                          height: 55.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,

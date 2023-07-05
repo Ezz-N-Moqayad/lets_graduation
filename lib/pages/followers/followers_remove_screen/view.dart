@@ -13,7 +13,7 @@ class FollowersRemoveScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Frindes',
           style: TextStyle(
             fontWeight: FontWeight.w500,
@@ -26,7 +26,7 @@ class FollowersRemoveScreen extends StatelessWidget {
             onTap: () {
               print('ff');
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_ios,
               color: Color(0xff184E68),
             )),
@@ -43,39 +43,39 @@ class FollowersRemoveScreen extends StatelessWidget {
                 onTap: () {},
                 onChanged: (String value) {},
                 cursorColor: Colors.black,
-                cursorRadius: Radius.circular(10),
+                cursorRadius: const Radius.circular(10),
                 enabled: true,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                     color: Colors.black),
                 decoration: InputDecoration(
-                  fillColor: Color(0xffF0F0F0),
+                  fillColor: const Color(0xffF0F0F0),
                   filled: true,
                   helperMaxLines: 1,
                   hintText: 'Search...',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 17,
                     color: Color(0xffA1A1A1),
                   ),
-                  errorBorder: UnderlineInputBorder(
+                  errorBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xffF5F5F5), width: 1),
+                    borderSide: const BorderSide(color: Color(0xffF5F5F5), width: 1),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff363737), width: 1),
+                    borderSide: const BorderSide(color: Color(0xff363737), width: 1),
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  prefixIcon: Icon(Icons.search_outlined),
-                  suffixIcon: Icon(Icons.person_search_outlined),
+                  prefixIcon: const Icon(Icons.search_outlined),
+                  suffixIcon: const Icon(Icons.person_search_outlined),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Padding(
@@ -86,7 +86,7 @@ class FollowersRemoveScreen extends StatelessWidget {
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
-                      color: Color(0xffF5F5FA),
+                      color: const Color(0xffF5F5FA),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: InkWell(
@@ -94,19 +94,19 @@ class FollowersRemoveScreen extends StatelessWidget {
                         print('gg');
                       },
                       child: CircleAvatar(
-                        backgroundColor: Color(0xffF5F5FA),
+                        backgroundColor: const Color(0xffF5F5FA),
                         child: Image.asset('assets/images/group.png'),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   TextButton(
                       onPressed: () {
                         Get.offAndToNamed(AppRoutes.NewGroup);
                       },
-                      child: Text(
+                      child: const Text(
                         'New Group',
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
@@ -117,15 +117,15 @@ class FollowersRemoveScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
-            Divider(
+            const Divider(
               color: Color(0xffECEEF1),
               thickness: 1,
               indent: 49,
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Padding(
@@ -136,7 +136,7 @@ class FollowersRemoveScreen extends StatelessWidget {
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
-                      color: Color(0xffF5F5FA),
+                      color: const Color(0xffF5F5FA),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: InkWell(
@@ -144,10 +144,10 @@ class FollowersRemoveScreen extends StatelessWidget {
                         print('gg');
                       },
                       child: CircleAvatar(
-                        backgroundColor: Color(0xffF5F5FA),
+                        backgroundColor: const Color(0xffF5F5FA),
                         child: IconButton(
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.group_add_outlined,
                             color: Color(0xff57CA85),
                           ),
@@ -155,14 +155,14 @@ class FollowersRemoveScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   TextButton(
                       onPressed: () {
                         Get.offAndToNamed(AppRoutes.FollowesCheck);
                       },
-                      child: Text(
+                      child: const Text(
                         'New Frinde',
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
@@ -173,11 +173,11 @@ class FollowersRemoveScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 16),
+            const Padding(
+              padding: EdgeInsetsDirectional.only(start: 16),
               child: Text(
                 'Frindes',
                 style: TextStyle(
@@ -187,12 +187,12 @@ class FollowersRemoveScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Expanded(
               child: ListView.separated(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return SizedBox(
                       width: double.infinity,
@@ -202,7 +202,7 @@ class FollowersRemoveScreen extends StatelessWidget {
                           width: 58,
                           height: 58,
                           decoration: BoxDecoration(
-                            color: Color(0xffF5F5FA),
+                            color: const Color(0xffF5F5FA),
                             borderRadius: BorderRadius.circular(100),
                           ),
                           child: InkWell(
@@ -210,13 +210,13 @@ class FollowersRemoveScreen extends StatelessWidget {
                               print('gg');
                             },
                             child: CircleAvatar(
-                              backgroundColor: Color(0xffF5F5FA),
+                              backgroundColor: const Color(0xffF5F5FA),
                               child: Image.asset(
                                   'assets/images/personal_frindes.png'),
                             ),
                           ),
                         ),
-                        title: Text(
+                        title: const Text(
                           'Will Knowles',
                           style: TextStyle(
                             fontSize: 16,
@@ -226,7 +226,13 @@ class FollowersRemoveScreen extends StatelessWidget {
                         ),
                         trailing: ElevatedButton(
                           onPressed: () async {},
-                          child: Text(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ), backgroundColor: const Color(0xff57CA85),
+                            minimumSize: const Size(75, 30),
+                          ),
+                          child: const Text(
                             'Remove',
                             style: TextStyle(
                               color: Colors.white,
@@ -235,19 +241,12 @@ class FollowersRemoveScreen extends StatelessWidget {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            minimumSize: Size(75, 30),
-                            primary: Color(0xff57CA85),
-                          ),
                         ),
                       ),
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return Divider(
+                    return const Divider(
                       color: Color(0xffECEEF1),
                       thickness: 1,
                     );

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../common/entities/entities.dart';
+import '../../../../common/models/models.dart';
 import '../../../../common/store/store.dart';
 
 class HomeState {

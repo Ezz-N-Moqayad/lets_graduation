@@ -25,7 +25,7 @@ class AppRoutes {
 
   static const checkemail = '/CheckEmailScreen';
 
-  static const editProfial = '/EditProfialScreen';
+  static const EditProfileScreen = '/EditProfileScreen';
 
   static const Setting = '/SettingsScreen';
 
@@ -62,4 +62,8 @@ class AppRoutes {
   static const DetailsHealthTip = '/DetailsHealthTip';
 
   static const DetailsClub = '/DetailsClub';
+
+  static const LogoutDialog = '/LogoutDialog';
+
+  static const NotificationsScreen = '/NotificationsScreen';
 }

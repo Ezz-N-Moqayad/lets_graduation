@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../../common/entities/entities.dart';
-import '../../../common/entities/fb_response.dart';
+import '../../../api/controllers/login_api_controller.dart';
+import '../../../common/models/models.dart';
 import '../../../common/routes/routes.dart';
 import '../../../common/store/store.dart';
 import '../../../common/utils/helpers.dart';
@@ -34,19 +34,20 @@ class LoginController extends GetxController with Helpers {
     try {
       var user = await _googleSignIn.signIn();
       if (user != null) {
-        final _gAuthentication = await user.authentication;
-        final _credential = GoogleAuthProvider.credential(
-          idToken: _gAuthentication.idToken,
-          accessToken: _gAuthentication.accessToken,
+        final gAuthentication = await user.authentication;
+        final credential = GoogleAuthProvider.credential(
+          idToken: gAuthentication.idToken,
+          accessToken: gAuthentication.accessToken,
         );
 
-        await FirebaseAuth.instance.signInWithCredential(_credential);
+        await FirebaseAuth.instance.signInWithCredential(credential);
 
         String displayName = user.displayName ?? user.email;
         String email = user.email;
         String id = user.id;
         String photoUrl = user.photoUrl ?? "";
         UserLoginResponseEntity userProfile = UserLoginResponseEntity();
+
         userProfile.email = email;
         userProfile.accessToken = id;
         userProfile.displayName = displayName;
@@ -55,10 +56,8 @@ class LoginController extends GetxController with Helpers {
 
         var fUser =
             await state.db.collection("users").where("id", isEqualTo: id).get();
-
         if (fUser.docs.isEmpty) {
           AddUser(userProfile);
-          toastInfo(msg: "Account Added successfully");
           Get.offAndToNamed(AppRoutes.done);
         } else {
           toastInfo(msg: "Login successfully");
@@ -90,7 +89,7 @@ class LoginController extends GetxController with Helpers {
           password: userProfile.password,
           gender: "",
           location: "",
-          heightKg: "",
+          widthKg: "",
           heightCm: "",
           fcmtoken: "",
           addtime: Timestamp.now());
@@ -104,7 +103,7 @@ class LoginController extends GetxController with Helpers {
           .add(data);
     }
 
-    toastInfo(msg: "Added successfully");
+    toastInfo(msg: "Account Added successfully");
   }
 
   Future<FbResponse> SignIn(
@@ -112,14 +111,29 @@ class LoginController extends GetxController with Helpers {
     try {
       UserCredential userCredential = await state.firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
+
       if (userCredential.user != null) {
-        String message = userCredential.user!.emailVerified
-            ? 'logged In Successfully'
-            : 'your must verify your email';
+        String? status = await LoginApiController().login(
+          email: email,
+          password: password,
+        );
 
-        bool states = userCredential.user!.emailVerified;
+        if (status!.isNotEmpty) {
+          String message = userCredential.user!.emailVerified
+              ? 'your must verify your email'
+              : 'logged In Successfully';
 
-        return FbResponse(message: message, states: !states);
+          UserLoginResponseEntity userProfile = UserLoginResponseEntity();
+          userProfile.email = email;
+          userProfile.password = password;
+          userProfile.accessToken = status;
+
+          await UserStore.to.saveProfile(userProfile);
+
+          bool states = userCredential.user!.emailVerified;
+
+          return FbResponse(message: message, states: !states);
+        }
       }
     } catch (e) {
       toastInfo(msg: "Login Error");
@@ -145,8 +159,9 @@ class LoginController extends GetxController with Helpers {
 
   Future<void> _login() async {
     FbResponse fbResponse = await SignIn(
-        email: state.emailController.text,
-        password: state.passwordController.text);
+      email: state.emailController.text,
+      password: state.passwordController.text,
+    );
 
     showSnackBar(message: fbResponse.message, error: !fbResponse.states);
 
@@ -156,15 +171,7 @@ class LoginController extends GetxController with Helpers {
   @override
   void onReady() {
     super.onReady();
-    FirebaseAuth.instance.authStateChanges().listen(
-      (User? user) {
-        if (user == null) {
-          print("User is currently logged out");
-        } else {
-          print("User is logged in");
-        }
-      },
-    );
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {});
   }
 
   @override

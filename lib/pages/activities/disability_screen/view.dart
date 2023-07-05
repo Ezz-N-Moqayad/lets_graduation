@@ -111,9 +111,8 @@ class DisabilityScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
-                  ),
+                  ), backgroundColor: Color(0xff57CA85),
                   minimumSize: Size(343.w, 48.h),
-                  primary: Color(0xff57CA85),
                 ),
               ),
             ),

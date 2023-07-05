@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../../../common/entities/entities.dart';
+import '../../../../common/models/models.dart';
 import '../../../../common/widgets/widgets.dart';
 import 'index.dart';
 
@@ -52,6 +52,7 @@ class HomeController extends GetxController
 
       if (user.docs.isNotEmpty) {
         var docId = user.docs.first.data().obs;
+        // ignore: invalid_use_of_protected_member
         final gender = docId.value['gender'];
 
         if (gender == 'Male') {

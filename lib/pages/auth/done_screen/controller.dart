@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
 
-import '../../../common/entities/entities.dart';
-import '../../../common/entities/fb_response.dart';
+import '../../../common/models/models.dart';
 import '../../../common/routes/routes.dart';
 import '../../../common/store/store.dart';
 import '../../../common/utils/helpers.dart';
@@ -20,7 +19,7 @@ class DoneController extends GetxController with Helpers {
   void onInit() {
     super.onInit();
 
-    state.HeightkgController = TextEditingController();
+    state.WidthKgController = TextEditingController();
     state.HeightCmController = TextEditingController();
     state.LocationController = TextEditingController();
   }
@@ -37,7 +36,7 @@ class DoneController extends GetxController with Helpers {
 
   // ignore: non_constant_identifier_names
   Future<FbResponse> updateAccount(
-      {required String heightKg,
+      {required String widthKg,
       required String heightCm,
       required String location}) async {
     try {
@@ -52,14 +51,13 @@ class DoneController extends GetxController with Helpers {
         if (userUpdate.docs.isNotEmpty) {
           var docId = userUpdate.docs.first.id;
 
-          String gender = (state.selectedGender.value == Gender.male)
-              ? 'Male'
-              : 'Female';
+          String gender =
+              (state.selectedGender.value == Gender.male) ? 'Male' : 'Female';
 
           await state.db.collection("users").doc(docId).update(
             {
               "fcmtoken": fcmToken,
-              "heightKg": heightKg,
+              "widthKg": widthKg,
               "heightCm": heightCm,
               "location": location,
               "gender": gender,
@@ -76,7 +74,7 @@ class DoneController extends GetxController with Helpers {
 
   Future<void> _updateDown() async {
     FbResponse fbResponse = await updateAccount(
-      heightKg: state.HeightkgController.text,
+      widthKg: state.WidthKgController.text,
       heightCm: state.HeightCmController.text,
       location: state.LocationController.text,
     );
@@ -92,7 +90,7 @@ class DoneController extends GetxController with Helpers {
   }
 
   bool checkData() {
-    if (state.HeightkgController.text.isNotEmpty &&
+    if (state.WidthKgController.text.isNotEmpty &&
         state.HeightCmController.text.isNotEmpty &&
         state.LocationController.text.isNotEmpty &&
         state.selectedGender.value != Gender.non) {
@@ -107,7 +105,7 @@ class DoneController extends GetxController with Helpers {
   void dispose() {
     super.dispose();
 
-    state.HeightkgController.dispose();
+    state.WidthKgController.dispose();
     state.HeightCmController.dispose();
     state.LocationController.dispose();
   }

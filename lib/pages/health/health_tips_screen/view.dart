@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../common/models/models.dart';
 import '../../../common/values/values.dart';
 import '../../../common/widgets/widgets.dart';
 import 'index.dart';
 
+// ignore: must_be_immutable
 class HealthTipsScreen extends GetView<HealthTipsController> {
   HealthTipsScreen({Key? key}) : super(key: key);
 
@@ -28,14 +30,16 @@ class HealthTipsScreen extends GetView<HealthTipsController> {
       );
     }
 
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ListView.separated(
+    // ignore: no_leading_underscores_for_local_identifiers
+    Widget _buildBody() {
+      return FutureBuilder<List<Health>?>(
+        future: controller.state.future,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+            controller.state.health = snapshot.data!;
+            return ListView.separated(
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () => Get.toNamed("/DetailsHealthTip"),
@@ -70,6 +74,7 @@ class HealthTipsScreen extends GetView<HealthTipsController> {
                                 topRight: Radius.circular(15.0),
                               ),
                               child: Image.asset(
+                                // controller.state.health[index].image
                                 'assets/images/image_tips.jpeg',
                                 width: double.infinity,
                                 height: double.infinity,
@@ -80,9 +85,9 @@ class HealthTipsScreen extends GetView<HealthTipsController> {
                           Container(
                             alignment: AlignmentDirectional.center,
                             padding: const EdgeInsetsDirectional.only(top: 11),
-                            child: const Text(
-                              'Eat a healthy diet',
-                              style: TextStyle(
+                            child: Text(
+                              controller.state.health[index].name,
+                              style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black),
@@ -92,13 +97,13 @@ class HealthTipsScreen extends GetView<HealthTipsController> {
                             padding: const EdgeInsetsDirectional.only(
                                 start: 5, end: 5),
                             child: Container(
-                              alignment: AlignmentDirectional.centerStart,
+                              alignment: AlignmentDirectional.center,
                               padding:
                                   const EdgeInsetsDirectional.only(top: 11),
-                              child: const Text(
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porta enim ultricies sem",
+                              child: Text(
+                                controller.state.health[index].desc,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.grey,
@@ -115,11 +120,37 @@ class HealthTipsScreen extends GetView<HealthTipsController> {
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 10);
               },
-              itemCount: 5,
-            ),
-          ),
-        ],
-      ),
+              itemCount: controller.state.health.length,
+            );
+          } else {
+            return const Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.warning,
+                    color: Colors.grey,
+                    size: 50,
+                  ),
+                  Text(
+                    'No DATA',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
+      );
+    }
+
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: _buildBody(),
     );
   }
 }

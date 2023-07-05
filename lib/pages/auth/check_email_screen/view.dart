@@ -87,9 +87,8 @@ class CheckEmailScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
-                  ),
+                  ), backgroundColor: Colors.white,
                   minimumSize: Size(343, 48),
-                  primary: Colors.white,
                 ),
               ),
             ),

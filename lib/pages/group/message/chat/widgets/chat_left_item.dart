@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../../../../common/entities/msgcontent.dart';
+import '../../../../../common/models/msgcontent.dart';
 import '../../../../../common/routes/names.dart';
 import '../../../../../common/values/colors.dart';
 

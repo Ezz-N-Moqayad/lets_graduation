@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 
 import '../../../common/routes/routes.dart';
 import 'index.dart';
@@ -75,13 +76,29 @@ class RegisterScreen extends GetView<RegisterController> {
                                 color: const Color(0xff2d4d2d),
                                 borderRadius: BorderRadius.circular(50),
                               ),
-                              child: CircleAvatar(
-                                child: Image.asset(
-                                  'assets/images/personal_group.png',
-                                  fit: BoxFit.contain,
-                                  width: 100.w,
-                                  height: 100.h,
-                                ),
+                              child: Obx(
+                                () => controller
+                                        .state.imagePath.value.isNotEmpty
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(55),
+                                        child: Image.file(
+                                          File(
+                                            controller.state.imagePath.value,
+                                          ),
+                                          fit: BoxFit.cover,
+                                          width: 100.w,
+                                          height: 100.h,
+                                        ),
+                                      )
+                                    : ClipRRect(
+                                        borderRadius: BorderRadius.circular(55),
+                                        child: Image.asset(
+                                          'assets/images/personal_group.png',
+                                          fit: BoxFit.contain,
+                                          width: 100.w,
+                                          height: 100.h,
+                                        ),
+                                      ),
                               ),
                             ),
                             Padding(
@@ -460,6 +477,7 @@ class RegisterScreen extends GetView<RegisterController> {
       ),
     );
   }
+
   void _showPicker(context) {
     showModalBottomSheet(
       context: context,
@@ -470,8 +488,15 @@ class RegisterScreen extends GetView<RegisterController> {
               ListTile(
                 leading: const Icon(Icons.photo_library),
                 title: const Text("Gallery"),
-                onTap: () {
-                  controller.imgFromGallery();
+                onTap: () async {
+                  try {
+                    final image = await controller.imgFromGallery();
+                    controller.state.imagePath.value = image!.path;
+                  } catch (e) {
+                    print('Error picking image: $e');
+                    // Handle the error if necessary
+                  }
+
                   Get.back();
                 },
               ),

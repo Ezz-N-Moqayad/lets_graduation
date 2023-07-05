@@ -9,6 +9,7 @@ class RegisterState {
   final db = FirebaseFirestore.instance;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
+  final RxString imagePath = ''.obs;
   File? photo;
   final ImagePicker picker = ImagePicker();
   RxBool isPasswordHidden = true.obs;

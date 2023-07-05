@@ -1,154 +1,147 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../common/values/values.dart';
+import '../../../common/widgets/widgets.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        alignment: AlignmentDirectional.topStart,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: AlignmentDirectional.topStart,
-                end: AlignmentDirectional.centerEnd,
-                colors: [
-              Color(0xff184E68),
-              Color(0xff57CA85),
-            ])),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 10, top: 45),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                        size: 23,
-                      )),
-                  SizedBox(
-                    width: 110,
-                  ),
-                  Text(
-                    'kkkkkkk',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 22),
-              child: Text(
-                'About the app ',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 22, top: 10),
-              child: Text(
-                'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\n duis enim velit mollit. Exercitation veniam\n consequat sunt nostrud amet.',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 22),
-              child: Text(
-                'kkkkkkkkkkkkkk',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 22, top: 10),
-              child: Text(
-                'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\n duis enim velit mollit. Exercitation veniam\n consequat sunt nostrud amet.',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 22),
-              child: Text(
-                'Our mission',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 22, top: 10),
-              child: Text(
-                'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\n duis enim velit mollit. Exercitation veniam\n consequat sunt nostrud amet.',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 22),
-              child: Text(
-                'hhhhhhh',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 22, top: 10),
-              child: Text(
-                'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\n duis enim velit mollit. Exercitation veniam\n consequat sunt nostrud amet.',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ],
+    // ignore: no_leading_underscores_for_local_identifiers
+    AppBar _buildAppBar() {
+      return transparentAppBar(
+        title: Text(
+          "Help",
+          style: TextStyle(
+            color: AppColors.primaryBackground,
+            fontSize: 18.sp,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-      ),
+      );
+    }
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    Widget _buildBody() {
+      return SingleChildScrollView(
+        child: Container(
+          alignment: AlignmentDirectional.topStart,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: AlignmentDirectional.topStart,
+              end: AlignmentDirectional.centerEnd,
+              colors: [
+                Color(0xff184E68),
+                Color(0xff57CA85),
+              ],
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.only(
+                  start: 88.w,
+                  end: 88.w,
+                  top: 25.h,
+                  bottom: 42.h,
+                ),
+                child: SizedBox(
+                  width: 200.w,
+                  height: 225.h,
+                  child: Image.asset('assets/images/help.png'),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.only(
+                    start: 16.w, bottom: 20, end: 16.w),
+                child: const Text(
+                  'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.only(
+                    start: 16.w, bottom: 20, end: 16.w),
+                child: const Text(
+                  'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.only(
+                    start: 16.w, bottom: 20, end: 16.w),
+                child: const Text(
+                  'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.only(
+                    start: 16.w, bottom: 20, end: 16.w),
+                child: const Text(
+                  'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.only(
+                    start: 16.w, bottom: 20, end: 16.w),
+                child: const Text(
+                  'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.only(
+                    start: 16.w, bottom: 20, end: 16.w),
+                child: const Text(
+                  'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: _buildBody(),
     );
   }
 }

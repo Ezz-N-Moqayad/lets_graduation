@@ -13,7 +13,7 @@ class FollowesCheckScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Frindes',
           style: TextStyle(
             fontWeight: FontWeight.w500,
@@ -26,7 +26,7 @@ class FollowesCheckScreen extends StatelessWidget {
           onTap: () {
             print('ff');
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios,
             color: Color(0xff184E68),
           ),
@@ -44,39 +44,39 @@ class FollowesCheckScreen extends StatelessWidget {
                 onTap: () {},
                 onChanged: (String value) {},
                 cursorColor: Colors.black,
-                cursorRadius: Radius.circular(10),
+                cursorRadius: const Radius.circular(10),
                 enabled: true,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                     color: Colors.black),
                 decoration: InputDecoration(
-                  fillColor: Color(0xffF0F0F0),
+                  fillColor: const Color(0xffF0F0F0),
                   filled: true,
                   helperMaxLines: 1,
                   hintText: 'Search...',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 17,
                     color: Color(0xffA1A1A1),
                   ),
-                  errorBorder: UnderlineInputBorder(
+                  errorBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xffF5F5F5), width: 1),
+                    borderSide: const BorderSide(color: Color(0xffF5F5F5), width: 1),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff363737), width: 1),
+                    borderSide: const BorderSide(color: Color(0xff363737), width: 1),
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  prefixIcon: Icon(Icons.search_outlined),
-                  suffixIcon: Icon(Icons.person_search_outlined),
+                  prefixIcon: const Icon(Icons.search_outlined),
+                  suffixIcon: const Icon(Icons.person_search_outlined),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Padding(
@@ -84,7 +84,7 @@ class FollowesCheckScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Frindes',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
@@ -96,7 +96,7 @@ class FollowesCheckScreen extends StatelessWidget {
                       onPressed: () {
                         Get.offAndToNamed(AppRoutes.FollowersRemove);
                       },
-                      child: Text(
+                      child: const Text(
                         'Next',
                         style: TextStyle(
                           color: Color(0xff57CA85),
@@ -107,12 +107,12 @@ class FollowesCheckScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 31,
             ),
             Expanded(
               child: ListView.separated(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return SizedBox(
                       width: double.infinity,
@@ -122,7 +122,7 @@ class FollowesCheckScreen extends StatelessWidget {
                           width: 58,
                           height: 58,
                           decoration: BoxDecoration(
-                            color: Color(0xffF5F5FA),
+                            color: const Color(0xffF5F5FA),
                             borderRadius: BorderRadius.circular(100),
                           ),
                           child: InkWell(
@@ -131,13 +131,13 @@ class FollowesCheckScreen extends StatelessWidget {
                               print('gg');
                             },
                             child: CircleAvatar(
-                              backgroundColor: Color(0xffF5F5FA),
+                              backgroundColor: const Color(0xffF5F5FA),
                               child: Image.asset(
                                   'assets/images/personal_frindes.png'),
                             ),
                           ),
                         ),
-                        title: Text(
+                        title: const Text(
                           'Will Knowles',
                           style: TextStyle(
                             fontSize: 16,
@@ -152,14 +152,14 @@ class FollowesCheckScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16),
                             color: Colors.white,
                             border:
-                                Border.all(color: Color(0xffD9D9D9), width: 1),
+                                Border.all(color: const Color(0xffD9D9D9), width: 1),
                           ),
                         ),
                       ),
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return Divider(
+                    return const Divider(
                       color: Color(0xffECEEF1),
                       thickness: 1,
                     );

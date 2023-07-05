@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:location/location.dart';
+import 'dart:io';
 
-import '../../../common/entities/entities.dart';
-import '../../../common/entities/fb_response.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
+import 'package:path/path.dart';
+
+import '../../../common/models/models.dart';
 import '../../../common/routes/routes.dart';
-import '../../../common/utils/helpers.dart';
+import '../../../common/utils/utils.dart';
 import '../../../common/widgets/widgets.dart';
 import 'index.dart';
 
@@ -20,6 +23,24 @@ class EditProfileController extends GetxController with Helpers {
     showAccountData();
   }
 
+  Future<XFile?> imgFromGallery() async {
+    final pickedFile = await state.picker.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      state.photo = File(pickedFile.path);
+      return XFile(pickedFile.path);
+    }
+    return null;
+  }
+
+  Future getImgUrl(String name) async {
+    final spaceRef = FirebaseStorage.instance.ref("User Photos").child(name);
+    var str = await spaceRef.getDownloadURL();
+    return str;
+  }
+
   Future<void> showAccountData() async {
     try {
       var userUpdate = await state.db
@@ -31,16 +52,17 @@ class EditProfileController extends GetxController with Helpers {
         var docData = userUpdate.docs.first.data().obs;
 
         final name = docData.value['name'];
-        final heightKg = docData.value['heightKg'];
+        final widthKg = docData.value['widthKg'];
         final heightCm = docData.value['heightCm'];
         final location = docData.value['location'];
+        final photoUrl = docData.value['photourl'];
         final gender = docData.value['gender'];
 
         state.NameController.text = name;
-        state.HeightkgController.text = heightKg;
+        state.WidthKgController.text = widthKg;
         state.HeightCmController.text = heightCm;
         state.LocationController.text = location;
-
+        state.photoUrl.value = photoUrl;
         state.selectedGender.value =
             gender == 'Male' ? Gender.male : Gender.female;
       }
@@ -54,16 +76,55 @@ class EditProfileController extends GetxController with Helpers {
       final location = await Location().getLocation();
       String address = "${location.latitude} , ${location.longitude}";
       state.LocationController.text = address;
-    } catch (e) {
-      // ignore: avoid_print
-      print("Getting error $e");
-    }
+    } catch (e) {}
+  }
+
+  Future uploadFile({
+    required String docId,
+    required String name,
+    required String widthKg,
+    required String heightCm,
+    required String location,
+    required String gender,
+  }) async {
+    if (state.photo == null) return;
+    final fileName = getRandomString(15) + extension(state.photo!.path);
+    try {
+      final ref = FirebaseStorage.instance.ref("User Photos").child(fileName);
+      await ref.putFile(state.photo as File).snapshotEvents.listen(
+        (event) async {
+          switch (event.state) {
+            case TaskState.running:
+              break;
+            case TaskState.paused:
+              break;
+            case TaskState.canceled:
+              break;
+            case TaskState.error:
+              break;
+            case TaskState.success:
+              String imgUrl = await getImgUrl(fileName);
+
+              await state.db.collection("users").doc(docId).update(
+                {
+                  "name": name,
+                  "widthKg": widthKg,
+                  "heightCm": heightCm,
+                  "location": location,
+                  "gender": gender,
+                  "photourl": imgUrl,
+                },
+              );
+          }
+        },
+      );
+    } catch (e) {}
   }
 
   // ignore: non_constant_identifier_names
   Future<FbResponse> UpdateAccount({
     required String name,
-    required String heightKg,
+    required String widthKg,
     required String heightCm,
     required String location,
   }) async {
@@ -77,10 +138,20 @@ class EditProfileController extends GetxController with Helpers {
         var docId = userUpdate.docs.first.id;
 
         Gender gender = state.selectedGender.value;
+
+        uploadFile(
+          docId: docId,
+          name: name,
+          widthKg: widthKg,
+          heightCm: heightCm,
+          location: location,
+          gender: await gender == Gender.male ? "Male" : "Female",
+        );
+
         await state.db.collection("users").doc(docId).update(
           {
             "name": name,
-            "heightKg": heightKg,
+            "widthKg": widthKg,
             "heightCm": heightCm,
             "location": location,
             "gender": await gender == Gender.male ? "Male" : "Female",
@@ -97,23 +168,20 @@ class EditProfileController extends GetxController with Helpers {
 
   Future<void> performSave() async {
     if (checkData()) {
-      await _updateDown();
+      FbResponse fbResponse = await UpdateAccount(
+          name: state.NameController.text,
+          widthKg: state.WidthKgController.text,
+          heightCm: state.HeightCmController.text,
+          location: state.LocationController.text);
+      showSnackBar(message: fbResponse.message, error: !fbResponse.states);
+      if (fbResponse.states)
+        Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
     }
-  }
-
-  Future<void> _updateDown() async {
-    FbResponse fbResponse = await UpdateAccount(
-        name: state.NameController.text,
-        heightKg: state.HeightkgController.text,
-        heightCm: state.HeightCmController.text,
-        location: state.LocationController.text);
-    showSnackBar(message: fbResponse.message, error: !fbResponse.states);
-    if (fbResponse.states) Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
   }
 
   bool checkData() {
     if (state.NameController.text.isNotEmpty &&
-        state.HeightkgController.text.isNotEmpty &&
+        state.WidthKgController.text.isNotEmpty &&
         state.HeightCmController.text.isNotEmpty &&
         state.LocationController.text.isNotEmpty &&
         state.selectedGender.value != Gender.non) {
@@ -129,7 +197,7 @@ class EditProfileController extends GetxController with Helpers {
     super.dispose();
 
     state.NameController.dispose();
-    state.HeightkgController.dispose();
+    state.WidthKgController.dispose();
     state.HeightCmController.dispose();
     state.LocationController.dispose();
   }

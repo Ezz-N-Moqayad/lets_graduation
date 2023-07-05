@@ -1,68 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class HeartBeat extends StatefulWidget {
-  const HeartBeat({Key? key}) : super(key: key);
+import 'index.dart';
+
+// ignore: must_be_immutable
+class HeartBeat extends GetView<HeartBeatController> {
+  HeartBeat({Key? key}) : super(key: key);
 
   @override
-  State<HeartBeat> createState() => _HeartBeatState();
-}
+  HeartBeatController controller = Get.put(HeartBeatController());
 
-class _HeartBeatState extends State<HeartBeat> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    // ignore: no_leading_underscores_for_local_identifiers
+    AppBar _buildAppBar() {
+      return AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        toolbarHeight: 90,
-        // title: Text(
-        //   'HeartBeat',
-        //   style: TextStyle(
-        //     fontWeight: FontWeight.w400,
-        //     fontSize: 20,
-        //     color: Color(0xff184E68),
-        //   ),
-        // ),
-        title: GradientText(
-          'HeartBeat',
-          style: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 20,
-          ),
-          gradientType: GradientType.linear,
-          gradientDirection: GradientDirection.ttb,
-          colors: [
-            Color(0xff184E68),
-            Color(0xff57CA85),
-          ],
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 64,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xff184E68),
+                Color(0xff57CA85),
+              ],
+              transform: GradientRotation(45),
             ),
-            Stack(
+          ),
+        ),
+        title: const Center(
+          child: Text("HeartBeat"),
+        ),
+      );
+    }
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    Widget _buildBody() {
+      return Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 35.h),
+            child: Stack(
               children: [
-                // Image.asset('${Const.images}c',width:
-                // 282,),
                 Image.asset(
                   'assets/images/heartbeat.png',
-                  width: 282,
+                  width: 150.w,
+                  height: 150.h,
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.only(top: 100, start: 110),
-                  child: Column(
+                  padding: EdgeInsetsDirectional.only(top: 45.h, start: 45.w),
+                  child: const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.only(start: 40),
+                        padding: EdgeInsetsDirectional.only(start: 40),
                         child: Text(
                           'BPM',
                           style: TextStyle(
@@ -93,165 +86,234 @@ class _HeartBeatState extends State<HeartBeat> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 46,
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.only(
+              start: 16.w,
+              end: 16.w,
+              top: 46.h,
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 150.w,
+                      height: 150.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.r),
+                        color: const Color(0xfff6f6f6),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 5,
+                            spreadRadius: 1,
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.only(top: 5.h),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Center(
+                              child: Text(
+                                'BPM MAX',
+                                style: TextStyle(
+                                  color: Color(0xff57CA85),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 24,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.only(
+                                start: 10.w,
+                                end: 10.w,
+                                top: 5.h,
+                              ),
+                              child: const Text(
+                                'A resting heart rate exceeding 100 beats per minute is considered elevated.',
+                                style: TextStyle(
+                                  color: Color(0xff000000),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 150.w,
+                      height: 150.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.r),
+                        color: const Color(0xfff6f6f6),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 5,
+                            spreadRadius: 1,
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.only(top: 5.h),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Center(
+                              child: Text(
+                                'BPM MIN',
+                                style: TextStyle(
+                                  color: Color(0xff57CA85),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 24,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.only(
+                                start: 10.w,
+                                end: 10.w,
+                                top: 5.h,
+                              ),
+                              child: const Text(
+                                'A resting heart rate below 60 beats per minute is generally uncommon.',
+                                style: TextStyle(
+                                  color: Color(0xff000000),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.only(top: 46.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(start: 42),
-                        child: Text(
-                          'BPM',
-                          style: TextStyle(
-                            color: Color(0xff57CA85),
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
+                      Container(
+                        width: 150.w,
+                        height: 150.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.r),
+                          color: const Color(0xfff6f6f6),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black,
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.only(top: 5.h),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Center(
+                                child: Text(
+                                  'BMI  MAX',
+                                  style: TextStyle(
+                                    color: Color(0xff57CA85),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.only(
+                                  start: 10.w,
+                                  end: 10.w,
+                                  top: 5.h,
+                                ),
+                                child: Text(
+                                  'The minimum recommended ideal weight for a person is ${controller.state.bmiUpper.value}.',
+                                  style: const TextStyle(
+                                    color: Color(0xff000000),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(bottom: 12),
-                        child: Text(
-                          '79',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
+                      Container(
+                        width: 150.w,
+                        height: 150.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.r),
+                          color: const Color(0xfff6f6f6),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black,
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                            ),
+                          ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(end: 15),
-                        child: Text(
-                          'AVG',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.only(top: 5.h),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Center(
+                                child: Text(
+                                  'BMI  MIN',
+                                  style: TextStyle(
+                                    color: Color(0xff57CA85),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.only(
+                                  start: 10.w,
+                                  end: 10.w,
+                                  top: 5.h,
+                                ),
+                                child: Text(
+                                  'The minimum recommended ideal weight for a person is ${controller.state.bmiLower.value}.',
+                                  style: const TextStyle(
+                                    color: Color(0xff000000),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(start: 42),
-                        child: Text(
-                          'BPM',
-                          style: TextStyle(
-                            color: Color(0xff57CA85),
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(bottom: 12),
-                        child: Text(
-                          '63',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(end: 15),
-                        child: Text(
-                          'MIN',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(start: 42),
-                        child: Text(
-                          'BPM',
-                          style: TextStyle(
-                            color: Color(0xff57CA85),
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(bottom: 12),
-                        child: Text(
-                          '112',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(end: 15),
-                        child: Text(
-                          'MAX',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 75,
-            ),
-            InkWell(
-                onTap: () {},
-                child: Align(
-                    alignment: AlignmentDirectional.center,
-                    child: Icon(
-                      Icons.fingerprint_outlined,
-                      color: Color(0xff57CA85),
-                      size: 60,
-                    )))
-          ],
-        ),
-      ),
+          ),
+        ],
+      );
+    }
+
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: _buildBody(),
     );
   }
 }
-
-//
-// Column(
-// children: [
-// Text('BPM',style: TextStyle(
-// color: Color(0xff57CA85),
-// fontWeight: FontWeight.w700,
-// fontSize: 12,
-// ),),
-// Text('79',style: TextStyle(
-// color: Colors.grey,
-// fontWeight: FontWeight.w700,
-// fontSize: 20,
-// ),),
-// Text('AVG',style: TextStyle(
-// color: Colors.grey,
-// fontWeight: FontWeight.w700,
-// fontSize: 20,
-// ),),
-//
-// ],
-// ),

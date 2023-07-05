@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lets_graduation/common/models/models.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../common/values/values.dart';
@@ -12,14 +13,6 @@ class FitnessMenScreen extends GetView<FitnessMenController> {
   FitnessMenScreen({Key? key}) : super(key: key);
 
   FitnessMenController controllers = Get.put(FitnessMenController());
-
-  var videosURL = <String>[
-    'https://www.youtube.com/watch?v=fRtM8pI4hmA',
-    'https://www.youtube.com/watch?v=aodKQH_7Bi8',
-    'https://www.youtube.com/watch?v=KRa1r0bmidA',
-    'https://www.youtube.com/watch?v=MEp_onD3610',
-    'https://www.youtube.com/watch?v=nULQccFpYPI',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +32,14 @@ class FitnessMenScreen extends GetView<FitnessMenController> {
 
     // ignore: no_leading_underscores_for_local_identifiers
     Widget _buildBody() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ListView.separated(
+      return FutureBuilder<List<Video>?>(
+        future: controller.state.future,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+            controller.state.video = snapshot.data!;
+            return ListView.separated(
               itemBuilder: (context, index) {
                 return Container(
                   padding: const EdgeInsetsDirectional.only(
@@ -72,7 +67,8 @@ class FitnessMenScreen extends GetView<FitnessMenController> {
                             child: YoutubePlayer(
                               controller: YoutubePlayerController(
                                 initialVideoId: YoutubePlayer.convertUrlToId(
-                                    videosURL[index].toString())!,
+                                  controller.state.video[index].youtube,
+                                )!,
                                 flags: const YoutubePlayerFlags(
                                   autoPlay: false,
                                   mute: false,
@@ -101,7 +97,7 @@ class FitnessMenScreen extends GetView<FitnessMenController> {
                           InkWell(
                             onTap: () => Get.toNamed(
                               "/VideoViewScreen",
-                              arguments: videosURL[index].toString(),
+                              arguments: controller.state.video[index].youtube,
                             ),
                             child:
                                 SizedBox(width: double.infinity, height: 200.h),
@@ -115,10 +111,31 @@ class FitnessMenScreen extends GetView<FitnessMenController> {
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 0);
               },
-              itemCount: 5,
-            ),
-          ),
-        ],
+              itemCount: controller.state.video.length,
+            );
+          } else {
+            return const Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.warning,
+                    color: Colors.grey,
+                    size: 50,
+                  ),
+                  Text(
+                    'No DATA',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
       );
     }
 

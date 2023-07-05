@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../common/models/models.dart';
 import '../../../common/values/values.dart';
 import '../../../common/widgets/widgets.dart';
 import 'index.dart';
@@ -10,7 +11,8 @@ import 'index.dart';
 class ClubScreen extends GetView<ClubController> {
   ClubScreen({Key? key}) : super(key: key);
 
-  ClubController controllers = Get.put(ClubController());
+  @override
+  ClubController controller = Get.put(ClubController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,15 @@ class ClubScreen extends GetView<ClubController> {
 
     // ignore: no_leading_underscores_for_local_identifiers
     Widget _buildBody() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ListView.separated(
+      return FutureBuilder<List<Gym>?>(
+        future: controller.state.future,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+            controller.state.gym = snapshot.data!;
+
+            return ListView.separated(
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () => Get.toNamed("/DetailsClub"),
@@ -65,6 +70,10 @@ class ClubScreen extends GetView<ClubController> {
                               width: 64.w,
                               height: 64.w,
                             ),
+                            // Image.network(
+                            //   controller.state.gym[index].image,
+                            //   fit: BoxFit.cover, // Adjust the image's fit within the widget
+                            // ),
                           ),
                         ),
                         Padding(
@@ -74,7 +83,7 @@ class ClubScreen extends GetView<ClubController> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                'Name GEM',
+                                controller.state.gym[index].name,
                                 overflow: TextOverflow.clip,
                                 maxLines: 1,
                                 style: TextStyle(
@@ -86,7 +95,7 @@ class ClubScreen extends GetView<ClubController> {
                                 ),
                               ),
                               Text(
-                                'Location GEM',
+                                controller.state.gym[index].location,
                                 overflow: TextOverflow.clip,
                                 maxLines: 1,
                                 style: TextStyle(
@@ -107,10 +116,31 @@ class ClubScreen extends GetView<ClubController> {
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 10);
               },
-              itemCount: 10,
-            ),
-          ),
-        ],
+              itemCount: controller.state.gym.length,
+            );
+          } else {
+            return const Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.warning,
+                    color: Colors.grey,
+                    size: 50,
+                  ),
+                  Text(
+                    'No DATA',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
       );
     }
 

@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../common/entities/entities.dart';
+
+import '../../../common/models/models.dart';
 import '../../../common/values/values.dart';
 import '../../../common/widgets/widgets.dart';
 import 'index.dart';
@@ -51,45 +55,88 @@ class EditProfileScreen extends GetView<EditProfileController> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.only(top: 25.h),
-                  child: Align(
-                    alignment: AlignmentDirectional.center,
-                    child: Stack(
+                InkWell(
+                  onTap: () => _showPicker(context),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(top: 25.h),
+                    child: Align(
                       alignment: AlignmentDirectional.center,
-                      children: [
-                        Container(
-                          width: 91,
-                          height: 91,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffF5F5FA),
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: InkWell(
-                            onTap: () {},
-                            child: CircleAvatar(
-                              backgroundColor: const Color(0xffF5F5FA),
-                              child: Image.asset(
-                                'assets/images/personal_group.png',
-                                fit: BoxFit.contain,
-                                width: double.infinity,
-                                height: double.infinity,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.only(
-                              top: 75, start: 70),
-                          child: Container(
-                            width: 35,
-                            height: 35,
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          Container(
+                            width: 100.w,
+                            height: 100.h,
                             decoration: BoxDecoration(
-                              color: const Color(0xffF5F5FA),
+                              color: const Color(0xff2d4d2d),
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            child: InkWell(
-                              onTap: () {},
+                            child: Obx(
+                              () => controller.state.photoUrl.value.isNotEmpty
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(55),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            controller.state.photoUrl.value,
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
+                                          height: 91.w,
+                                          width: 91.w,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(44.w),
+                                            ),
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            const Image(
+                                          image: AssetImage(
+                                              'assets/images/personal_group.png'),
+                                        ),
+                                      ),
+                                    )
+                                  : Obx(
+                                      () => controller
+                                              .state.imagePath.value.isNotEmpty
+                                          ? ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(55),
+                                              child: Image.file(
+                                                File(controller
+                                                    .state.imagePath.value),
+                                                fit: BoxFit.cover,
+                                                width: 100.w,
+                                                height: 100.h,
+                                              ),
+                                            )
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(55),
+                                              child: Image.asset(
+                                                'assets/images/personal_group.png',
+                                                fit: BoxFit.contain,
+                                                width: 100.w,
+                                                height: 100.h,
+                                              ),
+                                            ),
+                                    ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.only(
+                                top: 75, start: 70),
+                            child: Container(
+                              width: 35,
+                              height: 35,
+                              decoration: BoxDecoration(
+                                color: const Color(0xffF5F5FA),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
                               child: const CircleAvatar(
                                 backgroundColor: Color(0xffF5F5FA),
                                 child: Icon(
@@ -100,8 +147,8 @@ class EditProfileScreen extends GetView<EditProfileController> {
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -151,7 +198,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 const Padding(
                   padding: EdgeInsetsDirectional.only(top: 23, end: 135),
                   child: Text(
-                    'Height  (Kg)',
+                    'Width  (Kg)',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
@@ -162,7 +209,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 Padding(
                   padding: const EdgeInsetsDirectional.only(top: 12, end: 16),
                   child: TextFormField(
-                    controller: controller.state.HeightkgController,
+                    controller: controller.state.WidthKgController,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     onChanged: (String value) {},
@@ -348,8 +395,8 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   ],
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.only(top: 25.h, end: 16, start: 24,bottom: 25),
+                  padding: EdgeInsetsDirectional.only(
+                      top: 25.h, end: 16, start: 24, bottom: 25),
                   child: ElevatedButton(
                     onPressed: () async => await controller.performSave(),
                     style: ElevatedButton.styleFrom(
@@ -381,6 +428,36 @@ class EditProfileScreen extends GetView<EditProfileController> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildBody(),
+    );
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Gallery"),
+                onTap: () async {
+                  try {
+                    final image = await controller.imgFromGallery();
+                    controller.state.imagePath.value = image!.path;
+                  } catch (e) {}
+                  Get.back();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text("Camera"),
+                onTap: () {},
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

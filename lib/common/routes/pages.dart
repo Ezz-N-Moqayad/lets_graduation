@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +22,7 @@ import '../../pages/auth/change_password_screen/index.dart';
 import '../../pages/auth/forget_password_screen/index.dart';
 import '../../pages/fitness/fitness_men_screen/index.dart';
 import '../../pages/health/health_tips_screen/index.dart';
+import '../../pages/settings/notifications_screen/index.dart';
 import '../../pages/settings/settings_screen/index.dart';
 import '../../pages/auth/check_email_screen/index.dart';
 import '../../pages/group/new_group_screen/index.dart';
@@ -100,7 +103,7 @@ class AppPages {
       binding: CheckEmailBinding(),
     ),
     GetPage(
-      name: AppRoutes.editProfial,
+      name: AppRoutes.EditProfileScreen,
       page: () => EditProfileScreen(),
       binding: EditProfileBinding(),
     ),
@@ -193,6 +196,11 @@ class AppPages {
       name: AppRoutes.DetailsClub,
       page: () => DetailsClub(),
       binding: DetailsClubBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.NotificationsScreen,
+      page: () => const NotificationsScreen(),
+      binding: SettingsBinding(),
     ),
   ];
 }

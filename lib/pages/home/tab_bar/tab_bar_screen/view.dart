@@ -36,25 +36,25 @@ class _TabBarScreenState extends State<TabBarScreen>
           controller: _tabController,
           labelColor: Colors.black,
           unselectedLabelColor: Colors.black,
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w600,
           ),
-          unselectedLabelStyle: TextStyle(
+          unselectedLabelStyle: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w500,
           ),
-          indicatorColor: Color(0xff57CA85),
+          indicatorColor: const Color(0xff57CA85),
           indicatorWeight: 3,
           indicatorSize: TabBarIndicatorSize.label,
-          indicatorPadding: EdgeInsetsDirectional.only(bottom: 10),
+          indicatorPadding: const EdgeInsetsDirectional.only(bottom: 10),
           onTap: (int index) {
             setState(() {
               _tabController.index = index;
             });
             print('Selected tab index: $index');
           },
-          tabs: [
+          tabs: const [
             Tab(
               text: 'Day',
             ),
@@ -67,7 +67,7 @@ class _TabBarScreenState extends State<TabBarScreen>
           ],
         ),
       ),
-      body: IndexedStack(
+      body: const IndexedStack(
         children: [
           // TabBarView(
           //   controller: _tabController,

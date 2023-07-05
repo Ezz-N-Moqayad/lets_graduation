@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-import '../entities/entities.dart';
+import '../models/models.dart';
 import '../services/services.dart';
 import '../values/values.dart';
 

@@ -1,9 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../common/entities/entities.dart';
+import '../../../../common/models/models.dart';
 import '../../../../common/values/colors.dart';
 import '../index.dart';
 

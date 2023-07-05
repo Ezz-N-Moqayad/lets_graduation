@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
-import '../../../../common/entities/entities.dart';
+import '../../../../common/models/models.dart';
 import '../../../../common/store/store.dart';
 import '../../../../common/utils/security.dart';
 import 'index.dart';
@@ -26,6 +25,16 @@ class ChatController extends GetxController {
 
   File? _photo;
   final ImagePicker _picker = ImagePicker();
+
+  @override
+  void onInit() {
+    super.onInit();
+    var data = Get.parameters;
+    doc_id = data['doc_id'];
+    state.to_uid.value = data['to_uid'] ?? "";
+    state.to_name.value = data['to_name'] ?? "";
+    state.to_avatar.value = data['to_avatar'] ?? "";
+  }
 
   Future imgFromGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -98,16 +107,6 @@ class ChatController extends GetxController {
     } catch (e) {
       print("There's an error $e");
     }
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    var data = Get.parameters;
-    doc_id = data['doc_id'];
-    state.to_uid.value = data['to_uid'] ?? "";
-    state.to_name.value = data['to_name'] ?? "";
-    state.to_avatar.value = data['to_avatar'] ?? "";
   }
 
   sendMessage() async {
@@ -198,8 +197,9 @@ class ChatController extends GetxController {
 
   @override
   void dispose() {
+    super.dispose();
+
     msgScrolling.dispose();
     listener.cancel();
-    super.dispose();
   }
 }

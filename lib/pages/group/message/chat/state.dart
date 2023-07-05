@@ -1,4 +1,4 @@
-import '../../../../common/entities/entities.dart';
+import '../../../../common/models/models.dart';
 import 'package:get/get.dart';
 
 class ChatState {

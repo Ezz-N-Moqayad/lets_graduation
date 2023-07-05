@@ -32,24 +32,27 @@ class VideoViewScreen extends GetView<VideoViewController> {
 
     // ignore: no_leading_underscores_for_local_identifiers
     Widget _buildBody() {
-      return Center(
-        child: YoutubePlayer(
-          controller: controller.state.youtubePlayerController,
-          showVideoProgressIndicator: true,
-          progressIndicatorColor: Colors.red,
-          onReady: () => debugPrint('Ready'),
-          bottomActions: [
-            CurrentPosition(),
-            ProgressBar(
-              isExpanded: true,
-              colors: const ProgressBarColors(
-                playedColor: Color(0xff195d31),
-                handleColor: Color(0xff57CA85),
+      return Container(
+        color: Colors.black45,
+        child: Center(
+          child: YoutubePlayer(
+            controller: controller.state.youtubePlayerController,
+            showVideoProgressIndicator: true,
+            progressIndicatorColor: Colors.red,
+            onReady: () => debugPrint('Ready'),
+            bottomActions: [
+              CurrentPosition(),
+              ProgressBar(
+                isExpanded: true,
+                colors: const ProgressBarColors(
+                  playedColor: Color(0xff195d31),
+                  handleColor: Color(0xff57CA85),
+                ),
               ),
-            ),
-            const PlaybackSpeedButton(),
-            FullScreenButton(),
-          ],
+              const PlaybackSpeedButton(),
+              FullScreenButton(),
+            ],
+          ),
         ),
       );
     }

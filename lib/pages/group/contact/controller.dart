@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-import '../../../common/entities/entities.dart';
+import '../../../common/models/models.dart';
 import '../../../common/store/store.dart';
 import 'index.dart';
 
@@ -111,7 +111,6 @@ class ContactController extends GetxController {
 
     for (var doc in usersbase.docs) {
       state.contactList.add(doc.data());
-      print(doc.toString());
     }
   }
 }

@@ -140,9 +140,8 @@ class ActivitiesScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
-                            ),
+                            ), backgroundColor: Color(0xff57CA85),
                             minimumSize: Size(75, 30),
-                            primary: Color(0xff57CA85),
                           ),
                         ),
                       ),

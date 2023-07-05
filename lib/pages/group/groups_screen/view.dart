@@ -14,10 +14,10 @@ class GroupScreen extends StatelessWidget {
         child: Column(
           children: [
             Card(
-              margin: EdgeInsetsDirectional.only(start: 5, end: 5),
+              margin: const EdgeInsetsDirectional.only(start: 5, end: 5),
               color: Colors.white,
               elevation: 1,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(4),
                 bottomRight: Radius.circular(4),
@@ -30,7 +30,7 @@ class GroupScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Groups',
                         style: TextStyle(
                           color: Color(0xff184E68),
@@ -42,7 +42,7 @@ class GroupScreen extends StatelessWidget {
                         onPressed: () {
                           Get.offAndToNamed(AppRoutes.FollowersRemove);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.add,
                           color: Colors.black,
                         ),
@@ -55,8 +55,8 @@ class GroupScreen extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                   padding:
-                      EdgeInsetsDirectional.only(start: 16, end: 16, top: 20),
-                  physics: BouncingScrollPhysics(),
+                      const EdgeInsetsDirectional.only(start: 16, end: 16, top: 20),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return SizedBox(
                       width: double.infinity,
@@ -67,22 +67,20 @@ class GroupScreen extends StatelessWidget {
                           width: 58,
                           height: 58,
                           decoration: BoxDecoration(
-                            color: Color(0xffF5F5FA),
+                            color: const Color(0xffF5F5FA),
                             borderRadius: BorderRadius.circular(100),
                           ),
                           child: InkWell(
-                            onTap: () {
-                              print('gg');
-                            },
+                            onTap: () {},
                             child: CircleAvatar(
-                              backgroundColor: Color(0xffF5F5FA),
+                              backgroundColor: const Color(0xffF5F5FA),
                               child:
                                   Image.asset('assets/images/image_groups.png'),
                             ),
                           ),
                         ),
                         horizontalTitleGap: 16,
-                        title: Text(
+                        title: const Text(
                           'Will Knowles',
                           style: TextStyle(
                             fontSize: 18,
@@ -90,7 +88,7 @@ class GroupScreen extends StatelessWidget {
                             color: Color(0xff2B2B2B),
                           ),
                         ),
-                        subtitle: Text(
+                        subtitle: const Text(
                           'Total Steps: 1000',
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -102,7 +100,7 @@ class GroupScreen extends StatelessWidget {
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return Divider(
+                    return const Divider(
                       color: Color(0xffECEEF1),
                       thickness: 1,
                     );

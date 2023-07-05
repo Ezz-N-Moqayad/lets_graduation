@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../common/entities/entities.dart';
+import '../../../common/models/models.dart';
 import 'index.dart';
 
 // ignore: must_be_immutable
@@ -88,7 +87,7 @@ class DoneScreen extends GetView<DoneController> {
                 const Padding(
                   padding: EdgeInsetsDirectional.only(top: 23, end: 135),
                   child: Text(
-                    'Height  (Kg)',
+                    'Width  (Kg)',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
@@ -99,7 +98,7 @@ class DoneScreen extends GetView<DoneController> {
                 Padding(
                   padding: const EdgeInsetsDirectional.only(top: 12, end: 16),
                   child: TextFormField(
-                    controller: controller.state.HeightkgController,
+                    controller: controller.state.WidthKgController,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     onChanged: (String value) {},

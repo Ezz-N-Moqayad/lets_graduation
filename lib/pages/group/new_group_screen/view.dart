@@ -75,7 +75,7 @@ class NewGroupScreen extends StatelessWidget {
                         print('gg');
                       },
                       child: CircleAvatar(
-                        backgroundColor: Color(0xffF5F5FA),
+                        backgroundColor: const Color(0xffF5F5FA),
                         child: Image.asset(
                           'assets/images/personal_group.png',
                           fit: BoxFit.contain,
@@ -92,14 +92,14 @@ class NewGroupScreen extends StatelessWidget {
                       width: 35,
                       height: 35,
                       decoration: BoxDecoration(
-                        color: Color(0xffF5F5FA),
+                        color: const Color(0xffF5F5FA),
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: InkWell(
                         onTap: () {
                           print('gg');
                         },
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           backgroundColor: Color(0xffF5F5FA),
                           child: Icon(
                             Icons.camera_alt,
@@ -112,7 +112,7 @@ class NewGroupScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 26,
               ),
               Padding(
@@ -122,39 +122,39 @@ class NewGroupScreen extends StatelessWidget {
                   onTap: () {},
                   onChanged: (String value) {},
                   cursorColor: Colors.white,
-                  cursorRadius: Radius.circular(10),
+                  cursorRadius: const Radius.circular(10),
                   enabled: true,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
                       color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Group name',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
                     helperMaxLines: 1,
-                    errorBorder: UnderlineInputBorder(
+                    errorBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: Color(0xffF5F5F5), width: 1),
+                          const BorderSide(color: Color(0xffF5F5F5), width: 1),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1),
+                      borderSide: const BorderSide(color: Colors.black, width: 1),
                       borderRadius: BorderRadius.circular(14),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 69,
               ),
-              Row(
+              const Row(
                 children: [
                   SizedBox(
                     width: 16,
@@ -202,18 +202,18 @@ class NewGroupScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 0,
               ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(bottom: 240),
                   child: ListView.separated(
-                    padding: EdgeInsetsDirectional.only(start: 16, end: 16),
+                    padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
                     scrollDirection: Axis.horizontal,
                     itemCount: 20,
                     separatorBuilder: (context, index) {
-                      return SizedBox(width: 8);
+                      return const SizedBox(width: 8);
                     },
                     itemBuilder: (context, index) {
                       return Stack(
@@ -230,7 +230,7 @@ class NewGroupScreen extends StatelessWidget {
                                 print('gg');
                               },
                               child: CircleAvatar(
-                                backgroundColor: Color(0xffF5F5FA),
+                                backgroundColor: const Color(0xffF5F5FA),
                                 child: Image.asset(
                                   'assets/images/personal_frindes.png',
                                   fit: BoxFit.contain,
@@ -247,14 +247,14 @@ class NewGroupScreen extends StatelessWidget {
                               width: 25,
                               height: 25,
                               decoration: BoxDecoration(
-                                color: Color(0xffF5F5FA),
+                                color: const Color(0xffF5F5FA),
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               child: InkWell(
                                 onTap: () {
                                   print('gg');
                                 },
-                                child: CircleAvatar(
+                                child: const CircleAvatar(
                                   backgroundColor: Color(0xffF5F5FA),
                                   child: Icon(
                                     Icons.dangerous_outlined,
@@ -265,8 +265,8 @@ class NewGroupScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.only(top: 130),
+                          const Padding(
+                            padding: EdgeInsetsDirectional.only(top: 130),
                             child: Text(
                               'Aseel',
                               style: TextStyle(

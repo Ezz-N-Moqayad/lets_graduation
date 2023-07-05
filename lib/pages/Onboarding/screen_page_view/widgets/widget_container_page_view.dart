@@ -23,7 +23,7 @@ class widget_container_page_view extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w500,
           fontSize: 13,

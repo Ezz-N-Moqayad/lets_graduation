@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../../common/store/store.dart';
 import '../../../common/entities/entities.dart';
+import '../../../common/utils/http.dart';
 import 'index.dart';
 
 class MessageController extends GetxController {

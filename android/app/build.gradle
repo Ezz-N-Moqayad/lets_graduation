@@ -48,7 +48,7 @@ android {
     defaultConfig {
         applicationId "com.example.lets_graduation"
         multiDexEnabled true
-        minSdkVersion 20
+        minSdkVersion 26
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
