@@ -56,13 +56,13 @@ class _TabBarScreenState extends State<TabBarScreen>
           },
           tabs: const [
             Tab(
-              text: 'Day',
+              text: 'Day'
             ),
             Tab(
-              text: 'Week',
+              text: 'Week'
             ),
             Tab(
-              text: 'Month',
+              text: 'Month'
             ),
           ],
         ),

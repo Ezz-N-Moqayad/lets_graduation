@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../../../common/widgets/widgets.dart';
 import 'index.dart';
 
 class ProfileController extends GetxController {
@@ -8,16 +9,16 @@ class ProfileController extends GetxController {
   ProfileController();
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    showAccountData();
+    await showAccountData();
   }
 
   Future<void> showAccountData() async {
     try {
       var userUpdate = await state.db
           .collection("users")
-          .where("id", isEqualTo: state.token)
+          .where("email", isEqualTo: state.emailFire)
           .get();
 
       if (userUpdate.docs.isNotEmpty) {
@@ -27,6 +28,8 @@ class ProfileController extends GetxController {
         state.email.value = docData.value['email'];
         state.photoUrl.value = docData.value['photourl'];
       }
-    } catch (e) {}
+    } catch (e) {
+      toastInfo(msg: "Show Error");
+    }
   }
 }

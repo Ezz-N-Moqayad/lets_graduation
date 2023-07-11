@@ -6,16 +6,6 @@ import 'index.dart';
 class SplashController extends GetxController {
   final state = SplashState();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
   handleSingIn() async {
     await ConfigStore.to.saveAlreadyOpen();
 

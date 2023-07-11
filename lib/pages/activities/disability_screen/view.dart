@@ -13,7 +13,7 @@ class DisabilityScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Activites',
           style: TextStyle(
             fontWeight: FontWeight.w500,
@@ -26,7 +26,7 @@ class DisabilityScreen extends StatelessWidget {
             onTap: () {
               print('ff');
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_ios,
               color: Color(0xff184E68),
             )),
@@ -58,7 +58,7 @@ class DisabilityScreen extends StatelessWidget {
                 onTap: () {},
                 onChanged: (String value) {},
                 cursorColor: Colors.white,
-                cursorRadius: Radius.circular(10),
+                cursorRadius: const Radius.circular(10),
                 enabled: true,
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -66,27 +66,27 @@ class DisabilityScreen extends StatelessWidget {
                     color: Colors.white),
                 decoration: InputDecoration(
                     hintStyle: TextStyle(
-                      color: Color(0xffD9D9D9),
+                      color: const Color(0xffD9D9D9),
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                     ),
                     helperMaxLines: 1,
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1),
+                      borderSide: const BorderSide(color: Colors.black, width: 1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.3),
+                      borderSide: const BorderSide(color: Colors.black, width: 1.3),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     constraints: BoxConstraints(
                       maxWidth: 342.w,
                       maxHeight: 50.h,
                     ),
-                    suffixIcon: Icon(
+                    suffixIcon: const Icon(
                       Icons.visibility_off_outlined,
                       color: Colors.white,
-                    )),
+                    ),),
               ),
             ),
             SizedBox(
@@ -102,7 +102,7 @@ class DisabilityScreen extends StatelessWidget {
                   'keep going ',
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    color: Color(0xff184E68),
+                    color: const Color(0xff184E68),
                     fontWeight: FontWeight.w500,
                     fontSize: 18.sp,
                   ),
@@ -111,7 +111,7 @@ class DisabilityScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
-                  ), backgroundColor: Color(0xff57CA85),
+                  ), backgroundColor: const Color(0xff57CA85),
                   minimumSize: Size(343.w, 48.h),
                 ),
               ),

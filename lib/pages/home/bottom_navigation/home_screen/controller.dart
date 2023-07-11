@@ -47,7 +47,7 @@ class HomeController extends GetxController
     try {
       var user = await state.db
           .collection("users")
-          .where("id", isEqualTo: state.token)
+          .where("email", isEqualTo: state.email)
           .get();
 
       if (user.docs.isNotEmpty) {

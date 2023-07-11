@@ -9,7 +9,7 @@ class CheckEmailScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         alignment: AlignmentDirectional.topStart,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: AlignmentDirectional.topStart,
                 end: AlignmentDirectional.centerEnd,
@@ -27,7 +27,7 @@ class CheckEmailScreen extends StatelessWidget {
                 children: [
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
                       )),
@@ -74,21 +74,21 @@ class CheckEmailScreen extends StatelessWidget {
                   const EdgeInsetsDirectional.only(top: 80, end: 13, start: 12),
               child: ElevatedButton(
                 onPressed: () async {},
-                child: Text(
-                  'Open the email',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    color: Color(0xff184E68),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18.sp,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ), backgroundColor: Colors.white,
-                  minimumSize: Size(343, 48),
+                  minimumSize: const Size(343, 48),
+                ),
+                child: Text(
+                  'Open the email',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    color: const Color(0xff184E68),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18.sp,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),

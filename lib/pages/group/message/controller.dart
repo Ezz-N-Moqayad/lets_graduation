@@ -13,8 +13,6 @@ class MessageController extends GetxController {
   final token = UserStore.to.token;
   final db = FirebaseFirestore.instance;
 
-  var listener;
-
   final RefreshController refreshController = RefreshController(
     initialRefresh: true,
   );

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserData {
   late String? id;
+  late String? accessToken;
   late String? name;
   late String? email;
   late String? password;
@@ -15,6 +16,7 @@ class UserData {
 
   UserData({
     this.id,
+    this.accessToken,
     this.name,
     this.email,
     this.password,
@@ -29,8 +31,10 @@ class UserData {
 
   UserData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    accessToken = json['accessToken'];
     name = json['name'];
     email = json['email'];
+    password = json['password'];
     photourl = json['photourl'];
     widthKg = json['widthKg'];
     heightCm = json['heightCm'];
@@ -47,6 +51,7 @@ class UserData {
     final data = snapshot.data();
     return UserData(
       id: data?['id'],
+      accessToken: data?['accessToken'],
       name: data?['name'],
       email: data?['email'],
       password: data?['password'],
@@ -63,6 +68,7 @@ class UserData {
   Map<String, dynamic> toFirestore() {
     return {
       if (id != null) "id": id,
+      if (accessToken != null) "accessToken": accessToken,
       if (name != null) "name": name,
       if (email != null) "email": email,
       if (password != null) "password": password,
@@ -75,60 +81,20 @@ class UserData {
       if (addtime != null) "addtime": addtime,
     };
   }
-}
-
-class UserLoginResponseEntity {
-  String? accessToken;
-  String? displayName;
-  String? email;
-  String? password;
-  String? photoUrl;
-
-  UserLoginResponseEntity({
-    this.accessToken,
-    this.displayName,
-    this.email,
-    this.password,
-    this.photoUrl,
-  });
-
-  factory UserLoginResponseEntity.fromJson(Map<String, dynamic> json) =>
-      UserLoginResponseEntity(
-        accessToken: json["access_token"],
-        displayName: json["display_name"],
-        email: json["email"],
-        password: json["password"],
-        photoUrl: json["photoUrl"],
-      );
 
   Map<String, dynamic> toJson() => {
-        "access_token": accessToken,
-        "display_name": displayName,
+        "id": id,
+        "accessToken": accessToken,
+        "name": name,
         "email": email,
         "password": password,
-        "photoUrl": photoUrl,
+        "photourl": photourl,
+        "widthKg": widthKg,
+        "heightCm": heightCm,
+        "location": location,
+        "gender": gender,
+        "fcmtoken": fcmtoken,
       };
-}
-
-class MeListItem {
-  String? name;
-  String? icon;
-  String? explain;
-  String? route;
-
-  MeListItem({
-    this.name,
-    this.icon,
-    this.explain,
-    this.route,
-  });
-
-  factory MeListItem.fromJson(Map<String, dynamic> json) => MeListItem(
-        name: json["name"],
-        icon: json["icon"],
-        explain: json["explain"],
-        route: json["route"],
-      );
 }
 
 enum Gender { male, female, non }

@@ -30,68 +30,35 @@ class LoginController extends GetxController with Helpers {
     state.passwordController.text = '';
   }
 
-  Future<void> handleSignIn() async {
-    try {
-      var user = await _googleSignIn.signIn();
-      if (user != null) {
-        final gAuthentication = await user.authentication;
-        final credential = GoogleAuthProvider.credential(
-          idToken: gAuthentication.idToken,
-          accessToken: gAuthentication.accessToken,
-        );
-
-        await FirebaseAuth.instance.signInWithCredential(credential);
-
-        String displayName = user.displayName ?? user.email;
-        String email = user.email;
-        String id = user.id;
-        String photoUrl = user.photoUrl ?? "";
-        UserLoginResponseEntity userProfile = UserLoginResponseEntity();
-
-        userProfile.email = email;
-        userProfile.accessToken = id;
-        userProfile.displayName = displayName;
-        userProfile.photoUrl = photoUrl;
-        userProfile.password = "";
-
-        var fUser =
-            await state.db.collection("users").where("id", isEqualTo: id).get();
-        if (fUser.docs.isEmpty) {
-          AddUser(userProfile);
-          Get.offAndToNamed(AppRoutes.done);
-        } else {
-          toastInfo(msg: "Login successfully");
-          Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
-        }
-      }
-    } catch (e) {
-      toastInfo(msg: "Login Error");
-    }
+  @override
+  void onReady() {
+    super.onReady();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {});
   }
 
   // ignore: non_constant_identifier_names
-  void AddUser(UserLoginResponseEntity userProfile) async {
+  void AddUser(UserData userProfile) async {
     UserStore.to.saveProfile(userProfile);
     var userbase = await state.db
         .collection("users")
         .withConverter(
             fromFirestore: UserData.fromFirestore,
             toFirestore: (UserData userdata, options) => userdata.toFirestore())
-        .where("id", isEqualTo: userProfile.accessToken)
+        .where("id", isEqualTo: userProfile.id)
         .get();
 
     if (userbase.docs.isEmpty) {
       final data = UserData(
-          id: userProfile.accessToken,
-          name: userProfile.displayName,
+          id: userProfile.id,
+          name: userProfile.name,
           email: userProfile.email,
-          photourl: userProfile.photoUrl,
+          photourl: userProfile.photourl,
           password: userProfile.password,
-          gender: "",
-          location: "",
-          widthKg: "",
-          heightCm: "",
-          fcmtoken: "",
+          gender: userProfile.gender,
+          location: userProfile.location,
+          widthKg: userProfile.widthKg,
+          heightCm: userProfile.heightCm,
+          fcmtoken: userProfile.fcmtoken,
           addtime: Timestamp.now());
 
       await state.db
@@ -106,6 +73,62 @@ class LoginController extends GetxController with Helpers {
     toastInfo(msg: "Account Added successfully");
   }
 
+  Future<void> handleSignIn() async {
+    try {
+      var user = await _googleSignIn.signIn();
+      if (user != null) {
+        final gAuthentication = await user.authentication;
+        final credential = GoogleAuthProvider.credential(
+          idToken: gAuthentication.idToken,
+          accessToken: gAuthentication.accessToken,
+        );
+
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+        var userUpdate = await state.db
+            .collection("users")
+            .where("id", isEqualTo: user.id)
+            .get();
+
+        UserData userProfile = UserData();
+
+        userProfile.id = user.id;
+        userProfile.name = user.displayName ?? user.email;
+        userProfile.email = user.email;
+        userProfile.photourl = user.photoUrl ?? "";
+
+        if (userUpdate.docs.isNotEmpty) {
+          var docData = userUpdate.docs.first.data().obs;
+
+          userProfile.password = docData.value['password'];
+          userProfile.widthKg = docData.value['widthKg'];
+          userProfile.heightCm = docData.value['heightCm'];
+          userProfile.location = docData.value['location'];
+          userProfile.gender = docData.value['gender'];
+          userProfile.fcmtoken = docData.value['fcmtoken'];
+
+          await UserStore.to.saveProfile(userProfile);
+
+          toastInfo(msg: "Login successfully");
+          Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
+        } else {
+          userProfile.password = "";
+          userProfile.widthKg = "";
+          userProfile.heightCm = "";
+          userProfile.location = "";
+          userProfile.gender = "";
+          userProfile.fcmtoken = "";
+
+          AddUser(userProfile);
+          Get.offAndToNamed(AppRoutes.done);
+        }
+      }
+    } catch (e) {
+      toastInfo(msg: "Login Error");
+    }
+  }
+
+  // ignore: non_constant_identifier_names
   Future<FbResponse> SignIn(
       {required String email, required String password}) async {
     try {
@@ -123,16 +146,32 @@ class LoginController extends GetxController with Helpers {
               ? 'your must verify your email'
               : 'logged In Successfully';
 
-          UserLoginResponseEntity userProfile = UserLoginResponseEntity();
-          userProfile.email = email;
-          userProfile.password = password;
-          userProfile.accessToken = status;
+          var userUpdate = await state.db
+              .collection("users")
+              .where("email", isEqualTo: email)
+              .get();
 
-          await UserStore.to.saveProfile(userProfile);
+          if (userUpdate.docs.isNotEmpty) {
+            var docData = userUpdate.docs.first.data().obs;
 
-          bool states = userCredential.user!.emailVerified;
+            UserData userProfile = UserData();
+            userProfile.accessToken = status;
+            userProfile.id = docData.value['id'];
+            userProfile.name = docData.value['name'];
+            userProfile.email = docData.value['email'];
+            userProfile.password = docData.value['password'];
+            userProfile.photourl = docData.value['photourl'];
+            userProfile.widthKg = docData.value['widthKg'];
+            userProfile.heightCm = docData.value['heightCm'];
+            userProfile.location = docData.value['location'];
+            userProfile.gender = docData.value['gender'];
+            userProfile.fcmtoken = docData.value['fcmtoken'];
 
-          return FbResponse(message: message, states: !states);
+            await UserStore.to.saveProfile(userProfile);
+
+            bool states = userCredential.user!.emailVerified;
+            return FbResponse(message: message, states: !states);
+          }
         }
       }
     } catch (e) {
@@ -140,12 +179,6 @@ class LoginController extends GetxController with Helpers {
     }
 
     return FbResponse(message: 'somthing went worng', states: false);
-  }
-
-  Future<void> performLogin() async {
-    if (checkData()) {
-      await _login();
-    }
   }
 
   bool checkData() {
@@ -168,10 +201,10 @@ class LoginController extends GetxController with Helpers {
     if (fbResponse.states) Get.offAndToNamed(AppRoutes.BottomNavigationScreen);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {});
+  Future<void> performLogin() async {
+    if (checkData()) {
+      await _login();
+    }
   }
 
   @override

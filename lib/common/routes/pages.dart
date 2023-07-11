@@ -89,7 +89,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.BottomNavigationScreen,
-      page: () => const BottomNavigationScreen(),
+      page: () => BottomNavigationScreen(),
       binding: BottomNavigationBinding(),
     ),
     GetPage(

@@ -15,7 +15,7 @@ class ChatController extends GetxController {
   ChatController();
 
   ChatState state = ChatState();
-  var doc_id = null;
+  var doc_id ;
   final textController = TextEditingController();
   ScrollController msgScrolling = ScrollController();
   FocusNode contentNode = FocusNode();

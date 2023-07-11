@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../common/store/store.dart';
 import 'index.dart';
 
 // ignore: must_be_immutable
@@ -127,19 +128,19 @@ class Profile extends GetView<ProfileController> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 22),
+                        const SizedBox(height: 22),
                         Text(
                           controller.state.name.value,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
                           ),
                         ),
-                        SizedBox(height: 9),
+                        const SizedBox(height: 9),
                         Text(
                           controller.state.email.value,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 15,
                             fontWeight: FontWeight.w400,
@@ -422,7 +423,7 @@ class Profile extends GetView<ProfileController> {
                     ),
                     child: Padding(
                       padding:
-                      const EdgeInsetsDirectional.only(start: 10, end: 10),
+                          const EdgeInsetsDirectional.only(start: 10, end: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -496,7 +497,7 @@ class Profile extends GetView<ProfileController> {
                     ),
                     child: Padding(
                       padding:
-                      const EdgeInsetsDirectional.only(start: 10, end: 10),
+                          const EdgeInsetsDirectional.only(start: 10, end: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

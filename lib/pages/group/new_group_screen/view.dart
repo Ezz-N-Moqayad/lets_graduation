@@ -251,9 +251,7 @@ class NewGroupScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               child: InkWell(
-                                onTap: () {
-                                  print('gg');
-                                },
+                                onTap: () {},
                                 child: const CircleAvatar(
                                   backgroundColor: Color(0xffF5F5FA),
                                   child: Icon(

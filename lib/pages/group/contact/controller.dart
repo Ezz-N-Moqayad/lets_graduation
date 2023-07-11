@@ -41,15 +41,14 @@ class ContactController extends GetxController {
 
     if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
       String profile = await UserStore.to.getProfile();
-      UserLoginResponseEntity userdata =
-          UserLoginResponseEntity.fromJson(jsonDecode(profile));
+      UserData userdata = UserData.fromJson(jsonDecode(profile));
 
       var msgdata = Msg(
-          from_uid: userdata.accessToken,
+          from_uid: userdata.id,
           to_uid: to_userdata.id,
-          from_name: userdata.displayName,
+          from_name: userdata.name,
           to_name: to_userdata.name,
-          from_avatar: userdata.photoUrl,
+          from_avatar: userdata.photourl,
           to_avatar: to_userdata.photourl,
           last_msg: "",
           last_time: Timestamp.now(),

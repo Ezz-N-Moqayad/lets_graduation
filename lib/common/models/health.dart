@@ -17,7 +17,7 @@ class Health {
     if (json['meals'] != null) {
       meals = <Meals>[];
       json['meals'].forEach((v) {
-        meals!.add(Meals.fromJson(v));
+        meals.add(Meals.fromJson(v));
       });
     }
   }

@@ -5,9 +5,10 @@ import '../../../../common/store/store.dart';
 
 class ProfileState {
   final db = FirebaseFirestore.instance;
-  final token = UserStore.to.token;
 
-  RxString name = "".obs;
-  RxString email = "".obs;
-  RxString photoUrl = "".obs;
+  final emailFire = UserStore.to.profile.email;
+
+  RxString name = ''.obs;
+  RxString email = ''.obs;
+  RxString photoUrl = ''.obs;
 }

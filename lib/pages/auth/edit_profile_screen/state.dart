@@ -12,7 +12,7 @@ import '../../../common/store/store.dart';
 class EditProfileState {
   final db = FirebaseFirestore.instance;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final token = UserStore.to.token;
+  final email = UserStore.to.profile.email;
 
   final RxString imagePath = ''.obs;
   File? photo;
@@ -24,6 +24,5 @@ class EditProfileState {
   late TextEditingController WidthKgController = TextEditingController();
   late TextEditingController HeightCmController = TextEditingController();
   late TextEditingController LocationController = TextEditingController();
-  RxString photoUrl = "".obs;
-
+  RxString photoUrl = ''.obs;
 }

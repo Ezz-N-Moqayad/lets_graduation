@@ -26,7 +26,7 @@ class LogoutDialog extends StatelessWidget {
         width: 270.w,
         height: 137.h,
         decoration: ShapeDecoration(
-          color: Color(0xFFF2F2F2),
+          color: const Color(0xFFF2F2F2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14.w),
           ),
@@ -41,7 +41,7 @@ class LogoutDialog extends StatelessWidget {
               height: 92.h,
               padding: const EdgeInsets.all(16),
               clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -76,7 +76,7 @@ class LogoutDialog extends StatelessWidget {
             Container(
               width: double.infinity.w,
               height: 0.50.h,
-              decoration: BoxDecoration(color: Color(0x5B3C3C43)),
+              decoration: const BoxDecoration(color: Color(0x5B3C3C43)),
             ),
             Expanded(
               child: Container(
@@ -101,7 +101,7 @@ class LogoutDialog extends StatelessWidget {
                               'Cancel',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Color(0xFF007AFF),
+                                color: const Color(0xFF007AFF),
                                 fontSize: 17.sp,
                               ),
                             ),
@@ -113,7 +113,7 @@ class LogoutDialog extends StatelessWidget {
                     Container(
                       width: 0.50.w,
                       height: double.infinity.h,
-                      decoration: BoxDecoration(color: Color(0x5B3C3C43)),
+                      decoration: const BoxDecoration(color: Color(0x5B3C3C43)),
                     ),
                     SizedBox(width: 0.50.w),
                     InkWell(
@@ -126,7 +126,7 @@ class LogoutDialog extends StatelessWidget {
                         height: double.infinity.h,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 41, vertical: 11),
-                        child: Row(
+                        child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,

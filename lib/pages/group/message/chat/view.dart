@@ -116,16 +116,16 @@ class ChatPage extends GetView<ChatController> {
           child: Wrap(
             children: [
               ListTile(
-                leading: Icon(Icons.photo_library),
-                title: Text("Gallery"),
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Gallery"),
                 onTap: () {
                   controller.imgFromGallery();
                   Get.back();
                 },
               ),
               ListTile(
-                leading: Icon(Icons.photo_camera),
-                title: Text("Camera"),
+                leading: const Icon(Icons.photo_camera),
+                title: const Text("Camera"),
                 onTap: () {},
               ),
             ],
@@ -181,7 +181,7 @@ class ChatPage extends GetView<ChatController> {
                             width: 280.w,
                             height: 100.h,
                             decoration: ShapeDecoration(
-                              color: Color(0xFFF4F400),
+                              color: const Color(0xFFF4F400),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(14),
                               ),
@@ -200,7 +200,7 @@ class ChatPage extends GetView<ChatController> {
                                       controller: controller.textController,
                                       autofocus: false,
                                       focusNode: controller.contentNode,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         hintText: "Aa...",
                                         hintStyle: TextStyle(fontSize: 17),
                                       ),
@@ -216,7 +216,7 @@ class ChatPage extends GetView<ChatController> {
                                         Icons.send,
                                         size: 30.w,
                                         // color: Color(0xFF184E68),
-                                        color: Color(0xFF57CA85),
+                                        color: const Color(0xFF57CA85),
                                       ),
                                       onTap: () => controller.sendMessage(),
                                     ),

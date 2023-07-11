@@ -12,7 +12,7 @@ class PhotoImgViewPage extends GetView<PhotoImageViewController> {
   AppBar _buildAppBar() {
     return AppBar(
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(1.0),
+        preferredSize: const Size.fromHeight(1.0),
         child: Container(
           color: AppColors.secondaryElement,
           height: 2.0,

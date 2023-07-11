@@ -35,14 +35,14 @@ class ChangePasswordScreen extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_ios,
                           color: Colors.white,
                         )),
-                    SizedBox(
+                    const SizedBox(
                       width: 50,
                     ),
-                    Text(
+                    const Text(
                       'Change Password',
                       style: TextStyle(
                         color: Colors.white,
@@ -53,7 +53,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 94,
               ),
               Padding(
@@ -80,7 +80,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   onTap: () {},
                   onChanged: (String value) {},
                   cursorColor: Colors.white,
-                  cursorRadius: Radius.circular(10),
+                  cursorRadius: const Radius.circular(10),
                   enabled: true,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
@@ -88,26 +88,26 @@ class ChangePasswordScreen extends StatelessWidget {
                       color: Colors.white),
                   decoration: InputDecoration(
                       hintText: '   write old password here',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Color(0xffD9D9D9),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
                       helperMaxLines: 1,
-                      errorBorder: UnderlineInputBorder(
+                      errorBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xffF5F5F5), width: 1),
+                            const BorderSide(color: Color(0xffF5F5F5), width: 1),
                         borderRadius: BorderRadius.circular(14),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xffF5F5F5), width: 1),
+                            const BorderSide(color: Color(0xffF5F5F5), width: 1),
                         borderRadius: BorderRadius.circular(14),
                       ),
-                      suffixIcon: Icon(
+                      suffixIcon: const Icon(
                         Icons.visibility_off_outlined,
                         color: Colors.white,
                       )),
@@ -140,7 +140,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   onTap: () {},
                   onChanged: (String value) {},
                   cursorColor: Colors.white,
-                  cursorRadius: Radius.circular(10),
+                  cursorRadius: const Radius.circular(10),
                   enabled: true,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
@@ -148,26 +148,26 @@ class ChangePasswordScreen extends StatelessWidget {
                       color: Colors.white),
                   decoration: InputDecoration(
                       hintText: '   write old password here',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Color(0xffD9D9D9),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
                       helperMaxLines: 1,
-                      errorBorder: UnderlineInputBorder(
+                      errorBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xffF5F5F5), width: 1),
+                            const BorderSide(color: Color(0xffF5F5F5), width: 1),
                         borderRadius: BorderRadius.circular(14),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xffF5F5F5), width: 1),
+                            const BorderSide(color: Color(0xffF5F5F5), width: 1),
                         borderRadius: BorderRadius.circular(14),
                       ),
-                      suffixIcon: Icon(
+                      suffixIcon: const Icon(
                         Icons.visibility_off_outlined,
                         color: Colors.white,
                       )),
@@ -201,28 +201,28 @@ class ChangePasswordScreen extends StatelessWidget {
                   obscuringCharacter: '*',
                   onChanged: (String value) {},
                   cursorColor: Colors.white,
-                  cursorRadius: Radius.circular(10),
+                  cursorRadius: const Radius.circular(10),
                   enabled: true,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
                       color: Colors.white),
                   decoration: InputDecoration(
                       helperMaxLines: 1,
-                      errorBorder: UnderlineInputBorder(
+                      errorBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xffF5F5F5), width: 1),
+                            const BorderSide(color: Color(0xffF5F5F5), width: 1),
                         borderRadius: BorderRadius.circular(14),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xffF5F5F5), width: 1),
+                            const BorderSide(color: Color(0xffF5F5F5), width: 1),
                         borderRadius: BorderRadius.circular(14),
                       ),
-                      suffixIcon: Icon(
+                      suffixIcon: const Icon(
                         Icons.visibility_off_outlined,
                         color: Colors.white,
                       )),
@@ -268,28 +268,28 @@ class ChangePasswordScreen extends StatelessWidget {
                   obscuringCharacter: '*',
                   onChanged: (String value) {},
                   cursorColor: Colors.white,
-                  cursorRadius: Radius.circular(10),
+                  cursorRadius: const Radius.circular(10),
                   enabled: true,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
                       color: Colors.white),
                   decoration: InputDecoration(
                       helperMaxLines: 1,
-                      errorBorder: UnderlineInputBorder(
+                      errorBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xffF5F5F5), width: 1),
+                            const BorderSide(color: Color(0xffF5F5F5), width: 1),
                         borderRadius: BorderRadius.circular(14),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xffF5F5F5), width: 1),
+                            const BorderSide(color: Color(0xffF5F5F5), width: 1),
                         borderRadius: BorderRadius.circular(14),
                       ),
-                      suffixIcon: Icon(
+                      suffixIcon: const Icon(
                         Icons.visibility_off_outlined,
                         color: Colors.white,
                       )),

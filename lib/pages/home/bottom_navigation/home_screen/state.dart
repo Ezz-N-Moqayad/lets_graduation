@@ -6,10 +6,11 @@ import '../../../../common/models/models.dart';
 import '../../../../common/store/store.dart';
 
 class HomeState {
-  final token = UserStore.to.token;
+  final email = UserStore.to.profile.email;
   final db = FirebaseFirestore.instance;
 
   var checkGender = Gender.non.obs;
+  RxString gender = ''.obs;
 
   late TabController tabController;
 }

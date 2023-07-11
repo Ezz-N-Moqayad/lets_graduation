@@ -13,7 +13,7 @@ class ActivitiesScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Activities',
           style: TextStyle(
             fontWeight: FontWeight.w500,
@@ -26,7 +26,7 @@ class ActivitiesScreen extends StatelessWidget {
             onTap: () {
               print('ff');
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_ios,
               color: Color(0xff184E68),
             )),
@@ -43,43 +43,43 @@ class ActivitiesScreen extends StatelessWidget {
                 onTap: () {},
                 onChanged: (String value) {},
                 cursorColor: Colors.black,
-                cursorRadius: Radius.circular(10),
+                cursorRadius: const Radius.circular(10),
                 enabled: true,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                     color: Colors.black),
                 decoration: InputDecoration(
-                  fillColor: Color(0xffF0F0F0),
+                  fillColor: const Color(0xffF0F0F0),
                   filled: true,
                   helperMaxLines: 1,
                   hintText: 'Search...',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 17,
                     color: Color(0xffA1A1A1),
                   ),
-                  errorBorder: UnderlineInputBorder(
+                  errorBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xffF5F5F5), width: 1),
+                    borderSide: const BorderSide(color: Color(0xffF5F5F5), width: 1),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff363737), width: 1),
+                    borderSide: const BorderSide(color: Color(0xff363737), width: 1),
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  prefixIcon: Icon(Icons.search_outlined),
-                  suffixIcon: Icon(Icons.person_search_outlined),
+                  prefixIcon: const Icon(Icons.search_outlined),
+                  suffixIcon: const Icon(Icons.person_search_outlined),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 16),
+            const Padding(
+              padding: EdgeInsetsDirectional.only(start: 16),
               child: Text(
                 'Choose the activity you want to do:',
                 style: TextStyle(
@@ -89,12 +89,12 @@ class ActivitiesScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Expanded(
               child: ListView.separated(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return SizedBox(
                       width: double.infinity,
@@ -104,19 +104,19 @@ class ActivitiesScreen extends StatelessWidget {
                           width: 58,
                           height: 58,
                           decoration: BoxDecoration(
-                            color: Color(0xffF5F5FA),
+                            color: const Color(0xffF5F5FA),
                             borderRadius: BorderRadius.circular(100),
                           ),
                           child: InkWell(
                             onTap: () {},
                             child: CircleAvatar(
-                              backgroundColor: Color(0xffF5F5FA),
+                              backgroundColor: const Color(0xffF5F5FA),
                               child: Image.asset(
                                   'assets/images/personal_frindes.png'),
                             ),
                           ),
                         ),
-                        title: Text(
+                        title: const Text(
                           'Football',
                           style: TextStyle(
                             fontSize: 16,
@@ -128,7 +128,7 @@ class ActivitiesScreen extends StatelessWidget {
                           onPressed: () async {
                             Get.offAndToNamed(AppRoutes.activitiesSport);
                           },
-                          child: Text(
+                          child: const Text(
                             'Add',
                             style: TextStyle(
                               color: Colors.white,
@@ -140,20 +140,20 @@ class ActivitiesScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
-                            ), backgroundColor: Color(0xff57CA85),
-                            minimumSize: Size(75, 30),
+                            ), backgroundColor: const Color(0xff57CA85),
+                            minimumSize: const Size(75, 30),
                           ),
                         ),
                       ),
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return Divider(
+                    return const Divider(
                       color: Color(0xffECEEF1),
                       thickness: 1,
                     );
                   },
-                  itemCount: 40),
+                  itemCount: 40,),
             ),
           ],
         ),
